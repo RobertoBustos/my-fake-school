@@ -1,0 +1,20 @@
+.subjectCardContainer {
+    margin-bottom: 5px;
+    border-bottom: 1px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.subjectCardLabel {
+    font-size: 18px;
+    color: darkgray;
+}
+
+.subjectCardActionsContainer {
+    
+}
+
+.subjectCardLabelContainer {
+    
+}

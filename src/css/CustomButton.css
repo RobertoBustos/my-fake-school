@@ -1,0 +1,13 @@
+.buttonContainer {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.buttonBody {
+    background-color: orange;
+    color: black;
+    font-weight: bold;
+    width: 200px;
+    height: 50px;
+    border-radius: 25px;
+}
