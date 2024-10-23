@@ -4,10 +4,12 @@ import { ModalList } from "../types/index";
 import {
   addNewSubject,
   fetchAllSubjects,
-  removeExistingSubject,
+  deleteExistingSubject,
   beginSubjectEdition,
   editExistingSubject,
   cancelSubjectEdition,
+  beginSubjectDelete,
+  cancelSubjectDelete,
 } from "./subjectReducer";
 
 const initialState: IndicatorsState = {
@@ -50,13 +52,21 @@ export const indicatorsSlice = createSlice({
       state.appLoaderStatus = "idle";
     });
     //remove existing subject
-    builder.addCase(removeExistingSubject.pending, (state) => {
+    builder.addCase(beginSubjectDelete, (state) => {
+      state.visibleModals.push(ModalList.DELETE_SUBJECT_MODAL);
+    });
+    builder.addCase(cancelSubjectDelete, (state) => {
+      state.visibleModals = [];
+    });
+
+    builder.addCase(deleteExistingSubject.pending, (state) => {
       state.appLoaderStatus = "loading";
     });
-    builder.addCase(removeExistingSubject.fulfilled, (state) => {
+    builder.addCase(deleteExistingSubject.fulfilled, (state) => {
+      state.visibleModals = [];
       state.appLoaderStatus = "idle";
     });
-    builder.addCase(removeExistingSubject.rejected, (state) => {
+    builder.addCase(deleteExistingSubject.rejected, (state) => {
       state.appLoaderStatus = "idle";
     });
     //edit existing subject

@@ -18,8 +18,7 @@ export type EditSubjectPayloadType = {
   newData: Omit<SubjectType, "subjectId">;
 };
 
-export type DeleteSubjectPayloadType = string;
-
-export type DeleteSubjectServicePayloadType = {
+export type DeleteSubjectPayloadType = {
   subjectId: string;
+  newData: Omit<SubjectType, "subjectId">;
 };

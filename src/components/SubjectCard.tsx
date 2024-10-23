@@ -2,8 +2,10 @@ import { SubjectType } from "../constants/subjectTypes";
 import "../css/SubjectCard.css";
 import Button from "react-bootstrap/Button";
 import { useAppDispatch } from "../redux/hooks";
-import { removeExistingSubjectLocally } from "../redux/reducers/subjectReducer";
-import { beginSubjectEdition } from "../redux/reducers/subjectReducer";
+import {
+  beginSubjectEdition,
+  beginSubjectDelete,
+} from "../redux/reducers/subjectReducer";
 import { useTranslation } from "react-i18next";
 
 export type SubjectCardPropsType = {
@@ -19,7 +21,7 @@ const SubjectCard = ({ subject }: SubjectCardPropsType) => {
   };
 
   const handleSubjectDelete = () => {
-    dispatch(removeExistingSubjectLocally(subject.subjectId));
+    dispatch(beginSubjectDelete(subject));
   };
 
   return (

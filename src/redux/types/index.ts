@@ -2,6 +2,7 @@ import type { SubjectType } from "../../constants/subjectTypes";
 
 export enum ModalList {
   EDIT_SUBJECT_MODAL = "EditSubjectModal",
+  DELETE_SUBJECT_MODAL = "DeleteSubjectModal",
   ANOTHER_MODAL = "AnotherModal",
   ONE_MORE_MODAL = "OneMoreModal",
 }
@@ -20,5 +21,5 @@ export type ErrorState = {
 
 export type SubjectState = {
   subjectCatalog: SubjectType[];
-  subjectEditionInProgress: SubjectType;
+  subjectManipulationInProgress: SubjectType;
 };

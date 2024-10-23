@@ -1,46 +1,24 @@
-import Button from "react-bootstrap/Button";
-import Modal from "react-bootstrap/Modal";
-import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import {
-  editExistingSubject,
-  cancelSubjectEdition,
-} from "../redux/reducers/subjectReducer";
+import { useAppSelector, useAppDispatch } from "../redux/hooks";
 import { ModalList } from "../redux/types";
-import {
-  makeSelectCheckIfModalVisible,
-  selectSubjectEditionInProgressData,
-} from "../redux/selectors";
+import { selectSubjectManipulationInProgressData } from "../redux/selectors";
 import { useState } from "react";
+import CustomModal from "./common/CustomModal";
 import { useTranslation } from "react-i18next";
+import {
+  cancelSubjectEdition,
+  editExistingSubject,
+} from "../redux/reducers/subjectReducer";
+import { Modal } from "react-bootstrap";
 
-export type EditSubjectModalProps = {
-  modalId: ModalList;
-  headerText: string;
-  headerBodyTitle: string;
-  headerBodyText: string;
-};
-
-const EditSubjectModal = ({
-  headerText,
-  headerBodyTitle,
-  headerBodyText,
-}: EditSubjectModalProps) => {
+const EditSubjectModal = () => {
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
-  const isVisible = useAppSelector(
-    makeSelectCheckIfModalVisible(ModalList.EDIT_SUBJECT_MODAL)
-  );
-  const subjectData = useAppSelector(selectSubjectEditionInProgressData);
+  const subjectData = useAppSelector(selectSubjectManipulationInProgressData);
   const [newSubjectName, setNewSubjectName] = useState<string>(
     subjectData.subjectName
   );
 
-  const handleClose = () => {
-    setNewSubjectName("");
-    dispatch(cancelSubjectEdition());
-  };
-
-  const handleSubmit = () => {
+  const handleConfirmEdition = () => {
     setNewSubjectName("");
     dispatch(
       editExistingSubject({
@@ -53,7 +31,37 @@ const EditSubjectModal = ({
     );
   };
 
+  const handleCancelEdition = () => {
+    setNewSubjectName("");
+    dispatch(cancelSubjectEdition());
+  };
+
   return (
+    <CustomModal
+      modalId={ModalList.EDIT_SUBJECT_MODAL}
+      headerText={t("subject.editModal.title")}
+      onConfirm={handleConfirmEdition}
+      onCancel={handleCancelEdition}
+      confirmButtonLabel={t("buttons.subject.confirmEditLabel")}
+      cancelButtonLabel={t("buttons.subject.cancelEditLabel")}
+    >
+      <Modal.Body>
+        <h4>{t("subject.editModal.subtitle")}</h4>
+        <p>{t("subject.editModal.description")}</p>
+        <input
+          className=""
+          type="text"
+          onChange={(e) => {
+            e.preventDefault();
+            setNewSubjectName(e.target.value);
+          }}
+          value={newSubjectName}
+        />
+      </Modal.Body>
+    </CustomModal>
+  );
+
+  /* return (
     <Modal
       show={isVisible}
       size="lg"
@@ -66,28 +74,26 @@ const EditSubjectModal = ({
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <h4>{headerBodyTitle}</h4>
-        <p>{headerBodyText}</p>
-        <input
-          className=""
-          type="text"
-          onChange={(e) => {
-            e.preventDefault();
-            setNewSubjectName(e.target.value);
-          }}
-          value={newSubjectName}
-        />
+        {headerBodyTitle ? <h4>{headerBodyTitle}</h4> : null}
+        {headerBodyText ? <p>{headerBodyText}</p> : null}
+        {isSubjectEditModal ? (
+          <input
+            className=""
+            type="text"
+            onChange={(e) => {
+              e.preventDefault();
+              setNewSubjectName(e.target.value);
+            }}
+            value={newSubjectName}
+          />
+        ) : null}
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={handleSubmit}>
-          {t("buttons.subject.confirmEditLabel")}
-        </Button>
-        <Button onClick={handleClose}>
-          {t("buttons.subject.cancelEditLabel")}
-        </Button>
+        <Button onClick={onConfirm}>{confirmButtonLabel}</Button>
+        <Button onClick={onCancel}>{cancelButtonLabel}</Button>
       </Modal.Footer>
     </Modal>
-  );
+  ); */
 };
 
 export default EditSubjectModal;

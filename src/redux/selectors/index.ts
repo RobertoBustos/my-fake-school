@@ -18,8 +18,8 @@ export const selectAppLoaderStatus = (state: RootState) =>
 export const selectVisibleModals = (state: RootState) =>
   state.indicators.visibleModals;
 
-export const selectSubjectEditionInProgressData = (state: RootState) =>
-  state.subject.subjectEditionInProgress;
+export const selectSubjectManipulationInProgressData = (state: RootState) =>
+  state.subject.subjectManipulationInProgress;
 
 //Memoized selector for deriving data
 export const selectUnregisteredSubjects = createSelector(

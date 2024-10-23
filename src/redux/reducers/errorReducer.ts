@@ -4,7 +4,7 @@ import {
   addNewSubject,
   editExistingSubject,
   fetchAllSubjects,
-  removeExistingSubject,
+  deleteExistingSubject,
 } from "./subjectReducer";
 
 const initialState: ErrorState = {
@@ -38,7 +38,7 @@ export const errorSlice = createSlice({
       state.error = action.payload as string;
       state.isAlertVisible = true;
     });
-    builder.addCase(removeExistingSubject.rejected, (state, action) => {
+    builder.addCase(deleteExistingSubject.rejected, (state, action) => {
       state.error = action.payload as string;
       state.isAlertVisible = true;
     });

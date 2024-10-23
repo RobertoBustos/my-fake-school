@@ -1,6 +1,5 @@
 import {
   addDoc,
-  deleteDoc,
   doc,
   getDocs,
   query,
@@ -9,10 +8,10 @@ import {
 } from "firebase/firestore";
 import {
   AddSubjectServicePayloadType,
-  DeleteSubjectServicePayloadType,
   SubjectCatalogType,
   SubjectType,
   EditSubjectPayloadType,
+  DeleteSubjectPayloadType,
 } from "../constants/subjectTypes";
 import { subjectCollection } from "../config/firestore";
 
@@ -65,6 +64,18 @@ export async function updateSubject(
 }
 
 export async function deleteSubject(
+  payload: DeleteSubjectPayloadType
+): Promise<boolean | Error> {
+  try {
+    const docToEdit = doc(subjectCollection, `/${payload.subjectId}`);
+    await updateDoc(docToEdit, payload.newData);
+    return true;
+  } catch (error) {
+    return Error("Something went wrong");
+  }
+}
+
+/* export async function deleteSubject(
   payload: DeleteSubjectServicePayloadType
 ): Promise<boolean | Error> {
   try {
@@ -74,4 +85,4 @@ export async function deleteSubject(
   } catch (error) {
     return Error("Something went wrong");
   }
-}
+} */

@@ -15,7 +15,7 @@ import {
 
 const initialState: SubjectState = {
   subjectCatalog: [],
-  subjectEditionInProgress: {
+  subjectManipulationInProgress: {
     subjectId: "",
     subjectName: "",
     isDeleted: false,
@@ -27,22 +27,24 @@ export const subjectSlice = createSlice({
   initialState,
   reducers: {
     beginSubjectEdition: (state, action: PayloadAction<SubjectType>) => {
-      state.subjectEditionInProgress = action.payload;
+      state.subjectManipulationInProgress = action.payload;
     },
     cancelSubjectEdition: (state) => {
-      state.subjectEditionInProgress = {
+      state.subjectManipulationInProgress = {
         subjectId: "",
         subjectName: "",
         isDeleted: false,
       };
     },
-    removeExistingSubjectLocally: (
-      state,
-      action: PayloadAction<DeleteSubjectPayloadType>
-    ) => {
-      state.subjectCatalog = state.subjectCatalog.filter((subject, index) => {
-        return subject.subjectId !== action.payload;
-      });
+    beginSubjectDelete: (state, action: PayloadAction<SubjectType>) => {
+      state.subjectManipulationInProgress = action.payload;
+    },
+    cancelSubjectDelete: (state) => {
+      state.subjectManipulationInProgress = {
+        subjectId: "",
+        subjectName: "",
+        isDeleted: false,
+      };
     },
   },
   extraReducers: (builder) => {
@@ -60,16 +62,21 @@ export const subjectSlice = createSlice({
         if (subject) {
           subject.subjectName = action.payload.newData.subjectName;
         }
-        state.subjectEditionInProgress = {
+        state.subjectManipulationInProgress = {
           subjectId: "",
           subjectName: "",
           isDeleted: false,
         };
       })
-      .addCase(removeExistingSubject.fulfilled, (state, action) => {
+      .addCase(deleteExistingSubject.fulfilled, (state, action) => {
         state.subjectCatalog = state.subjectCatalog.filter(
-          (subject) => subject.subjectId !== action.payload
+          (subject) => subject.subjectId !== action.payload.subjectId
         );
+        state.subjectManipulationInProgress = {
+          subjectId: "",
+          subjectName: "",
+          isDeleted: false,
+        };
       });
   },
 });
@@ -116,26 +123,25 @@ export const editExistingSubject = createAsyncThunk(
   }
 );
 
-export const removeExistingSubject = createAsyncThunk(
+export const deleteExistingSubject = createAsyncThunk(
   "subject/removeExistingSubject",
-  async (subjectId: DeleteSubjectPayloadType, thunkApi) => {
-    if (subjectId === "") {
+  async (payload: DeleteSubjectPayloadType, thunkApi) => {
+    if (payload.subjectId === "") {
       return thunkApi.rejectWithValue("Subject id is required");
     }
-    const response = await deleteSubject({
-      subjectId: subjectId,
-    });
+    const response = await deleteSubject(payload);
     if (response instanceof Error) {
       return thunkApi.rejectWithValue(response.message);
     }
-    return subjectId;
+    return payload;
   }
 );
 
 export const {
-  removeExistingSubjectLocally,
   beginSubjectEdition,
   cancelSubjectEdition,
+  beginSubjectDelete,
+  cancelSubjectDelete,
 } = subjectSlice.actions;
 
 export default subjectSlice.reducer;
