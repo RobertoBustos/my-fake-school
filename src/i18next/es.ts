@@ -28,6 +28,13 @@ const es = {
         label: "Nueva materia",
       },
     },
+    errors: {
+      unknown: "Ha ocurrido un error inesperado.",
+      subject: {
+        nameRequired: "Por favor escriba un nombre para la nueva materia.",
+        idRequired: "No se encontro el id de esta materia.",
+      },
+    },
   },
 };
 

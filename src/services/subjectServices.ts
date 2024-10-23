@@ -14,6 +14,7 @@ import {
   DeleteSubjectPayloadType,
 } from "../constants/subjectTypes";
 import { subjectCollection } from "../config/firestore";
+import i18n from "i18next";
 
 export async function getSubjectCatalog(): Promise<SubjectCatalogType | Error> {
   let serviceResponse: SubjectCatalogType | Error;
@@ -32,7 +33,7 @@ export async function getSubjectCatalog(): Promise<SubjectCatalogType | Error> {
     });
     return serviceResponse;
   } catch (error) {
-    return Error("Something went wrong");
+    return Error(i18n.t("errors.unknown"));
   }
 }
 
@@ -47,7 +48,7 @@ export async function addSubject(
     };
     return mappedSubject;
   } catch (error) {
-    return Error("Something went wrong");
+    return Error(i18n.t("errors.unknown"));
   }
 }
 
@@ -55,11 +56,11 @@ export async function updateSubject(
   payload: EditSubjectPayloadType
 ): Promise<boolean | Error> {
   try {
-    const docToEdit = doc(subjectCollection, `/${payload.subjectId}`);
-    await updateDoc(docToEdit, payload.newData);
+    const docToChange = doc(subjectCollection, `/${payload.subjectId}`);
+    await updateDoc(docToChange, payload.newData);
     return true;
   } catch (error) {
-    return Error("Something went wrong");
+    return Error(i18n.t("errors.unknown"));
   }
 }
 
@@ -67,22 +68,11 @@ export async function deleteSubject(
   payload: DeleteSubjectPayloadType
 ): Promise<boolean | Error> {
   try {
-    const docToEdit = doc(subjectCollection, `/${payload.subjectId}`);
-    await updateDoc(docToEdit, payload.newData);
+    const docToChange = doc(subjectCollection, `/${payload.subjectId}`);
+    //logic delete, if real delete is required call the deleteDoc function with the docToDelete parameter
+    await updateDoc(docToChange, payload.newData);
     return true;
   } catch (error) {
-    return Error("Something went wrong");
+    return Error(i18n.t("errors.unknown"));
   }
 }
-
-/* export async function deleteSubject(
-  payload: DeleteSubjectServicePayloadType
-): Promise<boolean | Error> {
-  try {
-    const docToDelete = doc(subjectCollection, `/${payload.subjectId}`);
-    await deleteDoc(docToDelete);
-    return true;
-  } catch (error) {
-    return Error("Something went wrong");
-  }
-} */

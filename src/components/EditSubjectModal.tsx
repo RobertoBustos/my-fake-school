@@ -60,40 +60,6 @@ const EditSubjectModal = () => {
       </Modal.Body>
     </CustomModal>
   );
-
-  /* return (
-    <Modal
-      show={isVisible}
-      size="lg"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-    >
-      <Modal.Header>
-        <Modal.Title id="contained-modal-title-vcenter">
-          {headerText}
-        </Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        {headerBodyTitle ? <h4>{headerBodyTitle}</h4> : null}
-        {headerBodyText ? <p>{headerBodyText}</p> : null}
-        {isSubjectEditModal ? (
-          <input
-            className=""
-            type="text"
-            onChange={(e) => {
-              e.preventDefault();
-              setNewSubjectName(e.target.value);
-            }}
-            value={newSubjectName}
-          />
-        ) : null}
-      </Modal.Body>
-      <Modal.Footer>
-        <Button onClick={onConfirm}>{confirmButtonLabel}</Button>
-        <Button onClick={onCancel}>{cancelButtonLabel}</Button>
-      </Modal.Footer>
-    </Modal>
-  ); */
 };
 
 export default EditSubjectModal;

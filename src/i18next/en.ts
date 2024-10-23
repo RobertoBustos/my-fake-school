@@ -28,6 +28,13 @@ const en = {
         label: "New Subject",
       },
     },
+    errors: {
+      unknown: "An unknown error has ocurred.",
+      subject: {
+        nameRequired: "Subject name is required.",
+        idRequired: "Subject id is required.",
+      },
+    },
   },
 };
 

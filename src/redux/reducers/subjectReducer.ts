@@ -12,6 +12,7 @@ import {
   deleteSubject,
   updateSubject,
 } from "../../services/subjectServices";
+import i18n from "i18next";
 
 const initialState: SubjectState = {
   subjectCatalog: [],
@@ -96,7 +97,7 @@ export const addNewSubject = createAsyncThunk(
   "subject/addNewSubject",
   async (subjectName: AddSubjectPayloadType, thunkApi) => {
     if (subjectName === "") {
-      return thunkApi.rejectWithValue("Please write the subject name");
+      return thunkApi.rejectWithValue(i18n.t("errors.subject.nameRequired"));
     }
     const response = await addSubject({
       subjectName: subjectName,
@@ -113,7 +114,7 @@ export const editExistingSubject = createAsyncThunk(
   "subject/editExistingSubject",
   async (payload: EditSubjectPayloadType, thunkApi) => {
     if (payload.subjectId === "" || payload.newData.subjectName === "") {
-      return thunkApi.rejectWithValue("Subject id and name is required");
+      return thunkApi.rejectWithValue(i18n.t("errors.subject.nameRequired"));
     }
     const response = await updateSubject(payload);
     if (response instanceof Error) {
@@ -127,7 +128,7 @@ export const deleteExistingSubject = createAsyncThunk(
   "subject/removeExistingSubject",
   async (payload: DeleteSubjectPayloadType, thunkApi) => {
     if (payload.subjectId === "") {
-      return thunkApi.rejectWithValue("Subject id is required");
+      return thunkApi.rejectWithValue(i18n.t("errors.subject.idRequired"));
     }
     const response = await deleteSubject(payload);
     if (response instanceof Error) {
