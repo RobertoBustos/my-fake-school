@@ -1,7 +1,7 @@
 import { useAppSelector, useAppDispatch } from "../redux/hooks";
 import { ModalList } from "../redux/types";
 import { selectSubjectManipulationInProgressData } from "../redux/selectors";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CustomModal from "./common/CustomModal";
 import { useTranslation } from "react-i18next";
 import {
@@ -14,9 +14,11 @@ const EditSubjectModal = () => {
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
   const subjectData = useAppSelector(selectSubjectManipulationInProgressData);
-  const [newSubjectName, setNewSubjectName] = useState<string>(
-    subjectData.subjectName
-  );
+  const [newSubjectName, setNewSubjectName] = useState<string>("");
+
+  useEffect(() => {
+    setNewSubjectName(subjectData.subjectName);
+  }, [subjectData.subjectName]);
 
   const handleConfirmEdition = () => {
     setNewSubjectName("");
@@ -49,10 +51,8 @@ const EditSubjectModal = () => {
         <h4>{t("subject.editModal.subtitle")}</h4>
         <p>{t("subject.editModal.description")}</p>
         <input
-          className=""
           type="text"
           onChange={(e) => {
-            e.preventDefault();
             setNewSubjectName(e.target.value);
           }}
           value={newSubjectName}
