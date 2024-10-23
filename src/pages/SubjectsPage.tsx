@@ -1,5 +1,5 @@
 import AddSubject from "../components/AddSubject";
-import Layout from "../components/Layout";
+import Layout from "../components/common/Layout";
 import PageTitle from "../components/PageTitle";
 import SubjectCatalog from "../components/SubjectCatalog";
 import { useAppDispatch } from "../redux/hooks";

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import CustomButton from "../components/CustomButton";
 import PageTitle from "../components/PageTitle";
 import { Fragment } from "react/jsx-runtime";
-import Layout from "../components/Layout";
+import Layout from "../components/common/Layout";
 
 const HomePage = () => {
   const navigate = useNavigate();
