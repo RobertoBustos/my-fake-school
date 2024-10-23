@@ -6,3 +6,8 @@ export const homePageOptions = [
   "Option 2",
   "Option 3",
 ];
+
+export const supportedLanguages = [
+  { code: "en", nativeName: "English" },
+  { code: "es", nativeName: "Spanish" },
+];

@@ -1,7 +1,6 @@
 import { ReactNode } from "react";
 import "../css/Layout.css";
-import MemoizedAlert from "./MemoizedAlert";
-import MemoizedLoader from "./MemoizedLoader";
+import LayoutHeader from "./common/LayoutHeader";
 
 export type LayoutPropsType = {
   children: ReactNode;
@@ -10,8 +9,7 @@ export type LayoutPropsType = {
 const Layout = ({ children }: LayoutPropsType) => {
   return (
     <div className="layout">
-      <MemoizedAlert />
-      <MemoizedLoader />
+      <LayoutHeader showLoadingIndicator showBackButton showLanguageSelector />
       {children}
     </div>
   );

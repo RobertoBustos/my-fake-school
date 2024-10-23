@@ -1,5 +1,9 @@
 const es = {
   translation: {
+    languages: {
+      en: "Ingles",
+      es: "Español",
+    },
     buttons: {
       subject: {
         editLabel: "Editar",
