@@ -3,6 +3,7 @@ import "../css/AddSubject.css";
 import { useAppDispatch } from "../redux/hooks";
 import { addNewSubject } from "../redux/reducers/subjectReducer";
 import { useTranslation } from "react-i18next";
+import { Button, FloatingLabel, Form } from "react-bootstrap";
 
 const AddSubject = () => {
   const dispatch = useAppDispatch();
@@ -20,11 +21,19 @@ const AddSubject = () => {
 
   return (
     <div className={"formContainer"}>
-      <h1>{t("subject.addSubjectForm.label")}</h1>
-      <input type="text" value={subject} onChange={handleChange} />
-      <button onClick={handleSubjectAddition}>
+      <FloatingLabel
+        controlId="floatingInput"
+        label={t("subject.addSubjectForm.label")}
+      >
+        <Form.Control type="text" onChange={handleChange} value={subject} />
+      </FloatingLabel>
+      <Button
+        onClick={handleSubjectAddition}
+        variant="primary"
+        className="addSubjectButton"
+      >
         {t("buttons.subject.confirmAddLabel")}
-      </button>
+      </Button>
     </div>
   );
 };

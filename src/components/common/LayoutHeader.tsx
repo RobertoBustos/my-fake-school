@@ -40,14 +40,14 @@ const LayoutHeader = ({
   };
 
   return (
-    <>
+    <div className="LayoutHeaderContainer">
       <div className="layoutHeaderControlsContainer">
         {showBackButton ? renderBackButton() : null}
         {showLoadingIndicator ? <MemoizedLoader /> : null}
         {showLanguageSelector ? renderLanguageSelector() : null}
       </div>
       <MemoizedAlert />
-    </>
+    </div>
   );
 };
 

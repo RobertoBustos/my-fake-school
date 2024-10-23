@@ -1,8 +1,12 @@
 .formContainer {
     display: flex;
-    flex: 1;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row;
     align-items: center;
-    background-color: red;
+    justify-content: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.addSubjectButton {
+    margin-left: 10px;
 }
