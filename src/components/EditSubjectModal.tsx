@@ -1,16 +1,58 @@
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import { SubjectType } from "../constants/subjectTypes";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import {
+  editExistingSubject,
+  cancelSubjectEdition,
+} from "../redux/reducers/subjectReducer";
+import { ModalList } from "../redux/types";
+import {
+  makeSelectCheckIfModalVisible,
+  selectSubjectEditionInProgressData,
+} from "../redux/selectors";
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
-export type EditSubjectModalPropsType = {
-  isVisible: boolean;
-  onClose: (subject: SubjectType) => Promise<void>;
+export type EditSubjectModalProps = {
+  modalId: ModalList;
+  headerText: string;
+  headerBodyTitle: string;
+  headerBodyText: string;
 };
 
 const EditSubjectModal = ({
-  isVisible,
-  onClose,
-}: EditSubjectModalPropsType) => {
+  headerText,
+  headerBodyTitle,
+  headerBodyText,
+}: EditSubjectModalProps) => {
+  const dispatch = useAppDispatch();
+  const { t } = useTranslation();
+  const isVisible = useAppSelector(
+    makeSelectCheckIfModalVisible(ModalList.EDIT_SUBJECT_MODAL)
+  );
+  const subjectData = useAppSelector(selectSubjectEditionInProgressData);
+  const [newSubjectName, setNewSubjectName] = useState<string>(
+    subjectData.subjectName
+  );
+
+  const handleClose = () => {
+    setNewSubjectName("");
+    dispatch(cancelSubjectEdition());
+  };
+
+  const handleSubmit = () => {
+    setNewSubjectName("");
+    dispatch(
+      editExistingSubject({
+        subjectId: subjectData.subjectId,
+        newData: {
+          subjectName: newSubjectName,
+          isDeleted: subjectData.isDeleted,
+        },
+      })
+    );
+  };
+
   return (
     <Modal
       show={isVisible}
@@ -18,21 +60,31 @@ const EditSubjectModal = ({
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
-      <Modal.Header closeButton>
+      <Modal.Header>
         <Modal.Title id="contained-modal-title-vcenter">
-          Modal heading
+          {headerText}
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <h4>Centered Modal</h4>
-        <p>
-          Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-          dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac
-          consectetur ac, vestibulum at eros.
-        </p>
+        <h4>{headerBodyTitle}</h4>
+        <p>{headerBodyText}</p>
+        <input
+          className=""
+          type="text"
+          onChange={(e) => {
+            e.preventDefault();
+            setNewSubjectName(e.target.value);
+          }}
+          value={newSubjectName}
+        />
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={() => onClose}>Close</Button>
+        <Button onClick={handleSubmit}>
+          {t("buttons.subject.confirmEditLabel")}
+        </Button>
+        <Button onClick={handleClose}>
+          {t("buttons.subject.cancelEditLabel")}
+        </Button>
       </Modal.Footer>
     </Modal>
   );

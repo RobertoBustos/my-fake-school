@@ -1,44 +1,46 @@
-import { Fragment, useState } from "react";
+import { Fragment } from "react";
 import SubjectCard from "./SubjectCard";
-import { SubjectType } from "../constants/subjectTypes";
-import EditSubjectModal from "./EditSubjectModal";
+import { ConnectedProps, connect } from "react-redux";
+import WarningMessage from "./WarningMessage";
+import { useAppSelector } from "../redux/hooks";
+import { selectUnregisteredSubjects } from "../redux/selectors/index";
+import { RootState } from "../redux/store";
 
-export type SubjectCatalogPropsType = {
-  handleSubjectDelete: (subject: SubjectType) => Promise<void>;
-  handleSubjectEdit: (subject: SubjectType) => Promise<void>;
-  subjectsData: SubjectType[];
+type SubjectCatalogPropsType = PropsFromRedux & {
+  showUnregistered?: boolean;
 };
 
-export default function SubjectCatalog({
-  subjectsData,
-  handleSubjectDelete,
-  handleSubjectEdit,
-}: SubjectCatalogPropsType) {
-  const [isEditModalVisible, setIsEditModalVisible] = useState<boolean>(false);
+const SubjectCatalog = ({
+  showUnregistered,
+  subjectCatalog,
+}: SubjectCatalogPropsType) => {
+  //this is an example of a custom hook
+  const unregisteredSubjects = useAppSelector(selectUnregisteredSubjects);
 
-  const handleSubjectEditModalShow = () => {
-    setIsEditModalVisible(true);
-  };
+  return (
+    <>
+      {showUnregistered && unregisteredSubjects.length > 0 ? (
+        <WarningMessage />
+      ) : null}
+      {subjectCatalog.length > 0 ? (
+        <div className="subjectCatalogContainer">
+          {subjectCatalog.map((subject) => {
+            return (
+              <Fragment key={subject.subjectId}>
+                <SubjectCard subject={subject} />
+              </Fragment>
+            );
+          })}
+        </div>
+      ) : null}
+    </>
+  );
+};
 
-  console.log("isEditModalVisible", isEditModalVisible);
+const mapState = (state: RootState) => ({
+  subjectCatalog: state.subject.subjectCatalog,
+});
+const connector = connect(mapState, {});
+type PropsFromRedux = ConnectedProps<typeof connector>;
 
-  return subjectsData.length > 0 ? (
-    <div className="subjectCatalogContainer">
-      <EditSubjectModal
-        isVisible={isEditModalVisible}
-        onClose={handleSubjectEdit}
-      />
-      {subjectsData.map((subject) => {
-        return (
-          <Fragment key={subject.subjectId}>
-            <SubjectCard
-              subject={subject}
-              handleSubjectDelete={handleSubjectDelete}
-              handleSubjectEdit={handleSubjectEditModalShow}
-            />
-          </Fragment>
-        );
-      })}
-    </div>
-  ) : null;
-}
+export default connector(SubjectCatalog);

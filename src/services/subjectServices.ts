@@ -4,19 +4,19 @@ import {
   doc,
   getDocs,
   query,
+  updateDoc,
   where,
 } from "firebase/firestore";
 import {
-  AddSubjectPayloadType,
-  DeleteSubjectPayloadType,
-  UpdateSubjectPayloadType,
+  AddSubjectServicePayloadType,
+  DeleteSubjectServicePayloadType,
   SubjectCatalogType,
   SubjectType,
+  EditSubjectPayloadType,
 } from "../constants/subjectTypes";
 import { subjectCollection } from "../config/firestore";
 
 export async function getSubjectCatalog(): Promise<SubjectCatalogType | Error> {
-  console.log("im calling getSubjectCatalog service");
   let serviceResponse: SubjectCatalogType | Error;
   try {
     const subjectQuery = query(
@@ -38,10 +38,8 @@ export async function getSubjectCatalog(): Promise<SubjectCatalogType | Error> {
 }
 
 export async function addSubject(
-  payload: AddSubjectPayloadType
+  payload: AddSubjectServicePayloadType
 ): Promise<SubjectType | Error> {
-  console.log("im calling addSubject service");
-  if (payload.subjectName === "") return Error("Subject name is required");
   try {
     const newDoc = await addDoc(subjectCollection, payload);
     const mappedSubject: SubjectType = {
@@ -54,12 +52,21 @@ export async function addSubject(
   }
 }
 
-export async function updateSubject(payload: UpdateSubjectPayloadType) {}
+export async function updateSubject(
+  payload: EditSubjectPayloadType
+): Promise<boolean | Error> {
+  try {
+    const docToEdit = doc(subjectCollection, `/${payload.subjectId}`);
+    await updateDoc(docToEdit, payload.newData);
+    return true;
+  } catch (error) {
+    return Error("Something went wrong");
+  }
+}
 
 export async function deleteSubject(
-  payload: DeleteSubjectPayloadType
+  payload: DeleteSubjectServicePayloadType
 ): Promise<boolean | Error> {
-  console.log("im calling deleteSubject service");
   try {
     const docToDelete = doc(subjectCollection, `/${payload.subjectId}`);
     await deleteDoc(docToDelete);

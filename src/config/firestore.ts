@@ -3,11 +3,6 @@ import { initializeApp } from "firebase/app";
 import {
   getFirestore,
   collection,
-  addDoc,
-  onSnapshot,
-  doc,
-  query,
-  getDocs,
 } from "firebase/firestore";
 //import { getAnalytics } from "firebase/analytics";
 // TODO: Add SDKs for Firebase products that you want to use
