@@ -7,6 +7,9 @@ export const store = configureStore({
   devTools: true,
 });
 
+if (module.hot) {
+  module.hot.accept("./reducers", () => store.replaceReducer(rootReducer));
+}
 
 // Infer the type of `store`
 export default store;
