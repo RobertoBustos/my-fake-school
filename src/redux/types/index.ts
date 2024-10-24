@@ -9,14 +9,17 @@ export enum ModalList {
 
 export type VisibleModalsState = ModalList[];
 
+export type AlertType = {
+  alertId: string;
+  message: string;
+  type: "danger" | "success" | "warning";
+  dismisable: boolean;
+};
+
 export type IndicatorsState = {
   appLoaderStatus: "idle" | "loading" | "failed";
   visibleModals: VisibleModalsState;
-};
-
-export type ErrorState = {
-  error: string;
-  isAlertVisible: boolean;
+  alerts: AlertType[];
 };
 
 export type SubjectState = {

@@ -1,8 +1,9 @@
 import { createBrowserRouter } from "react-router-dom";
 
 import HomePage from "../pages/HomePage";
-import Subjects from "../pages/SubjectsPage";
+import SubjectsPage from "../pages/SubjectsPage";
 import ErrorBoundaryPage from "../pages/ErrorBoundaryPage";
+import { getSubjectCatalog } from "../services/subjectServices";
 
 const router = createBrowserRouter([
   {
@@ -14,7 +15,10 @@ const router = createBrowserRouter([
   {
     id: "subjects",
     path: "/subjects",
-    Component: Subjects,
+    Component: SubjectsPage,
+    loader: async () => {
+      return getSubjectCatalog();
+    },
   },
 ]);
 

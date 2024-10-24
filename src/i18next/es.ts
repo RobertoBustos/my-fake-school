@@ -35,8 +35,17 @@ const es = {
     errors: {
       unknown: "Ha ocurrido un error inesperado.",
       subject: {
-        nameRequired: "Por favor escriba un nombre para la nueva materia.",
+        nameRequired: "El nombre de la materia no puede estar vacio.",
         idRequired: "No se encontro el id de esta materia.",
+        subjectsWithoutIdDetected:
+          "Se encontraron {{subjects}} faltantes de registro en el catalogo.",
+      },
+    },
+    confirmations: {
+      subject: {
+        addedSuccesfully: "Materia agregada exitosamente.",
+        editedSuccesfully: "Materia editada exitosamente.",
+        removedSuccesfully: "Materia eliminada exitosamente.",
       },
     },
   },

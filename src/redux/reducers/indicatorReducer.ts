@@ -1,6 +1,7 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import type { IndicatorsState } from "../types/index";
-import { ModalList } from "../types/index";
+
+import i18n from "i18next";
+import { IndicatorsState, ModalList, AlertType } from "../types/index";
 import {
   addNewSubject,
   fetchAllSubjects,
@@ -11,10 +12,12 @@ import {
   beginSubjectDelete,
   cancelSubjectDelete,
 } from "./subjectReducer";
+import { generateRandomUid } from "../../utils/index";
 
 const initialState: IndicatorsState = {
   appLoaderStatus: "idle",
   visibleModals: [],
+  alerts: [],
 };
 
 export const indicatorsSlice = createSlice({
@@ -27,6 +30,14 @@ export const indicatorsSlice = createSlice({
     hideModal: (state, action: PayloadAction<ModalList>) => {
       state.visibleModals = state.visibleModals.filter(
         (value) => value !== action.payload
+      );
+    },
+    showAlert: (state, action: PayloadAction<AlertType>) => {
+      state.alerts = [...state.alerts, action.payload];
+    },
+    closeAlert: (state, action: PayloadAction<string>) => {
+      state.alerts = state.alerts.filter(
+        (alert) => alert.alertId !== action.payload
       );
     },
   },
@@ -47,9 +58,27 @@ export const indicatorsSlice = createSlice({
     });
     builder.addCase(addNewSubject.fulfilled, (state) => {
       state.appLoaderStatus = "idle";
+      state.alerts = [
+        ...state.alerts,
+        {
+          alertId: generateRandomUid(),
+          message: i18n.t("confirmations.subject.addedSuccesfully"),
+          type: "success",
+          dismisable: true,
+        },
+      ];
     });
-    builder.addCase(addNewSubject.rejected, (state) => {
+    builder.addCase(addNewSubject.rejected, (state, action) => {
       state.appLoaderStatus = "idle";
+      state.alerts = [
+        ...state.alerts,
+        {
+          alertId: generateRandomUid(),
+          message: action.payload as string,
+          type: "danger",
+          dismisable: true,
+        },
+      ];
     });
     //remove existing subject
     builder.addCase(beginSubjectDelete, (state) => {
@@ -65,9 +94,27 @@ export const indicatorsSlice = createSlice({
     builder.addCase(deleteExistingSubject.fulfilled, (state) => {
       state.visibleModals = [];
       state.appLoaderStatus = "idle";
+      state.alerts = [
+        ...state.alerts,
+        {
+          alertId: generateRandomUid(),
+          message: i18n.t("confirmations.subject.removedSuccesfully"),
+          type: "success",
+          dismisable: true,
+        },
+      ];
     });
-    builder.addCase(deleteExistingSubject.rejected, (state) => {
+    builder.addCase(deleteExistingSubject.rejected, (state, action) => {
       state.appLoaderStatus = "idle";
+      state.alerts = [
+        ...state.alerts,
+        {
+          alertId: generateRandomUid(),
+          message: action.payload as string,
+          type: "danger",
+          dismisable: true,
+        },
+      ];
     });
     //edit existing subject
     builder.addCase(beginSubjectEdition, (state) => {
@@ -83,12 +130,31 @@ export const indicatorsSlice = createSlice({
     builder.addCase(editExistingSubject.fulfilled, (state) => {
       state.visibleModals = [];
       state.appLoaderStatus = "idle";
+      state.alerts = [
+        ...state.alerts,
+        {
+          alertId: generateRandomUid(),
+          message: i18n.t("confirmations.subject.editedSuccesfully"),
+          type: "success",
+          dismisable: true,
+        },
+      ];
     });
-    builder.addCase(editExistingSubject.rejected, (state) => {
+    builder.addCase(editExistingSubject.rejected, (state, action) => {
       state.appLoaderStatus = "idle";
+      state.alerts = [
+        ...state.alerts,
+        {
+          alertId: generateRandomUid(),
+          message: action.payload as string,
+          type: "danger",
+          dismisable: true,
+        },
+      ];
     });
   },
 });
 
-export const { hideModal, showModal } = indicatorsSlice.actions;
+export const { hideModal, showModal, showAlert, closeAlert } =
+  indicatorsSlice.actions;
 export default indicatorsSlice.reducer;

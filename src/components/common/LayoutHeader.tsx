@@ -1,9 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import "../../css/components/LayoutHeader.css";
-import MemoizedLoader from "../MemoizedLoader";
+import LoadingSpinner from "../LoadingSpinner";
 import { ArrowLeft01Icon } from "hugeicons-react";
-import MemoizedAlert from "../MemoizedAlert";
+import AlertStack from "../AlertStack";
 import LanguageSelector from "../LanguageSelector";
+import { useMemo } from "react";
 
 export type LayoutHeaderPropsType = {
   showBackButton?: boolean;
@@ -18,15 +19,15 @@ const LayoutHeader = ({
 }: LayoutHeaderPropsType) => {
   const navigate = useNavigate();
 
-  const renderLanguageSelector = () => {
+  const renderLanguageSelector = useMemo(() => {
     return (
       <div className="languageSelectorContainer">
         <LanguageSelector />
       </div>
     );
-  };
+  }, []);
 
-  const renderBackButton = () => {
+  const renderBackButton = useMemo(() => {
     return (
       <div className="backButtonContainer">
         <ArrowLeft01Icon
@@ -37,16 +38,20 @@ const LayoutHeader = ({
         />
       </div>
     );
-  };
+  }, [navigate]);
+
+  const renderLoadingSpinner = useMemo(() => {
+    return <LoadingSpinner />;
+  }, []);
 
   return (
     <div className="LayoutHeaderContainer">
       <div className="layoutHeaderControlsContainer">
-        {showBackButton ? renderBackButton() : null}
-        {showLoadingIndicator ? <MemoizedLoader /> : null}
-        {showLanguageSelector ? renderLanguageSelector() : null}
+        {showBackButton ? renderBackButton : null}
+        {showLoadingIndicator ? renderLoadingSpinner : null}
+        {showLanguageSelector ? renderLanguageSelector : null}
       </div>
-      <MemoizedAlert />
+      <AlertStack />
     </div>
   );
 };

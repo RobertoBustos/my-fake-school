@@ -1,46 +1,23 @@
-import { Fragment } from "react";
+import { useMemo } from "react";
 import SubjectCard from "./SubjectCard";
-import { ConnectedProps, connect } from "react-redux";
-import WarningMessage from "./WarningMessage";
-import { useAppSelector } from "../redux/hooks";
-import { selectUnregisteredSubjects } from "../redux/selectors/index";
-import { RootState } from "../redux/store";
+import { SubjectCatalogType } from "../constants/subjectTypes";
 
-type SubjectCatalogPropsType = PropsFromRedux & {
-  showUnregistered?: boolean;
+export type SubjectCatalogPropsType = {
+  subjects: SubjectCatalogType;
 };
 
-const SubjectCatalog = ({
-  showUnregistered,
-  subjectCatalog,
-}: SubjectCatalogPropsType) => {
-  //this is an example of a custom hook
-  const unregisteredSubjects = useAppSelector(selectUnregisteredSubjects);
+const SubjectCatalog = ({ subjects }: SubjectCatalogPropsType) => {
+  const memoizedCatalog = useMemo(() => {
+    return (
+      <div className="subjectCatalogContainer">
+        {subjects.map((subject) => {
+          return <SubjectCard subject={subject} key={subject.subjectId} />;
+        })}
+      </div>
+    );
+  }, [subjects]);
 
-  return (
-    <>
-      {showUnregistered && unregisteredSubjects.length > 0 ? (
-        <WarningMessage />
-      ) : null}
-      {subjectCatalog.length > 0 ? (
-        <div className="subjectCatalogContainer">
-          {subjectCatalog.map((subject) => {
-            return (
-              <Fragment key={subject.subjectId}>
-                <SubjectCard subject={subject} />
-              </Fragment>
-            );
-          })}
-        </div>
-      ) : null}
-    </>
-  );
+  return memoizedCatalog;
 };
 
-const mapState = (state: RootState) => ({
-  subjectCatalog: state.subject.subjectCatalog,
-});
-const connector = connect(mapState, {});
-type PropsFromRedux = ConnectedProps<typeof connector>;
-
-export default connector(SubjectCatalog);
+export default SubjectCatalog;

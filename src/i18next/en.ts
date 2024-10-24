@@ -37,6 +37,15 @@ const en = {
       subject: {
         nameRequired: "Subject name is required.",
         idRequired: "Subject id is required.",
+        subjectsWithoutIdDetected:
+          "There are {{subjects}} missing its confirmation in the catalog.",
+      },
+    },
+    confirmations: {
+      subject: {
+        addedSuccesfully: "Subject added successfully.",
+        editedSuccesfully: "Subject changed successfully.",
+        removedSuccesfully: "Subject deleted successfully.",
       },
     },
   },

@@ -8,7 +8,7 @@ import type {
 import type { SubjectState } from "../types/index";
 import {
   getSubjectCatalog,
-  addSubject,
+  //addSubject,
   deleteSubject,
   updateSubject,
 } from "../../services/subjectServices";
@@ -99,14 +99,15 @@ export const addNewSubject = createAsyncThunk(
     if (subjectName === "") {
       return thunkApi.rejectWithValue(i18n.t("errors.subject.nameRequired"));
     }
-    const response = await addSubject({
+    return { subjectName: subjectName, isDeleted: false, subjectId: "" };
+    /* const response = await addSubject({
       subjectName: subjectName,
       isDeleted: false,
     });
     if (response instanceof Error) {
       return thunkApi.rejectWithValue(response.message);
     }
-    return response;
+    return response; */
   }
 );
 
@@ -114,7 +115,7 @@ export const editExistingSubject = createAsyncThunk(
   "subject/editExistingSubject",
   async (payload: EditSubjectPayloadType, thunkApi) => {
     if (payload.subjectId === "" || payload.newData.subjectName === "") {
-      return thunkApi.rejectWithValue(i18n.t("errors.subject.nameRequired"));
+      return thunkApi.rejectWithValue(i18n.t("errors.subject.idRequired"));
     }
     const response = await updateSubject(payload);
     if (response instanceof Error) {
