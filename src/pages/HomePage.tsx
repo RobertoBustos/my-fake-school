@@ -4,13 +4,15 @@ import CustomButton from "../components/CustomButton";
 import PageTitle from "../components/PageTitle";
 import { Fragment } from "react/jsx-runtime";
 import Layout from "../components/common/Layout";
+import { useTranslation } from "react-i18next";
 
 const HomePage = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   return (
     <Layout>
-      <PageTitle titleText="WELCOME TO YOUR HOME PAGE" />
+      <PageTitle titleText={t("homePage.title")} />
       {homePageOptions.map((element) => {
         return (
           <Fragment key={element}>
@@ -18,7 +20,7 @@ const HomePage = () => {
               handleClick={() => {
                 navigate(`/${element}`);
               }}
-              label={element.toUpperCase()}
+              label={t(`homePage.options.${element}`)}
             />
           </Fragment>
         );

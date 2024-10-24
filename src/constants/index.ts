@@ -1,10 +1,10 @@
 export const homePageOptions = [
-  "Subjects",
-  "Teachers",
-  "Students",
-  "Option 1",
-  "Option 2",
-  "Option 3",
+  "subjects",
+  "teachers",
+  "students",
+  "groups",
+  "grades",
+  "admin",
 ];
 
 export const supportedLanguages = [

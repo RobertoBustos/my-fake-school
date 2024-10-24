@@ -48,6 +48,17 @@ const en = {
         removedSuccesfully: "Subject deleted successfully.",
       },
     },
+    homePage: {
+      title: "Welcome To Your Home Page",
+      options: {
+        subjects: "Subjects",
+        teachers: "Teachers",
+        students: "Students",
+        groups: "Groups",
+        grades: "Grades",
+        admin: "Admin",
+      },
+    },
   },
 };
 

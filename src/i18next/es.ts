@@ -48,6 +48,17 @@ const es = {
         removedSuccesfully: "Materia eliminada exitosamente.",
       },
     },
+    homePage: {
+      title: "Bienvenido a Tu Pagina de Inicio",
+      options: {
+        subjects: "Materias",
+        teachers: "Maestros",
+        students: "Alumnos",
+        groups: "Grupos",
+        grades: "Calificaciones",
+        admin: "Administracion",
+      },
+    },
   },
 };
 
