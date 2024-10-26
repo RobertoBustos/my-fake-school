@@ -1,12 +1,12 @@
 import { useTranslation } from "react-i18next";
-import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import { ModalList } from "../redux/types";
-import CustomModal from "./common/CustomModal";
+import CustomModal from "@components/common/CustomModal";
+import { ModalList } from "@redux/types";
+import { useAppDispatch, useAppSelector } from "@redux/hooks";
 import {
   cancelSubjectDelete,
   deleteExistingSubject,
-} from "../redux/reducers/subjectReducer";
-import { selectSubjectManipulationInProgressData } from "../redux/selectors";
+} from "@reducers/subjectReducer";
+import { selectSubjectManipulationInProgressData } from "@selectors/index";
 
 const DeleteSubjectModal = () => {
   const dispatch = useAppDispatch();

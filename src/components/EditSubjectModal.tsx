@@ -1,14 +1,14 @@
-import { useAppSelector, useAppDispatch } from "../redux/hooks";
-import { ModalList } from "../redux/types";
-import { selectSubjectManipulationInProgressData } from "../redux/selectors";
 import { useEffect, useState } from "react";
-import CustomModal from "./common/CustomModal";
+import { Modal } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
+import CustomModal from "@components/common/CustomModal";
+import { useAppSelector, useAppDispatch } from "@redux/hooks";
+import { ModalList } from "@redux/types";
+import { selectSubjectManipulationInProgressData } from "@selectors/index";
 import {
   cancelSubjectEdition,
   editExistingSubject,
-} from "../redux/reducers/subjectReducer";
-import { Modal } from "react-bootstrap";
+} from "@reducers/subjectReducer";
 
 const EditSubjectModal = () => {
   const dispatch = useAppDispatch();

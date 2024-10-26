@@ -1,18 +1,18 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import i18n from "i18next";
 import type {
   AddSubjectPayloadType,
   DeleteSubjectPayloadType,
   EditSubjectPayloadType,
   SubjectType,
-} from "../../constants/subjectTypes";
-import type { SubjectState } from "../types/index";
+} from "@constants/subjectTypes";
+import type { SubjectState } from "@redux/types/index";
 import {
   getSubjectCatalog,
   //addSubject,
   deleteSubject,
   updateSubject,
-} from "../../services/subjectServices";
-import i18n from "i18next";
+} from "@services/subjectServices";
 
 const initialState: SubjectState = {
   subjectCatalog: [],

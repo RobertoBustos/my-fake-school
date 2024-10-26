@@ -1,7 +1,7 @@
 import Alert from "react-bootstrap/Alert";
-import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import { closeAlert } from "../redux/reducers/indicatorReducer";
-import { selectAlerts } from "../redux/selectors";
+import { useAppDispatch, useAppSelector } from "@redux/hooks";
+import { closeAlert } from "@reducers/indicatorReducer";
+import { selectAlerts } from "@selectors/index";
 
 const AlertStack = () => {
   const dispatch = useAppDispatch();

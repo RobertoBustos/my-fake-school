@@ -1,10 +1,10 @@
-import { useNavigate } from "react-router-dom";
-import "../../css/components/LayoutHeader.css";
-import LoadingSpinner from "../LoadingSpinner";
 import { ArrowLeft01Icon } from "hugeicons-react";
-import AlertStack from "../AlertStack";
-import LanguageSelector from "../LanguageSelector";
 import { useMemo } from "react";
+import { useNavigate } from "react-router-dom";
+import AlertStack from "@components/AlertStack";
+import LanguageSelector from "@components/LanguageSelector";
+import LoadingSpinner from "@components/LoadingSpinner";
+import "@styles/components/LayoutHeader.css";
 
 export type LayoutHeaderPropsType = {
   showBackButton?: boolean;

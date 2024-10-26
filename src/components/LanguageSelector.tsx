@@ -1,6 +1,6 @@
 import { Dropdown, DropdownButton } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
-import { supportedLanguages } from "../constants/index";
+import { supportedLanguages } from "@constants/index";
 
 const LanguageSelector = () => {
   const { t, i18n } = useTranslation();

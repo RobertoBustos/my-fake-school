@@ -1,6 +1,6 @@
 import { combineReducers } from "@reduxjs/toolkit";
-import subjectReducer from "./subjectReducer";
-import indicatorsReducer from "./indicatorReducer";
+import subjectReducer from "@reducers/subjectReducer";
+import indicatorsReducer from "@reducers/indicatorReducer";
 
 export default combineReducers({
   subject: subjectReducer,

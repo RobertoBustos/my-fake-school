@@ -1,6 +1,6 @@
 import Spinner from "react-bootstrap/Spinner";
-import { useAppSelector } from "../redux/hooks";
-import { selectAppLoaderStatusLoading } from "../redux/selectors";
+import { useAppSelector } from "@redux/hooks";
+import { selectAppLoaderStatusLoading } from "@selectors/index";
 
 const LoadingSpinner = () => {
   const isAppLoading = useAppSelector(selectAppLoaderStatusLoading);

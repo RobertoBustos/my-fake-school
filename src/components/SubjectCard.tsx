@@ -1,12 +1,12 @@
-import { SubjectType } from "../constants/subjectTypes";
-import "../css/SubjectCard.css";
 import Button from "react-bootstrap/Button";
-import { useAppDispatch } from "../redux/hooks";
+import { useTranslation } from "react-i18next";
+import { SubjectType } from "@constants/subjectTypes";
+import { useAppDispatch } from "@redux/hooks";
 import {
   beginSubjectEdition,
   beginSubjectDelete,
-} from "../redux/reducers/subjectReducer";
-import { useTranslation } from "react-i18next";
+} from "@reducers/subjectReducer";
+import "@styles/components/SubjectCard.css";
 
 export type SubjectCardPropsType = {
   subject: SubjectType;

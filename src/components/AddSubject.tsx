@@ -1,9 +1,9 @@
 import { useState } from "react";
-import "../css/AddSubject.css";
-import { useAppDispatch } from "../redux/hooks";
-import { addNewSubject } from "../redux/reducers/subjectReducer";
-import { useTranslation } from "react-i18next";
 import { Button, FloatingLabel, Form } from "react-bootstrap";
+import { useTranslation } from "react-i18next";
+import { useAppDispatch } from "@redux/hooks";
+import { addNewSubject } from "@redux/reducers/subjectReducer";
+import "@styles/components/AddSubject.css";
 
 const AddSubject = () => {
   const dispatch = useAppDispatch();

@@ -1,8 +1,8 @@
-import { Button, Modal } from "react-bootstrap";
-import { ModalList } from "../../redux/types";
-import { useAppSelector } from "../../redux/hooks";
-import { makeSelectCheckIfModalVisible } from "../../redux/selectors";
 import { ReactNode } from "react";
+import { Button, Modal } from "react-bootstrap";
+import { useAppSelector } from "@redux/hooks";
+import { ModalList } from "@redux/types/index";
+import { makeSelectCheckIfModalVisible } from "@selectors/index";
 
 export type CustomModalPropsType = {
   modalId: ModalList;

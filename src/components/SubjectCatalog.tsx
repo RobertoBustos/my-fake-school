@@ -1,6 +1,6 @@
 import { useMemo } from "react";
-import SubjectCard from "./SubjectCard";
-import { SubjectCatalogType } from "../constants/subjectTypes";
+import SubjectCard from "@components/SubjectCard";
+import { SubjectCatalogType } from "@constants/subjectTypes";
 
 export type SubjectCatalogPropsType = {
   subjects: SubjectCatalogType;

@@ -1,29 +1,21 @@
-import {
-  addDoc,
-  doc,
-  getDocs,
-  query,
-  updateDoc,
-  where,
-} from "firebase/firestore";
+import i18n from "i18next";
+import { subjectCollection, connection } from "@config/firestore";
 import {
   AddSubjectServicePayloadType,
   SubjectCatalogType,
   SubjectType,
   EditSubjectPayloadType,
   DeleteSubjectPayloadType,
-} from "../constants/subjectTypes";
-import { subjectCollection } from "../config/firestore";
-import i18n from "i18next";
+} from "@constants/subjectTypes";
 
 export async function getSubjectCatalog(): Promise<SubjectCatalogType | Error> {
   let serviceResponse: SubjectCatalogType | Error;
   try {
-    const subjectQuery = query(
+    const subjectQuery = connection.query(
       subjectCollection,
-      where("isDeleted", "==", false)
+      connection.where("isDeleted", "==", false)
     );
-    const querySnapshot = await getDocs(subjectQuery);
+    const querySnapshot = await connection.getDocs(subjectQuery);
     serviceResponse = querySnapshot.docs.map((doc) => {
       return {
         subjectId: doc.id,
@@ -41,7 +33,7 @@ export async function addSubject(
   payload: AddSubjectServicePayloadType
 ): Promise<SubjectType | Error> {
   try {
-    const newDoc = await addDoc(subjectCollection, payload);
+    const newDoc = await connection.addDoc(subjectCollection, payload);
     const mappedSubject: SubjectType = {
       ...payload,
       subjectId: newDoc.id,
@@ -56,8 +48,11 @@ export async function updateSubject(
   payload: EditSubjectPayloadType
 ): Promise<boolean | Error> {
   try {
-    const docToChange = doc(subjectCollection, `/${payload.subjectId}`);
-    await updateDoc(docToChange, payload.newData);
+    const docToChange = connection.doc(
+      subjectCollection,
+      `/${payload.subjectId}`
+    );
+    await connection.updateDoc(docToChange, payload.newData);
     return true;
   } catch (error) {
     return Error(i18n.t("errors.unknown"));
@@ -68,9 +63,12 @@ export async function deleteSubject(
   payload: DeleteSubjectPayloadType
 ): Promise<boolean | Error> {
   try {
-    const docToChange = doc(subjectCollection, `/${payload.subjectId}`);
+    const docToChange = connection.doc(
+      subjectCollection,
+      `/${payload.subjectId}`
+    );
     //logic delete, if real delete is required call the deleteDoc function with the docToDelete parameter
-    await updateDoc(docToChange, payload.newData);
+    await connection.updateDoc(docToChange, payload.newData);
     return true;
   } catch (error) {
     return Error(i18n.t("errors.unknown"));

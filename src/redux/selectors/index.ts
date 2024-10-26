@@ -1,6 +1,6 @@
 import { createSelector } from "reselect";
-import { RootState } from "../store";
-import { ModalList } from "../types";
+import { RootState } from "@redux/store";
+import { ModalList } from "@redux/types/index";
 
 //Top level selectors, every reducer must export at least one top level selector
 export const selectRootState = (state: RootState) => state;

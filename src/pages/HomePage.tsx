@@ -1,10 +1,10 @@
-import { homePageOptions } from "../constants/index";
 import { useNavigate } from "react-router-dom";
-import CustomButton from "../components/CustomButton";
-import PageTitle from "../components/PageTitle";
 import { Fragment } from "react/jsx-runtime";
-import Layout from "../components/common/Layout";
 import { useTranslation } from "react-i18next";
+import Layout from "@components/common/Layout";
+import CustomButton from "@components/CustomButton";
+import PageTitle from "@components/PageTitle";
+import { homePageOptions } from "@constants/index";
 
 const HomePage = () => {
   const navigate = useNavigate();

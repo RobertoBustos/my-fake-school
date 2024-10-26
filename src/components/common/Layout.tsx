@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
-import "../../css/Layout.css";
-import LayoutHeader from "./LayoutHeader";
+import LayoutHeader from "@components/common/LayoutHeader";
+import "@styles/components/Layout.css";
 
 export type LayoutPropsType = {
   children: ReactNode;

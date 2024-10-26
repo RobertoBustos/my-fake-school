@@ -1,4 +1,4 @@
-import type { SubjectType } from "../../constants/subjectTypes";
+import type { SubjectType } from "@constants/subjectTypes";
 
 export enum ModalList {
   EDIT_SUBJECT_MODAL = "EditSubjectModal",

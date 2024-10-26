@@ -1,13 +1,13 @@
-import AddSubject from "../components/AddSubject";
-import Layout from "../components/common/Layout";
-import PageTitle from "../components/PageTitle";
-import SubjectCatalog from "../components/SubjectCatalog";
-import "../css/pages/SubjectsPage.css";
 import { useTranslation } from "react-i18next";
-import EditSubjectModal from "../components/EditSubjectModal";
-import DeleteSubjectModal from "../components/DeleteSubjectModal";
 import { useLoaderData } from "react-router-dom";
-import { SubjectType } from "../constants/subjectTypes";
+import Layout from "@components/common/Layout";
+import AddSubject from "@components/AddSubject";
+import DeleteSubjectModal from "@components/DeleteSubjectModal";
+import EditSubjectModal from "@components/EditSubjectModal";
+import PageTitle from "@components/PageTitle";
+import SubjectCatalog from "@components/SubjectCatalog";
+import { SubjectType } from "@constants/subjectTypes";
+import "@styles/pages/SubjectsPage.css";
 
 const SubjectsPage = () => {
   const { t } = useTranslation();

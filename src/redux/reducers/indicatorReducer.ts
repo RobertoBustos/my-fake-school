@@ -1,7 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-
 import i18n from "i18next";
-import { IndicatorsState, ModalList, AlertType } from "../types/index";
+import { IndicatorsState, ModalList, AlertType } from "@redux/types";
 import {
   addNewSubject,
   fetchAllSubjects,
@@ -11,8 +10,8 @@ import {
   cancelSubjectEdition,
   beginSubjectDelete,
   cancelSubjectDelete,
-} from "./subjectReducer";
-import { generateRandomUid } from "../../utils/index";
+} from "@reducers/subjectReducer";
+import { generateRandomUid } from "@utils/index";
 
 const initialState: IndicatorsState = {
   appLoaderStatus: "idle",

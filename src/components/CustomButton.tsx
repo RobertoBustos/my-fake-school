@@ -1,4 +1,4 @@
-import "../css/CustomButton.css";
+import "@styles/components/CustomButton.css";
 
 export type CustomButtonPropsType = {
   label: string;

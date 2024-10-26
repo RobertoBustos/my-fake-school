@@ -1,12 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import reportWebVitals from "./reportWebVitals";
-import router from "./router/router";
 import { RouterProvider } from "react-router-dom";
 import { Provider } from "react-redux";
-import store from "./redux/store";
-import "./config/i18next";
+import store from "@redux/store";
+import router from "@router/index";
+import "@config/i18next";
 import "bootstrap/dist/css/bootstrap.min.css";
+import reportWebVitals from "./reportWebVitals";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement

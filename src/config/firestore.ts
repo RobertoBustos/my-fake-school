@@ -1,6 +1,15 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection } from "firebase/firestore";
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  doc,
+  getDocs,
+  query,
+  updateDoc,
+  where,
+} from "firebase/firestore";
 //import { getAnalytics } from "firebase/analytics";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -22,4 +31,6 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const subjectCollection = collection(db, "subjects");
 
-export { subjectCollection };
+const connection = { addDoc, doc, getDocs, query, updateDoc, where };
+
+export { subjectCollection, connection };
