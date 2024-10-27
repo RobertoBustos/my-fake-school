@@ -4,8 +4,9 @@ import { useNavigate } from "react-router-dom";
 import AlertStack from "@components/AlertStack";
 import LanguageSelector from "@components/LanguageSelector";
 import LoadingSpinner from "@components/LoadingSpinner";
+import { useAppSelector } from "@redux/hooks";
+import { selectFeatureFlag } from "@selectors/index";
 import "@styles/components/LayoutHeader.css";
-import { getFlagValue } from "@config/remoteConfig";
 
 export type LayoutHeaderPropsType = {
   showBackButton?: boolean;
@@ -19,7 +20,9 @@ const LayoutHeader = ({
   showLanguageSelector,
 }: LayoutHeaderPropsType) => {
   const navigate = useNavigate();
-  const showMultiLanguage = getFlagValue("enableMultiLanguage");
+  const showMultiLanguage = useAppSelector(
+    selectFeatureFlag("enableMultiLanguage")
+  );
 
   const renderLanguageSelector = useMemo(() => {
     return (
@@ -51,7 +54,7 @@ const LayoutHeader = ({
       <div className="layoutHeaderControlsContainer">
         {showBackButton ? renderBackButton : null}
         {showLoadingIndicator ? renderLoadingSpinner : null}
-        {showMultiLanguage && showLanguageSelector
+        {showMultiLanguage?.value && showLanguageSelector
           ? renderLanguageSelector
           : null}
       </div>

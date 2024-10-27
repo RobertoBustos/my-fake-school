@@ -19,6 +19,7 @@ const initialState: IndicatorsState = {
   appLoaderStatus: "idle",
   visibleModals: [],
   alerts: [],
+  featureFlags: []
 };
 
 export const indicatorsSlice = createSlice({
@@ -41,6 +42,9 @@ export const indicatorsSlice = createSlice({
         (alert) => alert.alertId !== action.payload
       );
     },
+    registerFeatureFlags: (state, action) => {
+      state.featureFlags = action.payload
+    }
   },
   extraReducers: (builder) => {
     //fetch all subjects

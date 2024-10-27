@@ -18,10 +18,8 @@ export type VisibleModalListType = ModalListType[];
 
 export type FeatureFlagType = {
     name: string;
-    type: string | boolean | number | Object
+    value: boolean | number | string
 }
-
-export type FeatureFlagListType = FeatureFlagType[]
 
 export type SupportedLanguageType = {
     code: string

@@ -27,6 +27,12 @@ export const selectAlerts = (state: RootState) => state.indicators.alerts;
 export const selectSubjectManipulationInProgressData = (state: RootState) =>
   state.subject.subjectManipulationInProgress;
 
+export const selectFeatureFlag = (featureFlagName: string) => {
+  return createSelector([(state: RootState) => state.indicators.featureFlags], (featureFlags) =>
+    featureFlags.find((flag) => flag.name === featureFlagName)
+  );
+}
+
 //Memoized selector for deriving data
 export const makeSelectSubjectById = (subjectId: string) => {
   return createSelector([selectSubjectCatalog], (subjects) =>
