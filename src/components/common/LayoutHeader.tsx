@@ -5,6 +5,7 @@ import AlertStack from "@components/AlertStack";
 import LanguageSelector from "@components/LanguageSelector";
 import LoadingSpinner from "@components/LoadingSpinner";
 import "@styles/components/LayoutHeader.css";
+import { getFlagValue } from "@config/remoteConfig";
 
 export type LayoutHeaderPropsType = {
   showBackButton?: boolean;
@@ -18,6 +19,7 @@ const LayoutHeader = ({
   showLanguageSelector,
 }: LayoutHeaderPropsType) => {
   const navigate = useNavigate();
+  const showMultiLanguage = getFlagValue("enableMultiLanguage");
 
   const renderLanguageSelector = useMemo(() => {
     return (
@@ -49,7 +51,9 @@ const LayoutHeader = ({
       <div className="layoutHeaderControlsContainer">
         {showBackButton ? renderBackButton : null}
         {showLoadingIndicator ? renderLoadingSpinner : null}
-        {showLanguageSelector ? renderLanguageSelector : null}
+        {showMultiLanguage && showLanguageSelector
+          ? renderLanguageSelector
+          : null}
       </div>
       <AlertStack />
     </div>

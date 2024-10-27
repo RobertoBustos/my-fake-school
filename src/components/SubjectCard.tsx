@@ -1,6 +1,6 @@
 import Button from "react-bootstrap/Button";
 import { useTranslation } from "react-i18next";
-import { SubjectType } from "@constants/subjectTypes";
+import type { SubjectType } from "@customTypes/index";
 import { useAppDispatch } from "@redux/hooks";
 import {
   beginSubjectEdition,

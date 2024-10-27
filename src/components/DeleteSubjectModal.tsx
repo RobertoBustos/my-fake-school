@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import CustomModal from "@components/common/CustomModal";
-import { ModalList } from "@redux/types";
+import { ModalListType } from "@customTypes/index";
 import { useAppDispatch, useAppSelector } from "@redux/hooks";
 import {
   cancelSubjectDelete,
@@ -28,7 +28,7 @@ const DeleteSubjectModal = () => {
 
   return (
     <CustomModal
-      modalId={ModalList.DELETE_SUBJECT_MODAL}
+      modalId={ModalListType.DELETE_SUBJECT_MODAL}
       headerText={t("subject.deleteModal.title")}
       onConfirm={handleConfirmDelete}
       onCancel={handleCancelDelete}

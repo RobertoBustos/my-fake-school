@@ -5,7 +5,7 @@ import type {
   DeleteSubjectPayloadType,
   EditSubjectPayloadType,
   SubjectType,
-} from "@constants/subjectTypes";
+} from "@customTypes/index";
 import type { SubjectState } from "@redux/types/index";
 import {
   getSubjectCatalog,

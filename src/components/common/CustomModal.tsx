@@ -1,11 +1,11 @@
 import { ReactNode } from "react";
 import { Button, Modal } from "react-bootstrap";
 import { useAppSelector } from "@redux/hooks";
-import { ModalList } from "@redux/types/index";
+import { ModalListType } from "@customTypes/index";
 import { makeSelectCheckIfModalVisible } from "@selectors/index";
 
 export type CustomModalPropsType = {
-  modalId: ModalList;
+  modalId: ModalListType;
   headerText: string;
   onConfirm: () => void;
   onCancel: () => void;

@@ -6,7 +6,7 @@ import DeleteSubjectModal from "@components/DeleteSubjectModal";
 import EditSubjectModal from "@components/EditSubjectModal";
 import PageTitle from "@components/PageTitle";
 import SubjectCatalog from "@components/SubjectCatalog";
-import { SubjectType } from "@constants/subjectTypes";
+import type { SubjectType } from "@customTypes/index";
 import "@styles/pages/SubjectsPage.css";
 
 const SubjectsPage = () => {

@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { serviceUrl } from "../constants/urls";
+import { serviceUrl } from "@constants/index";
 
 export const useFetch = () => {
   const [fetchResponse, setFetchResponse] = useState<unknown[]>([]);

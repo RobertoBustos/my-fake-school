@@ -24,6 +24,7 @@ module.exports = {
       "@selectors": path.resolve(__dirname, "src/redux/selectors"),
       "@router": path.resolve(__dirname, "src/router"),
       "@services": path.resolve(__dirname, "src/services"),
+      "@customTypes": path.resolve(__dirname, "src/types"),
       "@utils": path.resolve(__dirname, "src/utils"),
     },
   },

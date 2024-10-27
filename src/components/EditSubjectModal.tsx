@@ -3,7 +3,7 @@ import { Modal } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import CustomModal from "@components/common/CustomModal";
 import { useAppSelector, useAppDispatch } from "@redux/hooks";
-import { ModalList } from "@redux/types";
+import { ModalListType } from "@customTypes/index";
 import { selectSubjectManipulationInProgressData } from "@selectors/index";
 import {
   cancelSubjectEdition,
@@ -40,7 +40,7 @@ const EditSubjectModal = () => {
 
   return (
     <CustomModal
-      modalId={ModalList.EDIT_SUBJECT_MODAL}
+      modalId={ModalListType.EDIT_SUBJECT_MODAL}
       headerText={t("subject.editModal.title")}
       onConfirm={handleConfirmEdition}
       onCancel={handleCancelEdition}

@@ -1,6 +1,6 @@
 import { createSelector } from "reselect";
-import { RootState } from "@redux/store";
-import { ModalList } from "@redux/types/index";
+import { RootState } from "@redux/types/index";
+import { ModalListType } from "@customTypes/index";
 
 //Top level selectors, every reducer must export at least one top level selector
 export const selectRootState = (state: RootState) => state;
@@ -34,7 +34,7 @@ export const makeSelectSubjectById = (subjectId: string) => {
   );
 };
 
-export const makeSelectCheckIfModalVisible = (modalName: ModalList) => {
+export const makeSelectCheckIfModalVisible = (modalName: ModalListType) => {
   return createSelector([selectVisibleModals], (visibleModals) =>
     visibleModals.includes(modalName)
   );

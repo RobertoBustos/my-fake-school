@@ -1,6 +1,8 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import i18n from "i18next";
-import { IndicatorsState, ModalList, AlertType } from "@redux/types";
+import { IndicatorsState } from "@redux/types";
+import { ModalListType } from "@customTypes/index";
+import { AlertPropsType } from "@customTypes/index"
 import {
   addNewSubject,
   fetchAllSubjects,
@@ -23,15 +25,15 @@ export const indicatorsSlice = createSlice({
   name: "indicators",
   initialState,
   reducers: {
-    showModal: (state, action: PayloadAction<ModalList>) => {
+    showModal: (state, action: PayloadAction<ModalListType>) => {
       state.visibleModals = [...state.visibleModals, action.payload];
     },
-    hideModal: (state, action: PayloadAction<ModalList>) => {
+    hideModal: (state, action: PayloadAction<ModalListType>) => {
       state.visibleModals = state.visibleModals.filter(
         (value) => value !== action.payload
       );
     },
-    showAlert: (state, action: PayloadAction<AlertType>) => {
+    showAlert: (state, action: PayloadAction<AlertPropsType>) => {
       state.alerts = [...state.alerts, action.payload];
     },
     closeAlert: (state, action: PayloadAction<string>) => {
@@ -81,7 +83,7 @@ export const indicatorsSlice = createSlice({
     });
     //remove existing subject
     builder.addCase(beginSubjectDelete, (state) => {
-      state.visibleModals.push(ModalList.DELETE_SUBJECT_MODAL);
+      state.visibleModals.push(ModalListType.DELETE_SUBJECT_MODAL);
     });
     builder.addCase(cancelSubjectDelete, (state) => {
       state.visibleModals = [];
@@ -117,7 +119,7 @@ export const indicatorsSlice = createSlice({
     });
     //edit existing subject
     builder.addCase(beginSubjectEdition, (state) => {
-      state.visibleModals.push(ModalList.EDIT_SUBJECT_MODAL);
+      state.visibleModals.push(ModalListType.EDIT_SUBJECT_MODAL);
     });
     builder.addCase(cancelSubjectEdition, (state) => {
       state.visibleModals = [];

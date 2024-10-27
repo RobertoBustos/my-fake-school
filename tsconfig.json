@@ -32,6 +32,7 @@
       "@selectors/*": ["./src/redux/selectors/*"],
       "@router/*": ["./src/router/*"],
       "@services/*": ["./src/services/*"],
+      "@customTypes/*": ["./src/types/*"],
       "@utils/*": ["./src/utils/*"],
     }
   },
