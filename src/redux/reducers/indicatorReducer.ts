@@ -2,7 +2,6 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import i18n from "i18next";
 import { IndicatorsState } from "@redux/types";
 import { ModalListType } from "@customTypes/index";
-import { AlertPropsType } from "@customTypes/index"
 import {
   addNewSubject,
   fetchAllSubjects,
@@ -26,6 +25,12 @@ export const indicatorsSlice = createSlice({
   name: "indicators",
   initialState,
   reducers: {
+    showLoadingSpinner: (state) => {
+      state.appLoaderStatus = "loading"
+    },
+    hideLoadingSpinner: (state) => {
+      state.appLoaderStatus = "idle"
+    },
     showModal: (state, action: PayloadAction<ModalListType>) => {
       state.visibleModals = [...state.visibleModals, action.payload];
     },
@@ -33,9 +38,6 @@ export const indicatorsSlice = createSlice({
       state.visibleModals = state.visibleModals.filter(
         (value) => value !== action.payload
       );
-    },
-    showAlert: (state, action: PayloadAction<AlertPropsType>) => {
-      state.alerts = [...state.alerts, action.payload];
     },
     closeAlert: (state, action: PayloadAction<string>) => {
       state.alerts = state.alerts.filter(
@@ -160,6 +162,6 @@ export const indicatorsSlice = createSlice({
   },
 });
 
-export const { hideModal, showModal, showAlert, closeAlert } =
+export const { showLoadingSpinner, hideLoadingSpinner, hideModal, showModal, closeAlert } =
   indicatorsSlice.actions;
 export default indicatorsSlice.reducer;

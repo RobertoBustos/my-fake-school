@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
-import { useTranslation } from "react-i18next";
+import { useMemoizedTranslation } from "@hooks/useTranslation";
 import CustomModal from "@components/common/CustomModal";
 import { useAppSelector, useAppDispatch } from "@redux/hooks";
 import { ModalListType } from "@customTypes/index";
@@ -10,9 +10,17 @@ import {
   editExistingSubject,
 } from "@reducers/subjectReducer";
 
-const EditSubjectModal = () => {
+export type EditSubjectModalPropsType = {
+  modalId: ModalListType;
+  isVisible: boolean;
+};
+
+const EditSubjectModal = ({
+  modalId,
+  isVisible,
+}: EditSubjectModalPropsType) => {
   const dispatch = useAppDispatch();
-  const { t } = useTranslation();
+  const { t } = useMemoizedTranslation();
   const subjectData = useAppSelector(selectSubjectManipulationInProgressData);
   const [newSubjectName, setNewSubjectName] = useState<string>("");
 
@@ -40,12 +48,12 @@ const EditSubjectModal = () => {
 
   return (
     <CustomModal
-      modalId={ModalListType.EDIT_SUBJECT_MODAL}
       headerText={t("subject.editModal.title")}
       onConfirm={handleConfirmEdition}
       onCancel={handleCancelEdition}
       confirmButtonLabel={t("buttons.subject.confirmEditLabel")}
       cancelButtonLabel={t("buttons.subject.cancelEditLabel")}
+      isVisible={isVisible}
     >
       <Modal.Body>
         <h4>{t("subject.editModal.subtitle")}</h4>

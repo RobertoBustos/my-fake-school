@@ -1,5 +1,5 @@
 import Button from "react-bootstrap/Button";
-import { useTranslation } from "react-i18next";
+import { useMemoizedTranslation } from "@hooks/useTranslation";
 import type { SubjectType } from "@customTypes/index";
 import { useAppDispatch } from "@redux/hooks";
 import {
@@ -7,6 +7,7 @@ import {
   beginSubjectDelete,
 } from "@reducers/subjectReducer";
 import "@styles/components/SubjectCard.css";
+import { useMemo } from "react";
 
 export type SubjectCardPropsType = {
   subject: SubjectType;
@@ -14,31 +15,35 @@ export type SubjectCardPropsType = {
 
 const SubjectCard = ({ subject }: SubjectCardPropsType) => {
   const dispatch = useAppDispatch();
-  const { t } = useTranslation();
+  const { t } = useMemoizedTranslation();
 
-  const handleSubjectEdit = () => {
-    dispatch(beginSubjectEdition(subject));
-  };
+  const memoizedSubjectCard = useMemo(() => {
+    const handleSubjectEdit = () => {
+      dispatch(beginSubjectEdition(subject));
+    };
 
-  const handleSubjectDelete = () => {
-    dispatch(beginSubjectDelete(subject));
-  };
+    const handleSubjectDelete = () => {
+      dispatch(beginSubjectDelete(subject));
+    };
 
-  return (
-    <div className="subjectCardContainer">
-      <div className="subjectCardLabelContainer">
-        <h1 className="subjectCardLabel">{subject.subjectName}</h1>
+    return (
+      <div className="subjectCardContainer">
+        <div className="subjectCardLabelContainer">
+          <h1 className="subjectCardLabel">{subject.subjectName}</h1>
+        </div>
+        <div className="subjectCardActionsContainer">
+          <Button variant="warning" size="sm" onClick={handleSubjectEdit}>
+            {t("buttons.subject.editLabel")}
+          </Button>
+          <Button variant="danger" size="sm" onClick={handleSubjectDelete}>
+            {t("buttons.subject.deleteLabel")}
+          </Button>
+        </div>
       </div>
-      <div className="subjectCardActionsContainer">
-        <Button variant="warning" size="sm" onClick={handleSubjectEdit}>
-          {t("buttons.subject.editLabel")}
-        </Button>
-        <Button variant="danger" size="sm" onClick={handleSubjectDelete}>
-          {t("buttons.subject.deleteLabel")}
-        </Button>
-      </div>
-    </div>
-  );
+    );
+  }, [dispatch, subject, t]);
+
+  return memoizedSubjectCard;
 };
 
 export default SubjectCard;

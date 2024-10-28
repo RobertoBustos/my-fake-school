@@ -1,4 +1,4 @@
-import { useTranslation } from "react-i18next";
+import { useMemoizedTranslation } from "@hooks/useTranslation";
 import CustomModal from "@components/common/CustomModal";
 import { ModalListType } from "@customTypes/index";
 import { useAppDispatch, useAppSelector } from "@redux/hooks";
@@ -8,9 +8,17 @@ import {
 } from "@reducers/subjectReducer";
 import { selectSubjectManipulationInProgressData } from "@selectors/index";
 
-const DeleteSubjectModal = () => {
+export type DeleteSubjectModalPropsType = {
+  modalId: ModalListType;
+  isVisible: boolean;
+};
+
+const DeleteSubjectModal = ({
+  modalId,
+  isVisible,
+}: DeleteSubjectModalPropsType) => {
   const dispatch = useAppDispatch();
-  const { t } = useTranslation();
+  const { t } = useMemoizedTranslation();
   const subjectData = useAppSelector(selectSubjectManipulationInProgressData);
 
   const handleConfirmDelete = () => {
@@ -28,12 +36,12 @@ const DeleteSubjectModal = () => {
 
   return (
     <CustomModal
-      modalId={ModalListType.DELETE_SUBJECT_MODAL}
       headerText={t("subject.deleteModal.title")}
       onConfirm={handleConfirmDelete}
       onCancel={handleCancelDelete}
       confirmButtonLabel={t("buttons.subject.confirmDeleteLabel")}
       cancelButtonLabel={t("buttons.subject.cancelDeleteLabel")}
+      isVisible={isVisible}
     />
   );
 };

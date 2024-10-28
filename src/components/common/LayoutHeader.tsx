@@ -4,14 +4,14 @@ import { useNavigate } from "react-router-dom";
 import AlertStack from "@components/AlertStack";
 import LanguageSelector from "@components/LanguageSelector";
 import LoadingSpinner from "@components/LoadingSpinner";
-import { useAppSelector } from "@redux/hooks";
-import { selectFeatureFlag } from "@selectors/index";
 import "@styles/components/LayoutHeader.css";
+import { useAppSelector } from "@redux/hooks";
+import { selectAlerts } from "@redux/selectors";
 
 export type LayoutHeaderPropsType = {
   showBackButton?: boolean;
-  showLoadingIndicator?: boolean;
-  showLanguageSelector?: boolean;
+  showLoadingIndicator: boolean;
+  showLanguageSelector: boolean;
 };
 
 const LayoutHeader = ({
@@ -20,19 +20,17 @@ const LayoutHeader = ({
   showLanguageSelector,
 }: LayoutHeaderPropsType) => {
   const navigate = useNavigate();
-  const showMultiLanguage = useAppSelector(
-    selectFeatureFlag("enableMultiLanguage")
-  );
+  const alerts = useAppSelector(selectAlerts);
 
-  const renderLanguageSelector = useMemo(() => {
+  const memoizedLanguageSelector = useMemo(() => {
     return (
       <div className="languageSelectorContainer">
-        <LanguageSelector />
+        <LanguageSelector isVisible={showLanguageSelector} />
       </div>
     );
-  }, []);
+  }, [showLanguageSelector]);
 
-  const renderBackButton = useMemo(() => {
+  const memoizedBackButton = useMemo(() => {
     return (
       <div className="backButtonContainer">
         <ArrowLeft01Icon
@@ -45,20 +43,22 @@ const LayoutHeader = ({
     );
   }, [navigate]);
 
-  const renderLoadingSpinner = useMemo(() => {
-    return <LoadingSpinner />;
-  }, []);
+  const memoizedLoadingSpinner = useMemo(() => {
+    return <LoadingSpinner isVisible={showLoadingIndicator} />;
+  }, [showLoadingIndicator]);
+
+  const memoizedAlertStack = useMemo(() => {
+    return <AlertStack alertList={alerts} />;
+  }, [alerts]);
 
   return (
     <div className="LayoutHeaderContainer">
       <div className="layoutHeaderControlsContainer">
-        {showBackButton ? renderBackButton : null}
-        {showLoadingIndicator ? renderLoadingSpinner : null}
-        {showMultiLanguage?.value && showLanguageSelector
-          ? renderLanguageSelector
-          : null}
+        {showBackButton ? memoizedBackButton : null}
+        {memoizedLoadingSpinner}
+        {memoizedLanguageSelector}
       </div>
-      <AlertStack />
+      {memoizedAlertStack}
     </div>
   );
 };

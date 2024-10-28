@@ -1,30 +1,25 @@
 import { ReactNode } from "react";
 import { Button, Modal } from "react-bootstrap";
-import { useAppSelector } from "@redux/hooks";
-import { ModalListType } from "@customTypes/index";
-import { makeSelectCheckIfModalVisible } from "@selectors/index";
 
 export type CustomModalPropsType = {
-  modalId: ModalListType;
   headerText: string;
   onConfirm: () => void;
   onCancel: () => void;
   confirmButtonLabel: string;
   cancelButtonLabel: string;
+  isVisible: boolean;
   children?: ReactNode;
 };
 
 const CustomModal = ({
-  modalId,
   headerText,
   onConfirm,
   onCancel,
   confirmButtonLabel,
   cancelButtonLabel,
   children,
+  isVisible,
 }: CustomModalPropsType) => {
-  const isVisible = useAppSelector(makeSelectCheckIfModalVisible(modalId));
-
   return (
     <Modal
       show={isVisible}

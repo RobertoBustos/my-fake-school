@@ -3,8 +3,8 @@ export * from "./subjectTypes"
 export type AlertPropsType = {
     alertId: string;
     message: string;
-    type: "danger" | "success" | "warning";
-    dismisable: boolean;
+    type?: "danger" | "success" | "warning";
+    dismisable?: boolean;
 };
 
 export enum ModalListType {
@@ -25,4 +25,5 @@ export type SupportedLanguageType = {
     code: string
     nativeName: string,
 }
+
 export type SupportedLanguagesListType = SupportedLanguageType[]

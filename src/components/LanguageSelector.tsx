@@ -1,11 +1,20 @@
 import { Dropdown, DropdownButton } from "react-bootstrap";
-import { useTranslation } from "react-i18next";
+import { useMemoizedTranslation } from "@hooks/useTranslation";
 import { supportedLanguages } from "@constants/index";
+import { useAppSelector } from "@redux/hooks";
+import { selectFeatureFlag } from "@redux/selectors";
 
-const LanguageSelector = () => {
-  const { t, i18n } = useTranslation();
+export type LanguageSelectorPropsType = {
+  isVisible: boolean;
+};
 
-  return (
+const LanguageSelector = ({ isVisible }: LanguageSelectorPropsType) => {
+  const { t, i18n } = useMemoizedTranslation();
+  const showMultiLanguage = useAppSelector(
+    selectFeatureFlag("enableMultiLanguage")
+  );
+
+  return isVisible && showMultiLanguage?.value ? (
     <DropdownButton variant="secondary" title={i18n.resolvedLanguage}>
       {supportedLanguages.map((lng) => {
         return (
@@ -21,7 +30,7 @@ const LanguageSelector = () => {
         );
       })}
     </DropdownButton>
-  );
+  ) : null;
 };
 
 export default LanguageSelector;

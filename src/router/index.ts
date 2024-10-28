@@ -3,7 +3,8 @@ import { createBrowserRouter } from "react-router-dom";
 import HomePage from "@pages/HomePage";
 import SubjectsPage from "@pages/SubjectsPage";
 import ErrorBoundaryPage from "@pages/ErrorBoundaryPage";
-import { getSubjectCatalog } from "@services/subjectServices";
+import store from "@redux/store";
+import { fetchAllSubjects } from "@redux/reducers/subjectReducer";
 
 const router = createBrowserRouter([
   {
@@ -17,7 +18,8 @@ const router = createBrowserRouter([
     path: "/subjects",
     Component: SubjectsPage,
     loader: async () => {
-      return getSubjectCatalog();
+
+      return store.dispatch(fetchAllSubjects())
     },
   },
 ]);
