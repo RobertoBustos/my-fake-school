@@ -1,6 +1,6 @@
 import Alert from "react-bootstrap/Alert";
 import { useAppDispatch } from "@redux/hooks";
-import { closeAlert } from "@reducers/indicatorReducer";
+import { closeAlert } from "@actions/index";
 import { AlertPropsType } from "@customTypes/index";
 
 export type AlertStackPropsType = {

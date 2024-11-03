@@ -2,10 +2,7 @@ import Button from "react-bootstrap/Button";
 import { useMemoizedTranslation } from "@hooks/useTranslation";
 import type { SubjectType } from "@customTypes/index";
 import { useAppDispatch } from "@redux/hooks";
-import {
-  beginSubjectEdition,
-  beginSubjectDelete,
-} from "@reducers/subjectReducer";
+import { beginSubjectEdition, beginSubjectDelete } from "@actions/index";
 import "@styles/components/SubjectCard.css";
 import { useMemo } from "react";
 

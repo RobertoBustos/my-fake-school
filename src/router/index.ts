@@ -4,7 +4,7 @@ import HomePage from "@pages/HomePage";
 import SubjectsPage from "@pages/SubjectsPage";
 import ErrorBoundaryPage from "@pages/ErrorBoundaryPage";
 import store from "@redux/store";
-import { fetchAllSubjects } from "@redux/reducers/subjectReducer";
+import { fetchAllSubjects } from "@actions/index";
 
 const router = createBrowserRouter([
   {

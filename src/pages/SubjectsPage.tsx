@@ -9,7 +9,7 @@ import { useAppSelector } from "@redux/hooks";
 import {
   makeSelectCheckIfModalVisible,
   selectSubjectCatalog,
-} from "@redux/selectors";
+} from "@selectors/index";
 import { fakeDelayPromise } from "@utils/index";
 import "@styles/pages/SubjectsPage.css";
 

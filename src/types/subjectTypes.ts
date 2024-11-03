@@ -4,8 +4,6 @@ export type SubjectType = {
   isDeleted: boolean;
 };
 
-export type SubjectCatalogType = SubjectType[];
-
 export type AddSubjectPayloadType = string;
 
 export type AddSubjectServicePayloadType = {

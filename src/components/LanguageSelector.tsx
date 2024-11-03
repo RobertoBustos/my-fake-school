@@ -2,7 +2,7 @@ import { Dropdown, DropdownButton } from "react-bootstrap";
 import { useMemoizedTranslation } from "@hooks/useTranslation";
 import { supportedLanguages } from "@constants/index";
 import { useAppSelector } from "@redux/hooks";
-import { selectFeatureFlag } from "@redux/selectors";
+import { selectFeatureFlag } from "@selectors/index";
 
 export type LanguageSelectorPropsType = {
   isVisible: boolean;

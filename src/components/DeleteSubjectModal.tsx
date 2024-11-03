@@ -2,10 +2,7 @@ import { useMemoizedTranslation } from "@hooks/useTranslation";
 import CustomModal from "@components/common/CustomModal";
 import { ModalListType } from "@customTypes/index";
 import { useAppDispatch, useAppSelector } from "@redux/hooks";
-import {
-  cancelSubjectDelete,
-  deleteExistingSubject,
-} from "@reducers/subjectReducer";
+import { cancelSubjectDelete, deleteExistingSubject } from "@actions/index";
 import { selectSubjectManipulationInProgressData } from "@selectors/index";
 
 export type DeleteSubjectModalPropsType = {

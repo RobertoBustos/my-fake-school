@@ -6,7 +6,7 @@ import LanguageSelector from "@components/LanguageSelector";
 import LoadingSpinner from "@components/LoadingSpinner";
 import "@styles/components/LayoutHeader.css";
 import { useAppSelector } from "@redux/hooks";
-import { selectAlerts } from "@redux/selectors";
+import { selectAlerts } from "@selectors/index";
 
 export type LayoutHeaderPropsType = {
   showBackButton?: boolean;

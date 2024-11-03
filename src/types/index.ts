@@ -1,4 +1,5 @@
 export * from "./subjectTypes"
+export * from "./enums"
 
 export type AlertPropsType = {
     alertId: string;
@@ -6,15 +7,6 @@ export type AlertPropsType = {
     type?: "danger" | "success" | "warning";
     dismisable?: boolean;
 };
-
-export enum ModalListType {
-    EDIT_SUBJECT_MODAL = "EditSubjectModal",
-    DELETE_SUBJECT_MODAL = "DeleteSubjectModal",
-    ANOTHER_MODAL = "AnotherModal",
-    ONE_MORE_MODAL = "OneMoreModal",
-}
-
-export type VisibleModalListType = ModalListType[];
 
 export type FeatureFlagType = {
     name: string;
@@ -25,5 +17,3 @@ export type SupportedLanguageType = {
     code: string
     nativeName: string,
 }
-
-export type SupportedLanguagesListType = SupportedLanguageType[]

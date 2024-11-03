@@ -5,10 +5,7 @@ import CustomModal from "@components/common/CustomModal";
 import { useAppSelector, useAppDispatch } from "@redux/hooks";
 import { ModalListType } from "@customTypes/index";
 import { selectSubjectManipulationInProgressData } from "@selectors/index";
-import {
-  cancelSubjectEdition,
-  editExistingSubject,
-} from "@reducers/subjectReducer";
+import { cancelSubjectEdition, editExistingSubject } from "@actions/index";
 
 export type EditSubjectModalPropsType = {
   modalId: ModalListType;

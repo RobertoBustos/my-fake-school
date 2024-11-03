@@ -2,15 +2,14 @@ import i18n from "i18next";
 import { subjectCollection, connection } from "@config/firestore";
 import type {
   AddSubjectServicePayloadType,
-  SubjectCatalogType,
   SubjectType,
   EditSubjectPayloadType,
   DeleteSubjectPayloadType,
 } from "@customTypes/index";
-import eventLogger, { events } from "@utils/eventLogger"
+import { events, eventLogger } from "@utils/index"
 
-export async function getSubjectCatalog(): Promise<SubjectCatalogType | Error> {
-  let serviceResponse: SubjectCatalogType | Error;
+export async function getSubjectCatalog(): Promise<SubjectType[] | Error> {
+  let serviceResponse: SubjectType[] | Error;
   try {
     const subjectQuery = connection.query(
       subjectCollection,

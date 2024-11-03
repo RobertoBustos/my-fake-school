@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Button, FloatingLabel, Form } from "react-bootstrap";
 import { useMemoizedTranslation } from "@hooks/useTranslation";
 import { useAppDispatch } from "@redux/hooks";
-import { addNewSubject } from "@redux/reducers/subjectReducer";
+import { addNewSubject } from "@actions/index";
 import "@styles/components/AddSubject.css";
 
 const AddSubject = () => {

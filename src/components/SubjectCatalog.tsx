@@ -1,13 +1,13 @@
 import SubjectCard from "@components/SubjectCard";
-import type { SubjectCatalogType } from "@customTypes/index";
+import type { SubjectType } from "@customTypes/index";
 import { useAppSelector } from "@redux/hooks";
-import { selectUnregisteredSubjects } from "@redux/selectors";
+import { selectUnregisteredSubjects } from "@selectors/index";
 import WarningMessage from "./WarningMessage";
 import { useMemo } from "react";
 import { useMemoizedTranslation } from "@hooks/useTranslation";
 
 export type SubjectCatalogPropsType = {
-  subjects: SubjectCatalogType;
+  subjects: SubjectType[];
 };
 
 const SubjectCatalog = ({ subjects }: SubjectCatalogPropsType) => {
