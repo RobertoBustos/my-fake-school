@@ -16,3 +16,9 @@ export const supportedLanguages: SupportedLanguagesListType = [
   { code: "en", nativeName: "English" },
   { code: "es", nativeName: "Spanish" },
 ];
+
+export enum customEvents {
+  ADD_SUBJECT = "addSubject",
+  UPDATE_SUBJECT = "updateSubject",
+  DELETE_SUBJECT = "deleteSubject"
+}

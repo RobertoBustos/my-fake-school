@@ -7,6 +7,7 @@ import type {
   EditSubjectPayloadType,
   DeleteSubjectPayloadType,
 } from "@customTypes/index";
+import eventLogger, { events } from "@utils/eventLogger"
 
 export async function getSubjectCatalog(): Promise<SubjectCatalogType | Error> {
   let serviceResponse: SubjectCatalogType | Error;
@@ -38,6 +39,7 @@ export async function addSubject(
       ...payload,
       subjectId: newDoc.id,
     };
+    eventLogger(events.ADD_SUBJECT, payload)
     return mappedSubject;
   } catch (error) {
     return Error(i18n.t("errors.unknown"));
@@ -53,6 +55,7 @@ export async function updateSubject(
       `/${payload.subjectId}`
     );
     await connection.updateDoc(docToChange, payload.newData);
+    eventLogger(events.UPDATE_SUBJECT, payload)
     return true;
   } catch (error) {
     return Error(i18n.t("errors.unknown"));
@@ -69,6 +72,7 @@ export async function deleteSubject(
     );
     //logic delete, if real delete is required call the deleteDoc function with the docToDelete parameter
     await connection.updateDoc(docToChange, payload.newData);
+    eventLogger(events.DELETE_SUBJECT, payload)
     return true;
   } catch (error) {
     return Error(i18n.t("errors.unknown"));
