@@ -1,8 +1,10 @@
 import { ReactNode, useMemo } from "react";
 import LayoutHeader from "@components/common/LayoutHeader";
 import "@styles/components/Layout.css";
+import PageTitle from "@components/common/PageTitle";
 
 export type LayoutPropsType = {
+  pageTitle: string;
   showBackButton: boolean;
   showLoadingIndicator: boolean;
   showLanguageSelector: boolean;
@@ -14,6 +16,7 @@ const Layout = ({
   showBackButton,
   showLoadingIndicator,
   showLanguageSelector,
+  pageTitle,
 }: LayoutPropsType) => {
   const memoizedLayoutHeader = useMemo(() => {
     return (
@@ -27,6 +30,7 @@ const Layout = ({
 
   return (
     <div className="layout">
+      <PageTitle titleText={pageTitle} />
       {memoizedLayoutHeader}
       {children}
     </div>

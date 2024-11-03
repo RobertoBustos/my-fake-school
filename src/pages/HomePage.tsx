@@ -11,7 +11,12 @@ const HomePage = () => {
   const { t } = useMemoizedTranslation();
 
   return (
-    <Layout showLanguageSelector showBackButton={false} showLoadingIndicator>
+    <Layout
+      pageTitle="My Fake School - Home Page"
+      showLanguageSelector
+      showBackButton={false}
+      showLoadingIndicator
+    >
       <PageTitle titleText={t("homePage.title")} />
       {homePageOptions.map((element) => {
         return (

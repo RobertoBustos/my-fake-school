@@ -40,7 +40,12 @@ const SubjectsPage = () => {
   }, [t]);
 
   return (
-    <Layout showLanguageSelector showBackButton showLoadingIndicator>
+    <Layout
+      pageTitle="My Fake School - Subject Catalog"
+      showLanguageSelector
+      showBackButton
+      showLoadingIndicator
+    >
       {memoizedTitle}
       <AddSubject />
       {memoizedCatalog}
