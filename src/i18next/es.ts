@@ -14,19 +14,40 @@ const es = {
         confirmDeleteLabel: "Borrar",
         cancelDeleteLabel: "Cancelar",
       },
+      signIn: {
+        confirmLabel: "Entrar"
+      },
+      signUp: {
+        confirmLabel: "Registrarse"
+      }
+    },
+    forms: {
+      login: {
+        email: "Correo",
+        password: "Contraseña",
+        passwordConfirmation: "Confirme Contraseña",
+        needAnAccount: "¿Necesitas una cuenta? ",
+        signUp: "Registrate",
+        alreadyHaveAnAccount: "¿Ya cuentas con una cuenta? ",
+        signIn: "Ingresa",
+      }
+    },
+    pageTitles: {
+      signUp: "Crear Nueva Cuenta",
+      signIn: "Iniciar Sesión"
     },
     subject: {
       editModal: {
         title: "Editar materia",
         subtitle: "Escriba un nuevo nombre para esta materia",
         description:
-          "Este es un texto larguisimo que pude haber generado en la pagina generadora de textos largos o con algun lorem lipsum pero en vez de eso mejor perdere mi tiempo y escribire manualmente todo",
+          "Este es un texto larguisimo que pude haber generado en la pagina generadora de textos largos o con algun lorem lipsum pero en vez de eso mejor perdere mi tiempo y escribire manualmente todo.",
       },
       deleteModal: {
-        title: "¿Esta seguro de borrar esta materia?",
+        title: "¿Está seguro de borrar esta materia?",
       },
       catalogPage: {
-        title: "Catalogo de Materias",
+        title: "Catálogo de Materias",
       },
       addSubjectForm: {
         label: "Nueva materia",
@@ -38,7 +59,7 @@ const es = {
         nameRequired: "El nombre de la materia no puede estar vacio.",
         idRequired: "No se encontro el id de esta materia.",
         subjectsWithoutIdDetected:
-          "Se encontraron {{subjects}} faltantes de registro en el catalogo.",
+          "Se encontraron {{subjects}} faltantes de registro en el catálogo.",
       },
       auth: {
         passwordsNotMatch: "Las contraseñas no coinciden."
@@ -59,7 +80,7 @@ const es = {
         students: "Alumnos",
         groups: "Grupos",
         grades: "Calificaciones",
-        admin: "Administracion",
+        admin: "Administración",
         logOut: "Cerrar Sesión"
       },
     },

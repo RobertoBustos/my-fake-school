@@ -14,6 +14,27 @@ const en = {
         confirmDeleteLabel: "Delete",
         cancelDeleteLabel: "Cancel",
       },
+      signIn: {
+        confirmLabel: "Sign In"
+      },
+      signUp: {
+        confirmLabel: "Sign Up"
+      }
+    },
+    forms: {
+      login: {
+        email: "Email",
+        password: "Password",
+        passwordConfirmation: "Password Confirmation",
+        needAnAccount: "Need an account?",
+        signUp: "Create one",
+        alreadyHaveAnAccount: "Already have an account?",
+        signIn: "Log In",
+      }
+    },
+    pageTitles: {
+      signUp: "Sign Up",
+      signIn: "Sign In"
     },
     subject: {
       editModal: {

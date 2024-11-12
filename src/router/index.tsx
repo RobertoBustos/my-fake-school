@@ -7,6 +7,11 @@ import PrivateRoute from "@components/common/PrivateRoute";
 const router = createBrowserRouter([
   {
     id: "root",
+    path: "/",
+    element: <PrivateRoute />,
+  },
+  {
+    id: "home",
     path: "/home",
     element: (
       <PrivateRoute>

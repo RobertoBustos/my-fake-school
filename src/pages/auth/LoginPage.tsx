@@ -5,10 +5,12 @@ import { useAppDispatch, useAppSelector } from "@redux/hooks";
 import { selectAlerts } from "@selectors/index";
 import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { useMemoizedTranslation } from "@hooks/useTranslation";
 
 export type LoginPagePropsType = {};
 
 const LoginPage = (props: LoginPagePropsType) => {
+  const { t } = useMemoizedTranslation();
   const dispatch = useAppDispatch();
   const alerts = useAppSelector(selectAlerts);
 
@@ -25,13 +27,14 @@ const LoginPage = (props: LoginPagePropsType) => {
     <>
       <Card>
         <Card.Body>
-          <h2 className="text-center mb-4">Log In</h2>
+          <h2 className="text-center mb-4">{t("pageTitles.signIn")}</h2>
           <AlertStack alertList={alerts} />
           <LoginForm onSubmit={handleSubmit} />
         </Card.Body>
       </Card>
       <div className="w-100 text-center mt-2">
-        Need an account? <Link to="/signup">Sign Up</Link>
+        {t("forms.login.needAnAccount")}
+        <Link to="/signup">{t("forms.login.signUp")}</Link>
       </div>
     </>
   );

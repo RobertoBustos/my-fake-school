@@ -4,7 +4,7 @@ import { useMemo } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 
 export type PrivateRoutePropsType = {
-  children: any;
+  children?: any;
 };
 
 const PrivateRoute = ({ children }: PrivateRoutePropsType) => {
@@ -25,6 +25,13 @@ const PrivateRoute = ({ children }: PrivateRoutePropsType) => {
       isLoggedIn
     ) {
       return <Navigate to="/home" replace />;
+    }
+
+    if (location.pathname === "/") {
+      if (isLoggedIn) {
+        return <Navigate to="/home" replace />;
+      }
+      return <Navigate to="/login" replace />;
     }
 
     return children;
