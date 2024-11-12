@@ -21,7 +21,7 @@ const DeleteSubjectModal = lazy(() =>
   fakeDelayPromise(import("@components/DeleteSubjectModal"))
 );
 
-const SubjectsPage = () => {
+export const SubjectsPage = () => {
   const { t } = useMemoizedTranslation();
   const isDeleteSubjectModalVisible = useAppSelector(
     makeSelectCheckIfModalVisible(ModalListType.DELETE_SUBJECT_MODAL)
@@ -68,5 +68,3 @@ const SubjectsPage = () => {
     </Layout>
   );
 };
-
-export default SubjectsPage;

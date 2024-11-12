@@ -1,7 +1,10 @@
 export enum customEvents {
     ADD_SUBJECT = "addSubject",
     UPDATE_SUBJECT = "updateSubject",
-    DELETE_SUBJECT = "deleteSubject"
+    DELETE_SUBJECT = "deleteSubject",
+    SIGN_UP = "signUp",
+    SIGN_IN = "signIn",
+    LOG_OUT = "logOut"
 }
 
 export enum ModalListType {

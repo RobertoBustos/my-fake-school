@@ -5,10 +5,13 @@ import Layout from "@components/common/Layout";
 import CustomButton from "@components/CustomButton";
 import PageTitle from "@components/PageTitle";
 import { homePageOptions } from "@constants/index";
+import { useAppDispatch } from "@redux/hooks";
+import { logOut } from "@actions/index";
 
 const HomePage = () => {
   const navigate = useNavigate();
   const { t } = useMemoizedTranslation();
+  const dispatch = useAppDispatch();
 
   return (
     <Layout
@@ -30,6 +33,12 @@ const HomePage = () => {
           </Fragment>
         );
       })}
+      <CustomButton
+        handleClick={() => {
+          dispatch(logOut());
+        }}
+        label={t(`homePage.options.logOut`)}
+      />
     </Layout>
   );
 };

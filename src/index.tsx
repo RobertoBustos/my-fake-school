@@ -1,4 +1,3 @@
-import React from "react";
 import ReactDOM from "react-dom/client";
 import { RouterProvider } from "react-router-dom";
 import { Provider } from "react-redux";
@@ -8,6 +7,22 @@ import "@config/i18next";
 import "bootstrap/dist/css/bootstrap.min.css";
 import reportWebVitals from "./reportWebVitals";
 import "@config/remoteConfig";
+import { auth, initAuthStateChangeListener } from "@config/auth";
+import { clearUserData, setUserData } from "@redux/actions";
+
+initAuthStateChangeListener(auth, (user) => {
+  if (user) {
+    store.dispatch(
+      setUserData({
+        email: user.email || "",
+        isEmailVerified: user.emailVerified,
+        userId: user.uid,
+      })
+    );
+  } else {
+    store.dispatch(clearUserData());
+  }
+});
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement

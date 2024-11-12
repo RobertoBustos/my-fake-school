@@ -40,6 +40,9 @@ const es = {
         subjectsWithoutIdDetected:
           "Se encontraron {{subjects}} faltantes de registro en el catalogo.",
       },
+      auth: {
+        passwordsNotMatch: "Las contraseñas no coinciden."
+      }
     },
     confirmations: {
       subject: {
@@ -57,6 +60,7 @@ const es = {
         groups: "Grupos",
         grades: "Calificaciones",
         admin: "Administracion",
+        logOut: "Cerrar Sesión"
       },
     },
   },

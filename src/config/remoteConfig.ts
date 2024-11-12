@@ -4,7 +4,7 @@ import store from "@redux/store"
 import { registerFeatureFlags } from "@actions/index"
 
 const remoteConfig = getRemoteConfig(app)
-remoteConfig.settings.minimumFetchIntervalMillis = 600000;
+//remoteConfig.settings.minimumFetchIntervalMillis = 600000;
 
 fetchConfig(remoteConfig).then(() => {
     activate(remoteConfig).then(() => {

@@ -40,6 +40,9 @@ const en = {
         subjectsWithoutIdDetected:
           "There are {{subjects}} missing its confirmation in the catalog.",
       },
+      auth: {
+        passwordsNotMatch: "Passwords don't match."
+      }
     },
     confirmations: {
       subject: {
@@ -57,6 +60,7 @@ const en = {
         groups: "Groups",
         grades: "Grades",
         admin: "Admin",
+        logOut: "Log Out"
       },
     },
   },

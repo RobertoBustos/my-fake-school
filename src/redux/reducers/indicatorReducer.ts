@@ -12,6 +12,9 @@ import {
   beginSubjectDelete,
   cancelSubjectDelete,
 } from "@reducers/subjectReducer";
+import {
+  signUp, logIn
+} from "@reducers/authReducer"
 import { generateRandomUid } from "@utils/index";
 
 const initialState: IndicatorsState = {
@@ -149,6 +152,44 @@ export const indicatorsSlice = createSlice({
     });
     builder.addCase(editExistingSubject.rejected, (state, action) => {
       state.appLoaderStatus = "idle";
+      state.alerts = [
+        ...state.alerts,
+        {
+          alertId: generateRandomUid(),
+          message: action.payload as string,
+          type: "danger",
+          dismisable: true,
+        },
+      ];
+    });
+    //signUp
+    builder.addCase(signUp.pending, (state) => {
+      state.appLoaderStatus = "loading"
+    });
+    builder.addCase(signUp.fulfilled, (state) => {
+      state.appLoaderStatus = "idle"
+    });
+    builder.addCase(signUp.rejected, (state, action) => {
+      state.appLoaderStatus = "idle"
+      state.alerts = [
+        ...state.alerts,
+        {
+          alertId: generateRandomUid(),
+          message: action.payload as string,
+          type: "danger",
+          dismisable: true,
+        },
+      ];
+    });
+    //logIn
+    builder.addCase(logIn.pending, (state) => {
+      state.appLoaderStatus = "loading"
+    });
+    builder.addCase(logIn.fulfilled, (state) => {
+      state.appLoaderStatus = "idle"
+    });
+    builder.addCase(logIn.rejected, (state, action) => {
+      state.appLoaderStatus = "idle"
       state.alerts = [
         ...state.alerts,
         {
