@@ -1,18 +1,14 @@
-import AlertStack from "@components/AlertStack";
 import SignUpForm from "@components/forms/SignUpForm";
 import { signUp } from "@actions/index";
-import { useAppSelector, useAppDispatch } from "@redux/hooks";
-import { selectAlerts } from "@selectors/index";
-import { Card } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { useAppDispatch } from "@redux/hooks";
 import { useMemoizedTranslation } from "@hooks/useTranslation";
+import Layout2 from "@components/common/Layout2";
+import AuthFormDisclaimer from "@components/common/AuthFormDisclaimer";
+import AuthFormContainer from "@components/common/AuthFormContainer";
 
-export type SignUpPagePropsType = {};
-
-export const SignUpPage = (props: SignUpPagePropsType) => {
+export const SignUpPage = () => {
   const { t } = useMemoizedTranslation();
   const dispatch = useAppDispatch();
-  const alerts = useAppSelector(selectAlerts);
 
   const handleSubmit = (
     email: string,
@@ -28,19 +24,18 @@ export const SignUpPage = (props: SignUpPagePropsType) => {
     );
   };
 
+  const headerProps = { showBackButton: true, showLanguageSelector: true };
+
   return (
-    <>
-      <Card>
-        <Card.Body>
-          <h2 className="text-center mb-4">{t("pageTitles.signUp")}</h2>
-          <AlertStack alertList={alerts} />
-          <SignUpForm onSubmit={handleSubmit} />
-        </Card.Body>
-      </Card>
-      <div className="w-100 text-center mt-2">
-        {t("forms.login.alreadyHaveAnAccount")}
-        <Link to="/login">{t("forms.login.signIn")}</Link>
-      </div>
-    </>
+    <Layout2 pageTabTitle="My Fake School - Sign Up" header={headerProps}>
+      <AuthFormContainer formTitle={t("pageTitles.signUp")}>
+        <SignUpForm onSubmit={handleSubmit} />
+      </AuthFormContainer>
+      <AuthFormDisclaimer
+        text={t("forms.login.alreadyHaveAnAccount")}
+        linkText={t("forms.login.signIn")}
+        linkDestinationPath={"/login"}
+      />
+    </Layout2>
   );
 };

@@ -1,18 +1,15 @@
-import AlertStack from "@components/AlertStack";
 import LoginForm from "@components/forms/LoginForm";
 import { logIn } from "@actions/index";
-import { useAppDispatch, useAppSelector } from "@redux/hooks";
-import { selectAlerts } from "@selectors/index";
-import { Card } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { useAppDispatch } from "@redux/hooks";
 import { useMemoizedTranslation } from "@hooks/useTranslation";
+import Layout2 from "@components/common/Layout2";
+import AuthFormDisclaimer from "@components/common/AuthFormDisclaimer";
+import AuthFormContainer from "@components/common/AuthFormContainer";
+import type { LayoutFooter2PropsType } from "@components/common/LayoutFooter2";
 
-export type LoginPagePropsType = {};
-
-const LoginPage = (props: LoginPagePropsType) => {
+const LoginPage = () => {
   const { t } = useMemoizedTranslation();
   const dispatch = useAppDispatch();
-  const alerts = useAppSelector(selectAlerts);
 
   const handleSubmit = (email: string, password: string) => {
     dispatch(
@@ -23,20 +20,24 @@ const LoginPage = (props: LoginPagePropsType) => {
     );
   };
 
+  const headerProps = { showBackButton: true, showLanguageSelector: true };
+  const footerProps: LayoutFooter2PropsType = {};
+
   return (
-    <>
-      <Card>
-        <Card.Body>
-          <h2 className="text-center mb-4">{t("pageTitles.signIn")}</h2>
-          <AlertStack alertList={alerts} />
-          <LoginForm onSubmit={handleSubmit} />
-        </Card.Body>
-      </Card>
-      <div className="w-100 text-center mt-2">
-        {t("forms.login.needAnAccount")}
-        <Link to="/signup">{t("forms.login.signUp")}</Link>
-      </div>
-    </>
+    <Layout2
+      pageTabTitle="My Fake School - Log In"
+      header={headerProps}
+      footer={footerProps}
+    >
+      <AuthFormContainer formTitle={t("pageTitles.signIn")}>
+        <LoginForm onSubmit={handleSubmit} />
+      </AuthFormContainer>
+      <AuthFormDisclaimer
+        text={t("forms.login.needAnAccount")}
+        linkText={t("forms.login.signUp")}
+        linkDestinationPath={"/signup"}
+      />
+    </Layout2>
   );
 };
 

@@ -9,7 +9,6 @@ export async function signUpService(payload: SignUpServicePayloadType): Promise<
         eventLogger(events.SIGN_UP, payload)
         return response
     } catch (error) {
-        console.log(error)
         return error as CustomAuthError
     }
 }
@@ -20,7 +19,6 @@ export async function signInService(payload: SignInServicePayloadType): Promise<
         eventLogger(events.SIGN_IN, payload)
         return response
     } catch (error) {
-        console.log(error)
         return error as CustomAuthError
     }
 }
@@ -31,7 +29,6 @@ export async function logOutService(): Promise<void | CustomAuthError> {
         eventLogger(events.LOG_OUT, {})
         return response
     } catch (error) {
-        console.log(error)
         return error as CustomAuthError
     }
 }
