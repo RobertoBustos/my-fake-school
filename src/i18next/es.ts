@@ -62,7 +62,9 @@ const es = {
           "Se encontraron {{subjects}} faltantes de registro en el catálogo.",
       },
       auth: {
-        passwordsNotMatch: "Las contraseñas no coinciden."
+        passwordsNotMatch: "Las contraseñas no coinciden.",
+        invalidcredential: "Usuario o contraseña incorrectos.",
+        emailalreadyinuse: "Ya existe una cuenta con este correo."
       }
     },
     confirmations: {

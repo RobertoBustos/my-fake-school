@@ -1,8 +1,9 @@
-import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import i18n from "@config/i18next";
-import { SignInServicePayloadType, SignUpPayloadType, UserInfoType } from "@customTypes/authTypes";
-import { AuthState } from "@redux/types";
+import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { signUpService, signInService, logOutService } from "@services/authServices";
+import type { AuthState } from "@redux/types";
+import type { SignInServicePayloadType, SignUpPayloadType, UserInfoType } from "@customTypes/authTypes";
+import { shapeFirebaseAuthError } from "@utils/index"
 
 const initialState: AuthState = {
     userCredential: null,
@@ -29,18 +30,19 @@ export const signUp = createAsyncThunk("auth/signUp", async (payload: SignUpPayl
         return thunkApi.rejectWithValue(i18n.t("errors.auth.passwordsNotMatch"));
     }
     const response = await signUpService(payload)
-    if (response instanceof Error) {
-        return thunkApi.rejectWithValue(response.message);
+    if ("message" in response) {
+        return thunkApi.rejectWithValue(i18n.t(`errors.${shapeFirebaseAuthError(response.message)}`));
     }
-    return response
+    return response.toJSON()
 })
 
 export const logIn = createAsyncThunk("auth/logIn", async (payload: SignInServicePayloadType, thunkApi) => {
     const response = await signInService(payload)
-    if (response instanceof Error) {
-        return thunkApi.rejectWithValue(response.message);
+    if ("message" in response) {
+        return thunkApi.rejectWithValue(i18n.t(`errors.${shapeFirebaseAuthError(response.message)}`));
+    } else {
+        return response.toJSON()
     }
-    return response
 })
 
 export const logOut = createAsyncThunk("auth/logOut", async (_, thunkApi) => {

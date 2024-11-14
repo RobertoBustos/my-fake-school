@@ -62,7 +62,9 @@ const en = {
           "There are {{subjects}} missing its confirmation in the catalog.",
       },
       auth: {
-        passwordsNotMatch: "Passwords don't match."
+        passwordsNotMatch: "Passwords don't match.",
+        invalidcredential: "Incorrect username or password.",
+        emailalreadyinuse: "There's already an account with this email.",
       }
     },
     confirmations: {

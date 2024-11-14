@@ -1,5 +1,5 @@
 import { createAction } from '@reduxjs/toolkit'
-import { Value } from 'firebase/remote-config'
+import type { Value } from 'firebase/remote-config'
 export { closeAlert, hideLoadingSpinner, hideModal, indicatorsSlice, showLoadingSpinner, showModal } from "@reducers/indicatorReducer"
 
 export const registerFeatureFlags = createAction('indicators/registerFeatureFlags', function prepare(featureFlags: Record<string, Value>) {

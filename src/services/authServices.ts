@@ -1,34 +1,43 @@
 import { signUp, logIn, logOut } from "@config/auth";
-import { SignUpServicePayloadType, SignInServicePayloadType, CustomAuthError } from "@customTypes/index";
 import { eventLogger, events } from "@utils/eventLogger";
-import { UserCredential } from "firebase/auth";
+import type { SignUpServicePayloadType, SignInServicePayloadType, CustomUserType, CustomAuthErrorType } from "@customTypes/index";
+import { FirebaseError } from "firebase/app";
 
-export async function signUpService(payload: SignUpServicePayloadType): Promise<UserCredential | CustomAuthError> {
+export async function signUpService(payload: SignUpServicePayloadType): Promise<CustomUserType | CustomAuthErrorType> {
     try {
         const response = await signUp(payload.email, payload.password)
         eventLogger(events.SIGN_UP, payload)
-        return response
-    } catch (error) {
-        return error as CustomAuthError
+        return response.user
+    } catch (error: unknown) {
+        if (error instanceof FirebaseError) {
+            return { message: error.code } as CustomAuthErrorType
+        }
+        return { message: "Unknown error" } as CustomAuthErrorType
     }
 }
 
-export async function signInService(payload: SignInServicePayloadType): Promise<UserCredential | CustomAuthError> {
+export async function signInService(payload: SignInServicePayloadType): Promise<CustomUserType | CustomAuthErrorType> {
     try {
         const response = await logIn(payload.email, payload.password)
         eventLogger(events.SIGN_IN, payload)
-        return response
-    } catch (error) {
-        return error as CustomAuthError
+        return response.user
+    } catch (error: unknown) {
+        if (error instanceof FirebaseError) {
+            return { message: error.code } as CustomAuthErrorType
+        }
+        return { message: "Unknown error" } as CustomAuthErrorType
     }
 }
 
-export async function logOutService(): Promise<void | CustomAuthError> {
+export async function logOutService(): Promise<void | CustomAuthErrorType> {
     try {
         const response = await logOut()
         eventLogger(events.LOG_OUT, {})
         return response
-    } catch (error) {
-        return error as CustomAuthError
+    } catch (error: unknown) {
+        if (error instanceof FirebaseError) {
+            return { message: error.code } as CustomAuthErrorType
+        }
+        return { message: "Unknown error" } as CustomAuthErrorType
     }
 }

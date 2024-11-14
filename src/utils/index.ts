@@ -5,6 +5,10 @@ export const generateRandomUid = (): string => {
   return uuidv4();
 };
 
+export const shapeFirebaseAuthError = (errorCode: string) => {
+  return errorCode.replace("/", ".").replaceAll("-", "")
+}
+
 export const fakeDelayPromise = async (promise: any) => {
   return new Promise((resolve) => {
     setTimeout(resolve, 500);
