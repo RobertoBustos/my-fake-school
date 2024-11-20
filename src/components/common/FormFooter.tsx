@@ -1,17 +1,17 @@
 import { useMemo } from "react";
 import { Link } from "react-router-dom";
 
-export type AuthFormDisclaimerPropsType = {
+export type FormFooterPropsType = {
   text?: string;
   linkText?: string;
   linkDestinationPath?: string;
 };
 
-const AuthFormDisclaimer = ({
+const FormFooter = ({
   text = "",
   linkText = "",
   linkDestinationPath,
-}: AuthFormDisclaimerPropsType) => {
+}: FormFooterPropsType) => {
   const memoizedAuthFormDisclaimer = useMemo(() => {
     return (
       <div className="w-100 text-center mt-2">
@@ -26,4 +26,4 @@ const AuthFormDisclaimer = ({
   return memoizedAuthFormDisclaimer;
 };
 
-export default AuthFormDisclaimer;
+export default FormFooter;

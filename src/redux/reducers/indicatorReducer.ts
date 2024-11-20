@@ -13,12 +13,12 @@ import {
   cancelSubjectDelete,
 } from "@reducers/subjectReducer";
 import {
-  signUp, logIn
+  signUp, logIn, sendVerificationEmail, updateProfile, setUserData
 } from "@reducers/authReducer"
 import { generateRandomUid } from "@utils/index";
 
 const initialState: IndicatorsState = {
-  appLoaderStatus: "idle",
+  appLoaderStatus: "loading",
   visibleModals: [],
   alerts: [],
   featureFlags: []
@@ -49,7 +49,7 @@ export const indicatorsSlice = createSlice({
     },
     registerFeatureFlags: (state, action) => {
       state.featureFlags = action.payload
-    }
+    },
   },
   extraReducers: (builder) => {
     //fetch all subjects
@@ -162,6 +162,10 @@ export const indicatorsSlice = createSlice({
         },
       ];
     });
+    //load user data
+    builder.addCase(setUserData, (state) => {
+      state.appLoaderStatus = "idle"
+    });
     //signUp
     builder.addCase(signUp.pending, (state) => {
       state.appLoaderStatus = "loading"
@@ -189,6 +193,62 @@ export const indicatorsSlice = createSlice({
       state.appLoaderStatus = "idle"
     });
     builder.addCase(logIn.rejected, (state, action) => {
+      state.appLoaderStatus = "idle"
+      state.alerts = [
+        ...state.alerts,
+        {
+          alertId: generateRandomUid(),
+          message: action.payload as string,
+          type: "danger",
+          dismisable: true,
+        },
+      ];
+    });
+    //sendVerificationEmail
+    builder.addCase(sendVerificationEmail.pending, (state) => {
+      state.appLoaderStatus = "loading"
+    });
+    builder.addCase(sendVerificationEmail.fulfilled, (state) => {
+      state.appLoaderStatus = "idle"
+      state.alerts = [
+        ...state.alerts,
+        {
+          alertId: generateRandomUid(),
+          message: i18n.t("confirmations.user.verificationEmailSent"),
+          type: "success",
+          dismisable: true,
+        },
+      ];
+    });
+    builder.addCase(sendVerificationEmail.rejected, (state, action) => {
+      state.appLoaderStatus = "idle"
+      state.alerts = [
+        ...state.alerts,
+        {
+          alertId: generateRandomUid(),
+          message: action.payload as string,
+          type: "danger",
+          dismisable: true,
+        },
+      ];
+    });
+    //updateUserProfile
+    builder.addCase(updateProfile.pending, (state) => {
+      state.appLoaderStatus = "loading"
+    });
+    builder.addCase(updateProfile.fulfilled, (state) => {
+      state.appLoaderStatus = "idle"
+      state.alerts = [
+        ...state.alerts,
+        {
+          alertId: generateRandomUid(),
+          message: i18n.t("confirmations.user.profileUpdated"),
+          type: "success",
+          dismisable: true,
+        },
+      ];
+    });
+    builder.addCase(updateProfile.rejected, (state, action) => {
       state.appLoaderStatus = "idle"
       state.alerts = [
         ...state.alerts,

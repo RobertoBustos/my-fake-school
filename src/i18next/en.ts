@@ -19,7 +19,11 @@ const en = {
       },
       signUp: {
         confirmLabel: "Sign Up"
-      }
+      },
+      user: {
+        confirmEditLabel: "Save Changes",
+        verifyLabel: "Verify your email"
+      },
     },
     forms: {
       login: {
@@ -30,11 +34,25 @@ const en = {
         signUp: "Create one",
         alreadyHaveAnAccount: "Already have an account?",
         signIn: "Log In",
+      },
+      profile: {
+        firstName: "First Name",
+        lastName: "Last Name",
+        password: "New password",
+        phoneNumber: "phoneNumber"
       }
     },
-    pageTitles: {
+    pageTabTitles: {
+      homePage: "My Fake School - Home",
+      signUpPage: "My Fake School - Sign Up",
+      signInPage: "My Fake School - Sign In",
+      profilePage: "My Fake School - My Profile",
+      subjectPage: "My Fake School - Subject Catalog"
+    },
+    formTitles: {
       signUp: "Sign Up",
-      signIn: "Sign In"
+      signIn: "Sign In",
+      userProfile: "My Profile"
     },
     subject: {
       editModal: {
@@ -65,6 +83,7 @@ const en = {
         passwordsNotMatch: "Passwords don't match.",
         invalidcredential: "Incorrect username or password.",
         emailalreadyinuse: "There's already an account with this email.",
+        noChangesInProfile: "There are no changes to be saved."
       }
     },
     confirmations: {
@@ -73,6 +92,10 @@ const en = {
         editedSuccesfully: "Subject changed successfully.",
         removedSuccesfully: "Subject deleted successfully.",
       },
+      user: {
+        verificationEmailSent: "Verification email sent.",
+        profileUpdated: "User information succesfully updated.",
+      }
     },
     homePage: {
       title: "Welcome To Your Home Page",

@@ -1,13 +1,15 @@
-import { Button } from "react-bootstrap";
+import CustomButton from "@components/common/CustomButton";
 
 export type LayoutFooter2PropsType = {
   buttonLabel?: string;
   handleClick?: () => void;
+  buttonDisabled?: boolean;
 };
 
 const LayoutFooter2 = ({
   buttonLabel,
   handleClick,
+  buttonDisabled = false,
 }: LayoutFooter2PropsType) => {
   return (
     <div
@@ -18,9 +20,12 @@ const LayoutFooter2 = ({
       }}
     >
       {buttonLabel && handleClick ? (
-        <Button disabled={false} className="w-75" onClick={handleClick}>
-          {buttonLabel}
-        </Button>
+        <CustomButton
+          disabled={buttonDisabled}
+          className="w-75"
+          onClick={handleClick}
+          buttonLabel={buttonLabel}
+        />
       ) : null}
     </div>
   );

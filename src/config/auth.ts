@@ -1,4 +1,4 @@
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth"
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, sendEmailVerification, updateProfile, updatePassword } from "firebase/auth"
 import app from "@config/firebase"
 
 export const auth = getAuth(app)
@@ -16,3 +16,9 @@ export const logIn = (email: string, password: string) => {
 export const logOut = () => {
     return signOut(auth)
 }
+
+export const verifyEmalil = sendEmailVerification;
+
+export const updateUserProfile = updateProfile
+
+export const updateUserPassword = updatePassword

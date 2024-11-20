@@ -1,6 +1,6 @@
 import { ThunkAction } from "redux-thunk";
 import { Action } from "@reduxjs/toolkit";
-import type { SubjectType, AlertPropsType, ModalListType, FeatureFlagType, UserInfoType } from "@customTypes/index";
+import type { SubjectType, AlertPropsType, ModalListType, FeatureFlagType, UserDataType, ProfileFormFieldsType } from "@customTypes/index";
 import store from "@redux/store";
 
 export type AppStore = typeof store;
@@ -27,6 +27,7 @@ export type SubjectState = {
 };
 
 export type AuthState = {
-  userCredential: UserInfoType | null
-  isLoggedIn: boolean
+  userCredential: UserDataType
+  isLoggedIn: boolean;
+  userManipulationInProgress: ProfileFormFieldsType
 }

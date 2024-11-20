@@ -19,7 +19,7 @@ const router = createBrowserRouter([
       </PrivateRoute>
     ),
     lazy: async () => {
-      let { ErrorBoundaryPage } = await import("@pages/ErrorBoundaryPage");
+      const { ErrorBoundaryPage } = await import("@pages/ErrorBoundaryPage");
       return { ErrorBoundary: ErrorBoundaryPage };
     },
   },
@@ -36,7 +36,7 @@ const router = createBrowserRouter([
     id: "signup",
     path: "/signup",
     lazy: async () => {
-      let { SignUpPage } = await import("@pages/auth/SignUpPage");
+      const { SignUpPage } = await import("@pages/auth/SignUpPage");
       return {
         element: (
           <PrivateRoute>
@@ -47,11 +47,21 @@ const router = createBrowserRouter([
     },
   },
   {
+    id: "profile",
+    path: "/profile",
+    lazy: async () => {
+      const { ProfilePage } = await import("@pages/auth/ProfilePage");
+      return {
+        element: <ProfilePage />,
+      };
+    },
+  },
+  {
     id: "subjects",
     path: "/subjects",
     lazy: async () => {
-      let { SubjectsPage } = await import("@pages/SubjectsPage");
-      let { subjectCatalogLoader } = await import("@router/loaders");
+      const { SubjectsPage } = await import("@pages/SubjectsPage");
+      const { subjectCatalogLoader } = await import("@router/loaders");
       return {
         loader: subjectCatalogLoader,
         element: (

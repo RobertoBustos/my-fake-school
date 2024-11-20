@@ -1,18 +1,16 @@
 import Alert from "react-bootstrap/Alert";
-import { useAppDispatch } from "@redux/hooks";
+import { useAppDispatch, useAppSelector } from "@redux/hooks";
 import { closeAlert } from "@actions/index";
 import { AlertPropsType } from "@customTypes/index";
+import { selectAlerts } from "@selectors/index";
 
-export type AlertStackPropsType = {
-  alertList: AlertPropsType[];
-};
-
-const AlertStack = ({ alertList }: AlertStackPropsType) => {
+const AlertStack = () => {
   const dispatch = useAppDispatch();
+  const alerts: AlertPropsType[] = useAppSelector(selectAlerts);
 
   return (
     <div>
-      {alertList.map((alert) => {
+      {alerts.map((alert) => {
         if (alert.dismisable === true) {
           setTimeout(() => {
             dispatch(closeAlert(alert.alertId));

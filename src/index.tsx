@@ -17,6 +17,9 @@ initAuthStateChangeListener(auth, (user) => {
         email: user.email || "",
         isEmailVerified: user.emailVerified,
         userId: user.uid,
+        firstName: user.displayName?.split(",")[1] || "",
+        lastName: user.displayName?.split(",")[0] || "",
+        phoneNumber: user.phoneNumber || "",
       })
     );
   } else {

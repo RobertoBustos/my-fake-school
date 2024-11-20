@@ -1,22 +1,60 @@
 import { FirebaseError } from "firebase/app";
 import type { User } from "firebase/auth";
 
-export type SignUpPayloadType = {
+export type CustomAuthErrorType = FirebaseError
+
+export type CustomAuthResponseType = {
+    ok: boolean
+}
+
+export type CustomUserType = User;
+
+export type UserDataType = {
+    userId?: string;
+    firstName?: string;
+    lastName?: string;
+    email?: string;
+    isEmailVerified?: boolean;
+    phoneNumber?: string
+}
+
+export type UserSignUpPayloadType = {
     email: string;
     password: string;
     passwordConfirm: string;
 }
 
-export type SignUpServicePayloadType = Omit<SignUpPayloadType, "passwordConfirm">
-
-export type SignInServicePayloadType = Omit<SignUpPayloadType, "passwordConfirm">
-
-export type CustomAuthErrorType = FirebaseError
-
-export type CustomUserType = User;
-
-export type UserInfoType = {
-    userId: string;
+export type UserSignInPayloadType = {
     email: string;
-    isEmailVerified: boolean;
+    password: string;
+}
+
+export type SignUpServicePayloadType = Omit<UserSignUpPayloadType, "passwordConfirm">
+
+export type SignInServicePayloadType = UserSignInPayloadType
+
+
+export type UserUpdatePayloadType = {
+    firstName?: string;
+    lastName?: string;
+    password?: string
+    phoneNumber?: string
+    displayName?: string;
+}
+
+export type UpdateServicePayloadType = {
+    displayName?: string
+    phoneNumber?: string;
+    password?: string
+}
+
+export type ProfileFormFieldsType = UserUpdatePayloadType
+
+export type UserProfileNewValue = {
+    field: string;
+    value: string;
+}
+
+export type UpdatePayloadType = {
+
 }

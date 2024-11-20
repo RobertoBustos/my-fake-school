@@ -1,29 +1,27 @@
 import AlertStack from "@components/AlertStack";
-import { useAppSelector } from "@redux/hooks";
-import { selectAlerts } from "@redux/selectors";
 import { ReactNode } from "react";
 import { Card } from "react-bootstrap";
 
-export type AuthFormContainerPropsType = {
+export type FormContainerPropsType = {
   formTitle?: string;
+  displayAlerts?: boolean;
   children: ReactNode;
 };
 
-const AuthFormContainer = ({
+const FormContainer = ({
   formTitle,
+  displayAlerts = true,
   children,
-}: AuthFormContainerPropsType) => {
-  const alerts = useAppSelector(selectAlerts);
-
+}: FormContainerPropsType) => {
   return (
-    <Card>
+    <Card className="w-100">
       <Card.Body>
         {formTitle ? <h2 className="text-center mb-4">{formTitle}</h2> : null}
-        <AlertStack alertList={alerts} />
+        {displayAlerts ? <AlertStack /> : null}
         {children}
       </Card.Body>
     </Card>
   );
 };
 
-export default AuthFormContainer;
+export default FormContainer;

@@ -1,11 +1,11 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
-export type PageTitlePropsType = {
+export type PageTabTextPropsType = {
   titleText: string;
 };
 
-const PageTitle = ({ titleText }: PageTitlePropsType) => {
+const PageTabText = ({ titleText }: PageTabTextPropsType) => {
   const location = useLocation();
 
   useEffect(() => {
@@ -15,4 +15,4 @@ const PageTitle = ({ titleText }: PageTitlePropsType) => {
   return null;
 };
 
-export default PageTitle;
+export default PageTabText;

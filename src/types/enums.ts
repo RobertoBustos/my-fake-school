@@ -4,7 +4,10 @@ export enum customEvents {
     DELETE_SUBJECT = "deleteSubject",
     SIGN_UP = "signUp",
     SIGN_IN = "signIn",
-    LOG_OUT = "logOut"
+    LOG_OUT = "logOut",
+    VERIFY_EMAIL = "verifyEmail",
+    UPDATE_PROFILE = "updateProfile",
+    UPDATE_PASSWORD = "updatePassword"
 }
 
 export enum ModalListType {
@@ -12,4 +15,11 @@ export enum ModalListType {
     DELETE_SUBJECT_MODAL = "DeleteSubjectModal",
     ANOTHER_MODAL = "AnotherModal",
     ONE_MORE_MODAL = "OneMoreModal",
+}
+
+export enum FormFields {
+    FIRST_NAME = "firstName",
+    LAST_NAME = "lastName",
+    PASSWORD = "password",
+    PHONE_NUMBER = "phoneNumber"
 }

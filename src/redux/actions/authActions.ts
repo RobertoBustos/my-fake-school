@@ -1,1 +1,1 @@
-export { setUserData, clearUserData, signUp, logIn, logOut } from "@reducers/authReducer"
+export { setUserData, clearUserData, beginUserEdition, signUp, logIn, logOut, sendVerificationEmail, updateProfile } from "@reducers/authReducer"

@@ -3,8 +3,8 @@ import { logIn } from "@actions/index";
 import { useAppDispatch } from "@redux/hooks";
 import { useMemoizedTranslation } from "@hooks/useTranslation";
 import Layout2 from "@components/common/Layout2";
-import AuthFormDisclaimer from "@components/common/AuthFormDisclaimer";
-import AuthFormContainer from "@components/common/AuthFormContainer";
+import FormFooter from "@components/common/FormFooter";
+import FormContainer from "@components/common/FormContainer";
 import type { LayoutFooter2PropsType } from "@components/common/LayoutFooter2";
 
 const LoginPage = () => {
@@ -25,14 +25,14 @@ const LoginPage = () => {
 
   return (
     <Layout2
-      pageTabTitle="My Fake School - Log In"
+      pageTabTitle={t("pageTabTitles.signInPage")}
       header={headerProps}
       footer={footerProps}
     >
-      <AuthFormContainer formTitle={t("pageTitles.signIn")}>
+      <FormContainer formTitle={t("formTitles.signIn")}>
         <LoginForm onSubmit={handleSubmit} />
-      </AuthFormContainer>
-      <AuthFormDisclaimer
+      </FormContainer>
+      <FormFooter
         text={t("forms.login.needAnAccount")}
         linkText={t("forms.login.signUp")}
         linkDestinationPath={"/signup"}

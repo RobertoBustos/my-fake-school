@@ -1,5 +1,5 @@
 import { Suspense, lazy, useMemo } from "react";
-import Layout from "@components/common/Layout";
+import Layout2 from "@components/common/Layout2";
 import AddSubject from "@components/AddSubject";
 import PageTitle from "@components/PageTitle";
 import SubjectCatalog from "@components/SubjectCatalog";
@@ -39,13 +39,13 @@ export const SubjectsPage = () => {
     return <PageTitle titleText={t("subject.catalogPage.title")} />;
   }, [t]);
 
+  const headerProps = {
+    showLanguageSelector: true,
+    showBackButton: true,
+  };
+
   return (
-    <Layout
-      pageTitle="My Fake School - Subject Catalog"
-      showLanguageSelector
-      showBackButton
-      showLoadingIndicator
-    >
+    <Layout2 pageTabTitle={t("pageTabTitles.subjectPage")} header={headerProps}>
       {memoizedTitle}
       <AddSubject />
       {memoizedCatalog}
@@ -65,6 +65,6 @@ export const SubjectsPage = () => {
           />
         </Suspense>
       )}
-    </Layout>
+    </Layout2>
   );
 };

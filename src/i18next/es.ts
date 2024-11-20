@@ -19,7 +19,11 @@ const es = {
       },
       signUp: {
         confirmLabel: "Registrarse"
-      }
+      },
+      user: {
+        confirmEditLabel: "Guardar",
+        verifyLabel: "Verifique su correo"
+      },
     },
     forms: {
       login: {
@@ -30,11 +34,25 @@ const es = {
         signUp: "Registrate",
         alreadyHaveAnAccount: "¿Ya cuentas con una cuenta? ",
         signIn: "Ingresa",
+      },
+      profile: {
+        firstName: "Nombre",
+        lastName: "Apellidos",
+        password: "Nueva contraseña",
+        phoneNumber: "Teléfono"
       }
     },
-    pageTitles: {
+    pageTabTitles: {
+      homePage: "My Fake School - Inicio",
+      signUpPage: "My Fake School - Registro",
+      signInPage: "My Fake School - Entrar",
+      profilePage: "My Fake School - Mi Perfil",
+      subjectPage: "My Fake School - Catalogo de Materias"
+    },
+    formTitles: {
       signUp: "Crear Nueva Cuenta",
-      signIn: "Iniciar Sesión"
+      signIn: "Iniciar Sesión",
+      userProfile: "Mi Perfil"
     },
     subject: {
       editModal: {
@@ -64,7 +82,8 @@ const es = {
       auth: {
         passwordsNotMatch: "Las contraseñas no coinciden.",
         invalidcredential: "Usuario o contraseña incorrectos.",
-        emailalreadyinuse: "Ya existe una cuenta con este correo."
+        emailalreadyinuse: "Ya existe una cuenta con este correo.",
+        noChangesInProfile: "No hay información que modificar."
       }
     },
     confirmations: {
@@ -73,6 +92,10 @@ const es = {
         editedSuccesfully: "Materia editada exitosamente.",
         removedSuccesfully: "Materia eliminada exitosamente.",
       },
+      user: {
+        verificationEmailSent: "Correo de verification enviado exitosamente.",
+        profileUpdated: "Perfil actualizado exitosamente."
+      }
     },
     homePage: {
       title: "Bienvenido a Tu Pagina de Inicio",
