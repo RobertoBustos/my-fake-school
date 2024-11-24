@@ -14,12 +14,11 @@ initAuthStateChangeListener(auth, (user) => {
   if (user) {
     store.dispatch(
       setUserData({
-        email: user.email || "",
-        isEmailVerified: user.emailVerified,
         userId: user.uid,
-        firstName: user.displayName?.split(",")[1] || "",
-        lastName: user.displayName?.split(",")[0] || "",
+        email: user.email || "",
+        displayName: user.displayName || "",
         phoneNumber: user.phoneNumber || "",
+        isEmailVerified: user.emailVerified,
       })
     );
   } else {

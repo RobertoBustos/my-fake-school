@@ -21,5 +21,6 @@ export enum FormFields {
     FIRST_NAME = "firstName",
     LAST_NAME = "lastName",
     PASSWORD = "password",
-    PHONE_NUMBER = "phoneNumber"
+    PHONE_NUMBER = "phoneNumber",
+    DISPLAY_NAME = "displayName"
 }

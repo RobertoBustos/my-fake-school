@@ -7,7 +7,6 @@ export type PageTabTextPropsType = {
 
 const PageTabText = ({ titleText }: PageTabTextPropsType) => {
   const location = useLocation();
-
   useEffect(() => {
     document.title = titleText;
   }, [location, titleText]);

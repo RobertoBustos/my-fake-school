@@ -11,11 +11,10 @@ export type CustomUserType = User;
 
 export type UserDataType = {
     userId?: string;
-    firstName?: string;
-    lastName?: string;
     email?: string;
-    isEmailVerified?: boolean;
+    displayName?: string
     phoneNumber?: string
+    isEmailVerified?: boolean;
 }
 
 export type UserSignUpPayloadType = {

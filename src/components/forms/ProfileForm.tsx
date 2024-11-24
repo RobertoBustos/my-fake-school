@@ -1,34 +1,50 @@
-import { Controller, FormState, useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { useMemoizedTranslation } from "@hooks/useTranslation";
 import { FormFields, ProfileFormFieldsType } from "@customTypes/index";
 import { Form } from "react-bootstrap";
 import { useAppDispatch } from "@redux/hooks";
-import { beginUserEdition, sendVerificationEmail } from "@actions/index";
+import { beginUserEdition } from "@actions/index";
 import VerifyEmail from "@components/VerifyEmail";
 import FormContainer from "@components/common/FormContainer";
+import { parseFullName } from "@utils/index";
 
 export type ProfileFormPropsType = {
   defaultValues: ProfileFormFieldsType;
-  onEdit?: (formState: FormState<ProfileFormFieldsType>) => void;
 };
 
 const ProfileForm = ({ defaultValues }: ProfileFormPropsType) => {
   const { t } = useMemoizedTranslation();
   const dispatch = useAppDispatch();
-  const { control, register } = useForm<ProfileFormFieldsType>({
+  const { control, register, getValues } = useForm<ProfileFormFieldsType>({
     defaultValues: async () => defaultValues,
   });
 
-  const renderInput = (fieldName: FormFields, type: string) => {
-    const handleChange = (e: { target: { value: any } }) => {
+  const handleChange = (fieldName: FormFields, value: string) => {
+    if (
+      fieldName === FormFields.FIRST_NAME ||
+      fieldName === FormFields.LAST_NAME
+    ) {
+      const displayName = parseFullName(
+        getValues(FormFields.FIRST_NAME),
+        getValues(FormFields.LAST_NAME)
+      );
       dispatch(
         beginUserEdition({
-          field: fieldName,
-          value: e.target.value,
+          field: FormFields.DISPLAY_NAME,
+          value: displayName,
         })
       );
-    };
+      return;
+    }
+    dispatch(
+      beginUserEdition({
+        field: fieldName,
+        value: value,
+      })
+    );
+  };
 
+  const renderInput = (fieldName: FormFields, type: string) => {
     return (
       <Controller
         name={fieldName}
@@ -39,16 +55,15 @@ const ProfileForm = ({ defaultValues }: ProfileFormPropsType) => {
             <Form.Control
               {...register(fieldName)}
               type={type}
-              onChange={handleChange}
+              onChange={(e) => {
+                field.onChange(e);
+                handleChange(fieldName, e.target.value);
+              }}
             />
           </Form.Group>
         )}
       />
     );
-  };
-
-  const handleVerifyEmail = () => {
-    dispatch(sendVerificationEmail());
   };
 
   return (
@@ -59,8 +74,8 @@ const ProfileForm = ({ defaultValues }: ProfileFormPropsType) => {
       {renderInput(FormFields.FIRST_NAME, "text")}
       {renderInput(FormFields.LAST_NAME, "text")}
       {renderInput(FormFields.PASSWORD, "password")}
-      {renderInput(FormFields.PHONE_NUMBER, "phoneNumber")}
-      <VerifyEmail onclickVerifyEmail={handleVerifyEmail} />
+      {renderInput(FormFields.PHONE_NUMBER, "number")}
+      <VerifyEmail />
     </FormContainer>
   );
 };

@@ -1,21 +1,23 @@
 import { useMemoizedTranslation } from "@hooks/useTranslation";
-import { useAppSelector } from "@redux/hooks";
+import { useAppDispatch, useAppSelector } from "@redux/hooks";
 import { selectIsEmailVerified } from "@selectors/index";
 import CustomButton from "./common/CustomButton";
+import { sendVerificationEmail } from "@actions/index";
 
-export type VerifyEmailPropsType = {
-  onclickVerifyEmail: () => void;
-};
-
-const VerifyEmail = ({ onclickVerifyEmail }: VerifyEmailPropsType) => {
+const VerifyEmail = () => {
+  const dispatch = useAppDispatch();
   const { t } = useMemoizedTranslation();
   const isEmailVerified = useAppSelector(selectIsEmailVerified);
+
+  const handleVerifyEmail = () => {
+    dispatch(sendVerificationEmail());
+  };
 
   return isEmailVerified === false ? (
     <CustomButton
       buttonLabel={t("buttons.user.verifyLabel")}
       variant="warning"
-      onClick={onclickVerifyEmail}
+      onClick={handleVerifyEmail}
       className="w-100 mt-4"
     />
   ) : null;

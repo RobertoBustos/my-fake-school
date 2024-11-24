@@ -30,22 +30,26 @@ const LayoutHeader2 = ({
     ) : null;
   }, [navigate]);
 
-  return (
-    <div
-      className="d-flex flex-row align-items-center justify-content-between w-100 px-2"
-      style={{
-        minHeight: "10vh",
-        backgroundColor: "lightgray",
-      }}
-    >
-      <div className="" style={{ minWidth: "15%" }}>
-        {showBackButton ? memoizedBackButton : null}
+  const memoizedHeader = useMemo(() => {
+    return (
+      <div
+        className="d-flex flex-row align-items-center justify-content-between w-100 px-2"
+        style={{
+          minHeight: "10vh",
+          backgroundColor: "lightgray",
+        }}
+      >
+        <div className="" style={{ minWidth: "15%" }}>
+          {showBackButton ? memoizedBackButton : null}
+        </div>
+        <div className="" style={{ minWidth: "15%" }}>
+          {memoizedLanguageSelector}
+        </div>
       </div>
-      <div className="" style={{ minWidth: "15%" }}>
-        {memoizedLanguageSelector}
-      </div>
-    </div>
-  );
+    );
+  }, [memoizedBackButton, memoizedLanguageSelector, showBackButton]);
+
+  return memoizedHeader;
 };
 
 export default LayoutHeader2;

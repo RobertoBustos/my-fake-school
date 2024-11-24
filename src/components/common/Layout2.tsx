@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, useMemo } from "react";
 import PageTabText from "@components/common/PageTabText";
 import LayoutHeader2 from "@components/common/LayoutHeader2";
 import LayoutFooter2 from "@components/common/LayoutFooter2";
@@ -32,10 +32,13 @@ const Layout2 = ({
   if (header) {
     bodyHeight -= 10;
   }
+  const memoizedPageTabText = useMemo(() => {
+    return <PageTabText titleText={pageTabTitle} />;
+  }, [pageTabTitle]);
 
   return (
     <div className="w-100 vh-100">
-      <PageTabText titleText={pageTabTitle} />
+      {memoizedPageTabText}
       {header ? (
         <LayoutHeader2
           showLanguageSelector={header.showLanguageSelector}

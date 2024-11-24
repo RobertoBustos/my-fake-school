@@ -1,4 +1,5 @@
 import CustomButton from "@components/common/CustomButton";
+import { useMemo } from "react";
 
 export type LayoutFooter2PropsType = {
   buttonLabel?: string;
@@ -11,24 +12,32 @@ const LayoutFooter2 = ({
   handleClick,
   buttonDisabled = false,
 }: LayoutFooter2PropsType) => {
-  return (
-    <div
-      className="d-flex flex-row align-items-center justify-content-center px-2 w-100"
-      style={{
-        minHeight: "8vh",
-        backgroundColor: "lightgray",
-      }}
-    >
-      {buttonLabel && handleClick ? (
-        <CustomButton
-          disabled={buttonDisabled}
-          className="w-75"
-          onClick={handleClick}
-          buttonLabel={buttonLabel}
-        />
-      ) : null}
-    </div>
-  );
+  const memoizedButton = useMemo(() => {
+    return buttonLabel && handleClick ? (
+      <CustomButton
+        disabled={buttonDisabled}
+        className="w-75"
+        onClick={handleClick}
+        buttonLabel={buttonLabel}
+      />
+    ) : null;
+  }, [buttonDisabled, buttonLabel, handleClick]);
+
+  const memoizedFooter = useMemo(() => {
+    return (
+      <div
+        className="d-flex flex-row align-items-center justify-content-center px-2 w-100"
+        style={{
+          minHeight: "8vh",
+          backgroundColor: "lightgray",
+        }}
+      >
+        {memoizedButton}
+      </div>
+    );
+  }, [memoizedButton]);
+
+  return memoizedFooter;
 };
 
 export default LayoutFooter2;

@@ -26,31 +26,18 @@ export const authSlice = createSlice({
         beginUserEdition: (state, action: PayloadAction<UserProfileNewValue>) => {
             if (action.payload.value === "") {
                 state.userManipulationInProgress = removeKeyFromObject(state.userManipulationInProgress, action.payload.field)
-                if (action.payload.field === "firstName") {
-                    state.userManipulationInProgress.displayName = `${state.userManipulationInProgress.lastName || ""},`
-                }
-                if (action.payload.field === "lastName") {
-                    state.userManipulationInProgress.displayName = `,${state.userManipulationInProgress.firstName || ""}`
-                }
             } else {
                 const newUserManipulationInProgress = { ...state.userManipulationInProgress, [action.payload.field]: action.payload.value };
                 state.userManipulationInProgress = newUserManipulationInProgress;
-                if (action.payload.field === "firstName") {
-                    state.userManipulationInProgress.displayName = `${state.userManipulationInProgress.lastName || ""},${action.payload.value}`
-                }
-                if (action.payload.field === "lastName") {
-                    state.userManipulationInProgress.displayName = `${action.payload.value},${state.userManipulationInProgress.firstName || ""}`
-                }
             }
-            if (!state.userManipulationInProgress.firstName && !state.userManipulationInProgress.lastName) {
+            if (state.userCredential.displayName === state.userManipulationInProgress.displayName) {
                 state.userManipulationInProgress = removeKeyFromObject(state.userManipulationInProgress, "displayName")
             }
         },
     },
     extraReducers: (builder) => {
         builder.addCase(updateProfile.fulfilled, (state) => {
-            state.userCredential.firstName = state.userManipulationInProgress.firstName;
-            state.userCredential.lastName = state.userManipulationInProgress.lastName;
+            state.userCredential.displayName = state.userManipulationInProgress.displayName
             state.userManipulationInProgress = {}
         });
         builder.addCase(updateProfile.rejected, (state) => {

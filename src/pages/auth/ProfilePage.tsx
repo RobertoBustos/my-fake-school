@@ -4,8 +4,9 @@ import { useAppDispatch, useAppSelector } from "@redux/hooks";
 import { updateProfile } from "@actions/index";
 import {
   selectAppLoaderStatusLoading,
+  selectIsProfileEdited,
   selectLoggedInUserData,
-} from "@redux/selectors";
+} from "@selectors/index";
 import { useMemoizedTranslation } from "@hooks/useTranslation";
 import CustomButton from "@components/common/CustomButton";
 
@@ -14,11 +15,12 @@ export const ProfilePage = () => {
   const userInfo = useAppSelector(selectLoggedInUserData);
   const dispatch = useAppDispatch();
   const isAppLoading = useAppSelector(selectAppLoaderStatusLoading);
+  const isProfileEdited = useAppSelector(selectIsProfileEdited);
 
   const defaultValues = {
     password: "",
-    firstName: userInfo.firstName,
-    lastName: userInfo.lastName,
+    firstName: userInfo.displayName?.split(",")[1],
+    lastName: userInfo.displayName?.split(",")[0],
     phoneNumber: userInfo.phoneNumber,
   };
 
@@ -34,6 +36,7 @@ export const ProfilePage = () => {
   const footerProps = {
     buttonLabel: t("buttons.user.confirmEditLabel"),
     handleClick: handleSubmit,
+    buttonDisabled: !isProfileEdited,
   };
 
   return (
@@ -49,6 +52,7 @@ export const ProfilePage = () => {
             buttonLabel={t("buttons.user.confirmEditLabel")}
             onClick={handleSubmit}
             className="w-100 mt-3"
+            disabled={!isProfileEdited}
           />
         </>
       ) : null}
