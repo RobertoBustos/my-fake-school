@@ -7,7 +7,8 @@ export enum customEvents {
     LOG_OUT = "logOut",
     VERIFY_EMAIL = "verifyEmail",
     UPDATE_PROFILE = "updateProfile",
-    UPDATE_PASSWORD = "updatePassword"
+    UPDATE_PASSWORD = "updatePassword",
+    UPLOAD_PROFILE_PICTURE = "uploadProfilePicture"
 }
 
 export enum ModalListType {
@@ -22,5 +23,6 @@ export enum FormFields {
     LAST_NAME = "lastName",
     PASSWORD = "password",
     PHONE_NUMBER = "phoneNumber",
-    DISPLAY_NAME = "displayName"
+    DISPLAY_NAME = "displayName",
+    PHOTO_URL = "photoURL"
 }

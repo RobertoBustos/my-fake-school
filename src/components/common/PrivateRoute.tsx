@@ -1,5 +1,8 @@
 import { useAppSelector } from "@redux/hooks";
-import { selectIsLoggedIn } from "@redux/selectors";
+import {
+  selectAppLoaderStatusLoading,
+  selectIsLoggedIn,
+} from "@selectors/index";
 import { useMemo } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 
@@ -10,10 +13,14 @@ export type PrivateRoutePropsType = {
 const PrivateRoute = ({ children }: PrivateRoutePropsType) => {
   const location = useLocation();
   const isLoggedIn = useAppSelector(selectIsLoggedIn);
+  const isAppLoading = useAppSelector(selectAppLoaderStatusLoading);
 
   const memoizedPrivateRoute = useMemo(() => {
-    //root path condition
+    if (isAppLoading) {
+      return null;
+    }
     if (location.pathname === "/") {
+      //root path condition
       if (isLoggedIn) {
         return <Navigate to="/home" replace />;
       }
@@ -37,9 +44,8 @@ const PrivateRoute = ({ children }: PrivateRoutePropsType) => {
     ) {
       return <Navigate to="/login" replace />;
     }
-
     return children;
-  }, [children, isLoggedIn, location]);
+  }, [children, isAppLoading, isLoggedIn, location.pathname]);
 
   return memoizedPrivateRoute;
 };

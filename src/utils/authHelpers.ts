@@ -6,9 +6,12 @@ export const parseUpdateUserProfilePayload = () => {
     if (Object.keys(state.auth.userManipulationInProgress).length === 0) {
         return null;
     }
-    let payload: UpdateServicePayloadType = {}
+    let payload: UpdateServicePayloadType = { profile: {} }
     if (state.auth.userManipulationInProgress.displayName) {
-        payload.displayName = state.auth.userManipulationInProgress.displayName
+        payload.profile.displayName = state.auth.userManipulationInProgress.displayName
+    }
+    if (state.auth.userManipulationInProgress.photoURL) {
+        payload.profile.photoURL = state.auth.userManipulationInProgress.photoURL
     }
     if (state.auth.userManipulationInProgress.phoneNumber) {
         payload.phoneNumber = state.auth.userManipulationInProgress.phoneNumber
@@ -17,6 +20,11 @@ export const parseUpdateUserProfilePayload = () => {
         payload.password = state.auth.userManipulationInProgress.password
     }
     return payload
+}
+
+export const isProfilePictureChanged = () => {
+    const state = store.getState();
+    return state.auth.userManipulationInProgress.photoURL && state.auth.userManipulationInProgress.photoURL !== "" ? state.auth.userManipulationInProgress.photoURL : undefined
 }
 
 export const parseFullName = (firstName?: string, lastName?: string) => {

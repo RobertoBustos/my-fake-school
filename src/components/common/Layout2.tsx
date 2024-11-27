@@ -26,11 +26,11 @@ const Layout2 = ({
   let bodyHeight = 100;
 
   if (footer) {
-    bodyHeight -= 8;
+    bodyHeight -= 7;
   }
 
   if (header) {
-    bodyHeight -= 10;
+    bodyHeight -= 7;
   }
   const memoizedPageTabText = useMemo(() => {
     return <PageTabText titleText={pageTabTitle} />;

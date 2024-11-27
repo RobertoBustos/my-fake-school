@@ -22,7 +22,8 @@ const es = {
       },
       user: {
         confirmEditLabel: "Guardar",
-        verifyLabel: "Verifique su correo"
+        verifyLabel: "Verifique su correo",
+        logOutLabel: "Cerrar Sesíon"
       },
     },
     forms: {
@@ -84,6 +85,9 @@ const es = {
         invalidcredential: "Usuario o contraseña incorrectos.",
         emailalreadyinuse: "Ya existe una cuenta con este correo.",
         noChangesInProfile: "No hay información que modificar."
+      },
+      storage: {
+        retrylimitexceeded: "El número de intentos ha sido excedido."
       }
     },
     confirmations: {

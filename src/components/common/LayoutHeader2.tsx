@@ -35,7 +35,7 @@ const LayoutHeader2 = ({
       <div
         className="d-flex flex-row align-items-center justify-content-between w-100 px-2"
         style={{
-          minHeight: "10vh",
+          minHeight: "7vh",
           backgroundColor: "lightgray",
         }}
       >

@@ -10,8 +10,12 @@ import "@config/remoteConfig";
 import { auth, initAuthStateChangeListener } from "@config/auth";
 import { clearUserData, setUserData } from "@redux/actions";
 
+const root = ReactDOM.createRoot(
+  document.getElementById("root") as HTMLElement
+);
+
 initAuthStateChangeListener(auth, (user) => {
-  if (user) {
+  if (user && user !== null) {
     store.dispatch(
       setUserData({
         userId: user.uid,
@@ -19,6 +23,7 @@ initAuthStateChangeListener(auth, (user) => {
         displayName: user.displayName || "",
         phoneNumber: user.phoneNumber || "",
         isEmailVerified: user.emailVerified,
+        photoURL: user.photoURL,
       })
     );
   } else {
@@ -26,14 +31,13 @@ initAuthStateChangeListener(auth, (user) => {
   }
 });
 
-const root = ReactDOM.createRoot(
-  document.getElementById("root") as HTMLElement
-);
 root.render(
   <Provider store={store}>
     <RouterProvider router={router} />
   </Provider>
 );
+
+// eslint-disable-next-line react-hooks/rules-of-hooks
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

@@ -22,7 +22,8 @@ const en = {
       },
       user: {
         confirmEditLabel: "Save Changes",
-        verifyLabel: "Verify your email"
+        verifyLabel: "Verify your email",
+        logOutLabel: "Log out"
       },
     },
     forms: {
@@ -84,6 +85,9 @@ const en = {
         invalidcredential: "Incorrect username or password.",
         emailalreadyinuse: "There's already an account with this email.",
         noChangesInProfile: "There are no changes to be saved."
+      },
+      storage: {
+        retrylimitexceeded: "The number of retries has been exceeded."
       }
     },
     confirmations: {

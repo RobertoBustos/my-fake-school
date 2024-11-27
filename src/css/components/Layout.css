@@ -1,9 +1,0 @@
-.layout {
-    display: flex;
-    flex-direction: column;
-    font-family: monospace;
-    align-items: center;
-    justify-content: center;
-    background-color: transparent;
-    min-height: max-content;
-}

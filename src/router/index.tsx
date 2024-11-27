@@ -52,7 +52,11 @@ const router = createBrowserRouter([
     lazy: async () => {
       const { ProfilePage } = await import("@pages/auth/ProfilePage");
       return {
-        element: <ProfilePage />,
+        element: (
+          <PrivateRoute>
+            <ProfilePage />,
+          </PrivateRoute>
+        ),
       };
     },
   },

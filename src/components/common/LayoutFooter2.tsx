@@ -28,7 +28,7 @@ const LayoutFooter2 = ({
       <div
         className="d-flex flex-row align-items-center justify-content-center px-2 w-100"
         style={{
-          minHeight: "8vh",
+          minHeight: "7vh",
           backgroundColor: "lightgray",
         }}
       >

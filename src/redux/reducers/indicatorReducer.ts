@@ -13,7 +13,7 @@ import {
   cancelSubjectDelete,
 } from "@reducers/subjectReducer";
 import {
-  signUp, logIn, sendVerificationEmail, updateProfile, setUserData
+  signUp, logIn, sendVerificationEmail, updateProfile, setUserData, clearUserData, uploadUserProfilePicture
 } from "@reducers/authReducer"
 import { generateRandomUid } from "@utils/index";
 
@@ -166,6 +166,10 @@ export const indicatorsSlice = createSlice({
     builder.addCase(setUserData, (state) => {
       state.appLoaderStatus = "idle"
     });
+    //clear user data
+    builder.addCase(clearUserData, (state) => {
+      state.appLoaderStatus = "idle"
+    })
     //signUp
     builder.addCase(signUp.pending, (state) => {
       state.appLoaderStatus = "loading"
@@ -249,6 +253,25 @@ export const indicatorsSlice = createSlice({
       ];
     });
     builder.addCase(updateProfile.rejected, (state, action) => {
+      state.appLoaderStatus = "idle"
+      state.alerts = [
+        ...state.alerts,
+        {
+          alertId: generateRandomUid(),
+          message: action.payload as string,
+          type: "danger",
+          dismisable: true,
+        },
+      ];
+    });
+    //uploadProfilePicture
+    builder.addCase(uploadUserProfilePicture.pending, (state) => {
+      state.appLoaderStatus = "loading"
+    });
+    builder.addCase(uploadUserProfilePicture.fulfilled, (state) => {
+      state.appLoaderStatus = "idle"
+    });
+    builder.addCase(uploadUserProfilePicture.rejected, (state, action) => {
       state.appLoaderStatus = "idle"
       state.alerts = [
         ...state.alerts,

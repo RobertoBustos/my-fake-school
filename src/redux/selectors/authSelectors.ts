@@ -9,3 +9,7 @@ export const selectIsEmailVerified = (state: RootState) => state.auth.userCreden
 export const selectIsProfileEdited = (state: RootState) => {
     return Object.keys(state.auth.userManipulationInProgress).length > 0
 }
+
+export const selecProfilePhotoURL = (state: RootState) => {
+    return state.auth.userManipulationInProgress.photoURL || state.auth.userCredential.photoURL
+} 

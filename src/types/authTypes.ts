@@ -1,5 +1,6 @@
 import { FirebaseError } from "firebase/app";
 import type { User } from "firebase/auth";
+import type { FullMetadata } from "firebase/storage";
 
 export type CustomAuthErrorType = FirebaseError
 
@@ -9,12 +10,17 @@ export type CustomAuthResponseType = {
 
 export type CustomUserType = User;
 
+export type CustomStorageResponseType = FullMetadata & {
+    downloadURL: string
+}
+
 export type UserDataType = {
     userId?: string;
     email?: string;
     displayName?: string
     phoneNumber?: string
     isEmailVerified?: boolean;
+    photoURL?: string | null
 }
 
 export type UserSignUpPayloadType = {
@@ -39,12 +45,17 @@ export type UserUpdatePayloadType = {
     password?: string
     phoneNumber?: string
     displayName?: string;
+    email?: string;
+    photoURL?: string | null
 }
 
 export type UpdateServicePayloadType = {
-    displayName?: string
-    phoneNumber?: string;
+    profile: {
+        displayName?: string
+        photoURL?: string
+    }
     password?: string
+    phoneNumber?: string;
 }
 
 export type ProfileFormFieldsType = UserUpdatePayloadType
@@ -54,6 +65,10 @@ export type UserProfileNewValue = {
     value: string;
 }
 
-export type UpdatePayloadType = {
-
+export type UserUploadProfilePicturePayloadType = {
+    file: File
+}
+export type UploadProfilePictureServiceType = {
+    file: File;
+    path: string
 }

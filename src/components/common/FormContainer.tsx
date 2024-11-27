@@ -14,7 +14,7 @@ const FormContainer = ({
   children,
 }: FormContainerPropsType) => {
   return (
-    <Card className="w-100">
+    <Card className="w-100 my-3">
       <Card.Body>
         {formTitle ? <h2 className="text-center mb-4">{formTitle}</h2> : null}
         {displayAlerts ? <AlertStack /> : null}
