@@ -1,3 +1,12 @@
+export enum AppLoaders {
+    UPLOAD_PROFILE_PICTURE = "ProfilePicture",
+    SEND_EMAIL_VERIFICATION = "emailVerification",
+    UPDATE_PROFILE = "updateProfile",
+    LOG_OUT = "logOut",
+    LOG_IN = "logIn",
+    SIGN_UP = "signUp"
+}
+
 export enum customEvents {
     ADD_SUBJECT = "addSubject",
     UPDATE_SUBJECT = "updateSubject",

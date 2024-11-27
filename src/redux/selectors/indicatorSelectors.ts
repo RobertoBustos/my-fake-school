@@ -1,6 +1,6 @@
 import { createSelector } from "reselect"
 import { RootState } from "@redux/types/index";
-import { ModalListType } from "@customTypes/index";
+import { AppLoaders, ModalListType } from "@customTypes/index";
 
 export const selectIndicatorState = (state: RootState) => state.indicators;
 
@@ -15,6 +15,12 @@ export const selectAlerts = (state: RootState) => state.indicators.alerts;
 export const selectFeatureFlag = (featureFlagName: string) => {
     return createSelector([(state: RootState) => state.indicators.featureFlags], (featureFlags) =>
         featureFlags.find((flag) => flag.name === featureFlagName)
+    );
+}
+
+export const selectAppLoader = (appLoader: AppLoaders) => {
+    return createSelector([(state: RootState) => state.indicators.appLoaders], (appLoaders) =>
+        appLoaders.includes(appLoader)
     );
 }
 

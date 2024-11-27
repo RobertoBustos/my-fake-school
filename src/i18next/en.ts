@@ -21,9 +21,14 @@ const en = {
         confirmLabel: "Sign Up"
       },
       user: {
-        confirmEditLabel: "Save Changes",
+        saveChangesLabel: "Save Changes",
+        saveChangesInProgress: "Saving Changes...",
         verifyLabel: "Verify your email",
-        logOutLabel: "Log out"
+        verifyLabelInProgress: "Sending verification email...",
+        logOutLabel: "Log out",
+        logOutLabelInProgress: "Loggin out...",
+        logInLabelInProgress: "Loggin in...",
+        signUpLabelInProgress: "Creating account..."
       },
     },
     forms: {

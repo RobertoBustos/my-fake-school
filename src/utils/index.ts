@@ -8,9 +8,9 @@ export const generateRandomUid = (): string => {
   return uuidv4();
 };
 
-export const fakeDelayPromise = async (promise: Promise<any>) => {
+export const fakeDelayPromise = async (promise?: Promise<any>, timeout = 500) => {
   return new Promise((resolve) => {
-    setTimeout(resolve, 500);
+    setTimeout(resolve, timeout);
   }).then(() => promise);
 }
 

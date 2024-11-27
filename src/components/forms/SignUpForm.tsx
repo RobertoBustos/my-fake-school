@@ -1,8 +1,10 @@
+import CustomButton from "@components/common/CustomButton";
+import { AppLoaders } from "@customTypes/index";
 import { useMemoizedTranslation } from "@hooks/useTranslation";
 import { useAppSelector } from "@redux/hooks";
-import { selectAppLoaderStatusLoading } from "@selectors/index";
+import { selectAppLoader } from "@selectors/index";
 import { useRef } from "react";
-import { Button, Form } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 
 export type SignUpFormPropsType = {
   onSubmit: (email: string, password: string, passwordConfirm: string) => void;
@@ -13,7 +15,7 @@ const SignUpForm = ({ onSubmit }: SignUpFormPropsType) => {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const passwordConfirmRef = useRef<HTMLInputElement>(null);
-  const isAppLoading = useAppSelector(selectAppLoaderStatusLoading);
+  const isSigningUp = useAppSelector(selectAppLoader(AppLoaders.SIGN_UP));
 
   return (
     <Form
@@ -44,9 +46,13 @@ const SignUpForm = ({ onSubmit }: SignUpFormPropsType) => {
         <Form.Label>{t("forms.login.passwordConfirmation")}</Form.Label>
         <Form.Control type="password" ref={passwordConfirmRef} required />
       </Form.Group>
-      <Button disabled={isAppLoading} className="w-100 mt-4" type="submit">
-        {t("buttons.signUp.confirmLabel")}
-      </Button>
+      <CustomButton
+        buttonLabel={t("buttons.signUp.confirmLabel")}
+        type="submit"
+        className="w-100 mt-4"
+        isLoading={isSigningUp}
+        loadingLabel={t("buttons.user.signUpLabelInProgress")}
+      />
     </Form>
   );
 };

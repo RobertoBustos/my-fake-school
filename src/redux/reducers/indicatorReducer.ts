@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import i18n from "i18next";
 import { IndicatorsState } from "@redux/types";
-import { ModalListType } from "@customTypes/index";
+import { AppLoaders, ModalListType } from "@customTypes/index";
 import {
   addNewSubject,
   fetchAllSubjects,
@@ -13,7 +13,8 @@ import {
   cancelSubjectDelete,
 } from "@reducers/subjectReducer";
 import {
-  signUp, logIn, sendVerificationEmail, updateProfile, setUserData, clearUserData, uploadUserProfilePicture
+  signUp, logIn, sendVerificationEmail, updateProfile, setUserData, clearUserData, uploadUserProfilePicture,
+  logOut
 } from "@reducers/authReducer"
 import { generateRandomUid } from "@utils/index";
 
@@ -21,7 +22,8 @@ const initialState: IndicatorsState = {
   appLoaderStatus: "loading",
   visibleModals: [],
   alerts: [],
-  featureFlags: []
+  featureFlags: [],
+  appLoaders: []
 };
 
 export const indicatorsSlice = createSlice({
@@ -172,13 +174,13 @@ export const indicatorsSlice = createSlice({
     })
     //signUp
     builder.addCase(signUp.pending, (state) => {
-      state.appLoaderStatus = "loading"
+      state.appLoaders = [...state.appLoaders, AppLoaders.SIGN_UP]
     });
     builder.addCase(signUp.fulfilled, (state) => {
-      state.appLoaderStatus = "idle"
+      state.appLoaders = state.appLoaders.filter(value => value !== AppLoaders.SIGN_UP)
     });
     builder.addCase(signUp.rejected, (state, action) => {
-      state.appLoaderStatus = "idle"
+      state.appLoaders = state.appLoaders.filter(value => value !== AppLoaders.SIGN_UP)
       state.alerts = [
         ...state.alerts,
         {
@@ -191,13 +193,32 @@ export const indicatorsSlice = createSlice({
     });
     //logIn
     builder.addCase(logIn.pending, (state) => {
-      state.appLoaderStatus = "loading"
+      state.appLoaders = [...state.appLoaders, AppLoaders.LOG_IN]
     });
     builder.addCase(logIn.fulfilled, (state) => {
-      state.appLoaderStatus = "idle"
+      state.appLoaders = state.appLoaders.filter(value => value !== AppLoaders.LOG_IN)
     });
     builder.addCase(logIn.rejected, (state, action) => {
-      state.appLoaderStatus = "idle"
+      state.appLoaders = state.appLoaders.filter(value => value !== AppLoaders.LOG_IN)
+      state.alerts = [
+        ...state.alerts,
+        {
+          alertId: generateRandomUid(),
+          message: action.payload as string,
+          type: "danger",
+          dismisable: true,
+        },
+      ];
+    });
+    //logout
+    builder.addCase(logOut.pending, (state) => {
+      state.appLoaders = [...state.appLoaders, AppLoaders.LOG_OUT]
+    });
+    builder.addCase(logOut.fulfilled, (state) => {
+      state.appLoaders = state.appLoaders.filter(value => value !== AppLoaders.LOG_OUT)
+    });
+    builder.addCase(logOut.rejected, (state, action) => {
+      state.appLoaders = state.appLoaders.filter(value => value !== AppLoaders.LOG_OUT)
       state.alerts = [
         ...state.alerts,
         {
@@ -210,10 +231,10 @@ export const indicatorsSlice = createSlice({
     });
     //sendVerificationEmail
     builder.addCase(sendVerificationEmail.pending, (state) => {
-      state.appLoaderStatus = "loading"
+      state.appLoaders = [...state.appLoaders, AppLoaders.SEND_EMAIL_VERIFICATION]
     });
     builder.addCase(sendVerificationEmail.fulfilled, (state) => {
-      state.appLoaderStatus = "idle"
+      state.appLoaders = state.appLoaders.filter(value => value !== AppLoaders.SEND_EMAIL_VERIFICATION)
       state.alerts = [
         ...state.alerts,
         {
@@ -225,7 +246,7 @@ export const indicatorsSlice = createSlice({
       ];
     });
     builder.addCase(sendVerificationEmail.rejected, (state, action) => {
-      state.appLoaderStatus = "idle"
+      state.appLoaders = state.appLoaders.filter(value => value !== AppLoaders.SEND_EMAIL_VERIFICATION)
       state.alerts = [
         ...state.alerts,
         {
@@ -238,10 +259,10 @@ export const indicatorsSlice = createSlice({
     });
     //updateUserProfile
     builder.addCase(updateProfile.pending, (state) => {
-      state.appLoaderStatus = "loading"
+      state.appLoaders = [...state.appLoaders, AppLoaders.UPDATE_PROFILE]
     });
     builder.addCase(updateProfile.fulfilled, (state) => {
-      state.appLoaderStatus = "idle"
+      state.appLoaders = state.appLoaders.filter(value => value !== AppLoaders.UPDATE_PROFILE)
       state.alerts = [
         ...state.alerts,
         {
@@ -253,7 +274,7 @@ export const indicatorsSlice = createSlice({
       ];
     });
     builder.addCase(updateProfile.rejected, (state, action) => {
-      state.appLoaderStatus = "idle"
+      state.appLoaders = state.appLoaders.filter(value => value !== AppLoaders.UPDATE_PROFILE)
       state.alerts = [
         ...state.alerts,
         {
@@ -266,13 +287,13 @@ export const indicatorsSlice = createSlice({
     });
     //uploadProfilePicture
     builder.addCase(uploadUserProfilePicture.pending, (state) => {
-      state.appLoaderStatus = "loading"
+      state.appLoaders = [...state.appLoaders, AppLoaders.UPLOAD_PROFILE_PICTURE]
     });
     builder.addCase(uploadUserProfilePicture.fulfilled, (state) => {
-      state.appLoaderStatus = "idle"
+      state.appLoaders = state.appLoaders.filter(value => value !== AppLoaders.UPLOAD_PROFILE_PICTURE)
     });
     builder.addCase(uploadUserProfilePicture.rejected, (state, action) => {
-      state.appLoaderStatus = "idle"
+      state.appLoaders = state.appLoaders.filter(value => value !== AppLoaders.UPLOAD_PROFILE_PICTURE)
       state.alerts = [
         ...state.alerts,
         {

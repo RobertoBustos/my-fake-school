@@ -21,9 +21,14 @@ const es = {
         confirmLabel: "Registrarse"
       },
       user: {
-        confirmEditLabel: "Guardar",
+        saveChangesLabel: "Guardar",
+        saveChangesInProgress: "Guardando cambios...",
         verifyLabel: "Verifique su correo",
-        logOutLabel: "Cerrar Sesíon"
+        verifyLabelInProgress: "Enviando correo de verificación...",
+        logOutLabel: "Cerrar Sesíon",
+        logOutLabelInProgress: "Finalizando sesión...",
+        logInLabelInProgress: "Iniciando sesión...",
+        signUpLabelInProgress: "Creando cuenta..."
       },
     },
     forms: {

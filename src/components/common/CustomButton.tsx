@@ -1,11 +1,16 @@
-import { Button } from "react-bootstrap";
+import { CSSProperties } from "react";
+import { Button, Spinner } from "react-bootstrap";
 
 export type CustomButtonPropsType = {
   buttonLabel: string;
-  onClick: () => void;
+  onClick?: () => void;
   variant?: string;
   className?: string;
   disabled?: boolean;
+  isLoading?: boolean;
+  loadingLabel?: string;
+  type?: "button" | "submit" | "reset";
+  style?: CSSProperties;
 };
 
 const CustomButton = ({
@@ -14,15 +19,31 @@ const CustomButton = ({
   variant = "primary",
   className = "w-100",
   disabled = false,
+  isLoading = false,
+  loadingLabel = "Loading...",
+  type = "button",
+  style,
 }: CustomButtonPropsType) => {
   return (
     <Button
-      className={className}
       onClick={onClick}
       variant={variant}
-      disabled={disabled}
+      disabled={disabled || isLoading}
+      type={type}
+      className={className}
+      style={style}
     >
-      {buttonLabel}
+      {isLoading ? (
+        <Spinner
+          as="span"
+          animation="border"
+          size="sm"
+          role="status"
+          aria-hidden="true"
+          style={{ marginRight: "0.5rem" }}
+        />
+      ) : null}
+      {isLoading ? loadingLabel : buttonLabel}
     </Button>
   );
 };

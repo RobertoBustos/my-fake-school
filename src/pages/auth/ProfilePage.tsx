@@ -1,14 +1,17 @@
 import Layout2 from "@components/common/Layout2";
 import ProfileForm from "@components/forms/ProfileForm";
 import { useAppDispatch, useAppSelector } from "@redux/hooks";
-import { clearUserUpdateData, logOut, updateProfile } from "@actions/index";
+import { updateProfile } from "@actions/index";
 import {
+  selectAppLoader,
   selectAppLoaderStatusLoading,
   selectIsProfileEdited,
   selectLoggedInUserData,
 } from "@selectors/index";
 import { useMemoizedTranslation } from "@hooks/useTranslation";
 import CustomButton from "@components/common/CustomButton";
+import { AppLoaders } from "@customTypes/enums";
+import LogoutButton from "@components/LogoutButton";
 
 export const ProfilePage = () => {
   const { t } = useMemoizedTranslation();
@@ -16,6 +19,7 @@ export const ProfilePage = () => {
   const dispatch = useAppDispatch();
   const isAppLoading = useAppSelector(selectAppLoaderStatusLoading);
   const isProfileEdited = useAppSelector(selectIsProfileEdited);
+  const isEditing = useAppSelector(selectAppLoader(AppLoaders.UPDATE_PROFILE));
 
   const defaultValues = {
     email: userInfo.email || "",
@@ -35,13 +39,6 @@ export const ProfilePage = () => {
     showLanguageSelector: true,
   };
 
-  const handleLogOut = () => {
-    if (isProfileEdited) {
-      dispatch(clearUserUpdateData());
-    }
-    dispatch(logOut());
-  };
-
   return (
     <Layout2 header={headerProps} pageTabTitle={t("pageTabTitles.profilePage")}>
       {!isAppLoading ? (
@@ -49,17 +46,14 @@ export const ProfilePage = () => {
           <ProfileForm defaultValues={defaultValues} />
           <div className="w-100 mt-3">
             <CustomButton
-              buttonLabel={t("buttons.user.confirmEditLabel")}
+              buttonLabel={t("buttons.user.saveChangesLabel")}
               onClick={handleSubmit}
               disabled={!isProfileEdited}
               className="w-50"
+              isLoading={isEditing}
+              loadingLabel={t("buttons.user.saveChangesInProgress")}
             />
-            <CustomButton
-              buttonLabel={t("buttons.user.logOutLabel")}
-              onClick={handleLogOut}
-              variant="danger"
-              className="w-50"
-            />
+            <LogoutButton className="w-50" />
           </div>
         </>
       ) : null}
