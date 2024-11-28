@@ -109,6 +109,7 @@ const en = {
     homePage: {
       title: "Welcome To Your Home Page",
       options: {
+        profile: "My Profile",
         subjects: "Subjects",
         teachers: "Teachers",
         students: "Students",

@@ -1,9 +1,17 @@
 .avatar {
-    width: 10rem;
-    height: 10rem;
-    border-radius: 50%;
+    width: 5rem;
+    height: 5rem;
+    border-radius: 2.5rem;
     border-width: 0.2rem;
     border-color: black;
     border-style: outset;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+@media (min-width: 431px) {
+    .avatar {
+        width: 10rem;
+        height: 10rem;
+        border-radius: 5rem;
+    }
 }

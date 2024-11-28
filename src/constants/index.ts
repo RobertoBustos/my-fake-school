@@ -4,6 +4,7 @@ export const serviceUrl: string =
   "https://rickandmortyapi.com/api/character/?page=18";
 
 export const homePageOptions: string[] = [
+  "profile",
   "subjects",
   "teachers",
   "students",

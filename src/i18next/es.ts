@@ -109,6 +109,7 @@ const es = {
     homePage: {
       title: "Bienvenido a Tu Pagina de Inicio",
       options: {
+        profile: "Mi Perfil",
         subjects: "Materias",
         teachers: "Maestros",
         students: "Alumnos",

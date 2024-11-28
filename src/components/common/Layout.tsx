@@ -1,9 +1,10 @@
 import { ReactNode, useMemo } from "react";
 import PageTabText from "@components/common/PageTabText";
-import LayoutHeader2 from "@components/common/LayoutHeader2";
-import LayoutFooter2 from "@components/common/LayoutFooter2";
-import type { LayoutHeader2PropsType as HeaderProps } from "@components/common/LayoutHeader2";
-import type { LayoutFooter2PropsType as FooterProps } from "@components/common/LayoutFooter2";
+import "@styles/components/common/Layout.css";
+import LayoutHeader from "@components/common/LayoutHeader";
+import type { LayoutHeaderPropsType as HeaderProps } from "@components/common/LayoutHeader";
+import LayoutFooter from "@components/common/LayoutFooter";
+import type { LayoutFooterPropsType as FooterProps } from "@components/common/LayoutFooter";
 import AlertStack from "@components/AlertStack";
 
 export type Layout2PropsType = {
@@ -16,53 +17,34 @@ export type Layout2PropsType = {
   displayAlerts?: boolean;
 };
 
-const Layout2 = ({
+const Layout = ({
   children,
   pageTabTitle = "",
   header = undefined,
   footer = undefined,
   displayAlerts = true,
 }: Layout2PropsType) => {
-  let bodyHeight = 100;
-
-  if (footer) {
-    bodyHeight -= 7;
-  }
-
-  if (header) {
-    bodyHeight -= 7;
-  }
   const memoizedPageTabText = useMemo(() => {
     return <PageTabText titleText={pageTabTitle} />;
   }, [pageTabTitle]);
 
   return (
-    <div className="w-100 vh-100">
+    <div className="layout">
       {memoizedPageTabText}
       {header ? (
-        <LayoutHeader2
+        <LayoutHeader
           showLanguageSelector={header.showLanguageSelector}
           showBackButton={header.showBackButton}
+          className="header"
         />
       ) : null}
       {displayAlerts ? <AlertStack /> : null}
-      <div
-        className="d-flex flex-column align-items-center justify-content-center w-100 px-4"
-        style={{
-          minHeight: `${bodyHeight}vh`,
-        }}
-      >
-        {children}
-      </div>
+      <div className="content">{children}</div>
       {footer ? (
-        <LayoutFooter2
-          buttonLabel={footer.buttonLabel}
-          handleClick={footer.handleClick}
-          buttonDisabled={footer.buttonDisabled}
-        />
+        <LayoutFooter className="footer" button={footer.button} />
       ) : null}
     </div>
   );
 };
 
-export default Layout2;
+export default Layout;

@@ -1,0 +1,16 @@
+.buttonoption {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    background-color: orange !important;
+    color: black !important;
+    font-weight: bold !important;
+    width: 100% !important;
+    height: 3.2rem !important;
+    border-radius: 2rem !important;
+}
+
+.pageTitle {
+    text-align: center;
+    font-size: 1.7rem;
+    font-weight: 500;
+}

@@ -1,10 +1,11 @@
 import { useNavigate } from "react-router-dom";
 import { useMemoizedTranslation } from "@hooks/useTranslation";
-import Layout2 from "@components/common/Layout2";
+import Layout from "@components/common/Layout";
 import CustomButton from "@components/common/CustomButton";
-import PageTitle from "@components/PageTitle";
 import { homePageOptions } from "@constants/index";
 import LogoutButton from "@components/LogoutButton";
+import "@styles/pages/HomePage.css";
+import CustomText from "@components/common/CustomText";
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -15,20 +16,9 @@ const HomePage = () => {
     showBackButton: true,
   };
 
-  const buttonStyle = {
-    marginTop: "10px",
-    marginBottom: "10px",
-    backgroundColor: "orange",
-    color: "black",
-    fontWeight: "bold",
-    width: "200px",
-    height: "50px",
-    borderRadius: "25px",
-  };
-
   return (
-    <Layout2 pageTabTitle={t("pageTabTitles.homePage")} header={headerProps}>
-      <PageTitle titleText={t("homePage.title")} />
+    <Layout pageTabTitle={t("pageTabTitles.homePage")} header={headerProps}>
+      <CustomText className="pageTitle" text={t("homePage.title")} />
       {homePageOptions.map((element) => {
         return (
           <CustomButton
@@ -37,13 +27,12 @@ const HomePage = () => {
               navigate(`/${element}`);
             }}
             buttonLabel={t(`homePage.options.${element}`)}
-            style={buttonStyle}
-            className={""}
+            className={"buttonoption"}
           />
         );
       })}
-      <LogoutButton className={""} style={buttonStyle} />
-    </Layout2>
+      <LogoutButton className={"buttonoption"} />
+    </Layout>
   );
 };
 

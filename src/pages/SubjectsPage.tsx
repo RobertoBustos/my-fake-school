@@ -1,7 +1,6 @@
 import { Suspense, lazy, useMemo } from "react";
-import Layout2 from "@components/common/Layout2";
+import Layout from "@components/common/Layout";
 import AddSubject from "@components/AddSubject";
-import PageTitle from "@components/PageTitle";
 import SubjectCatalog from "@components/SubjectCatalog";
 import { ModalListType } from "@customTypes/index";
 import { useMemoizedTranslation } from "@hooks/useTranslation";
@@ -12,6 +11,7 @@ import {
 } from "@selectors/index";
 import { fakeDelayPromise } from "@utils/index";
 import "@styles/pages/SubjectsPage.css";
+import CustomText from "@components/common/CustomText";
 
 //using lazy loading for components that dont need to be rendered if they are not being used
 const EditSubjectModal = lazy(() =>
@@ -36,7 +36,7 @@ export const SubjectsPage = () => {
   }, [subjects]);
 
   const memoizedTitle = useMemo(() => {
-    return <PageTitle titleText={t("subject.catalogPage.title")} />;
+    return <CustomText text={t("subject.catalogPage.title")} />;
   }, [t]);
 
   const headerProps = {
@@ -45,7 +45,7 @@ export const SubjectsPage = () => {
   };
 
   return (
-    <Layout2 pageTabTitle={t("pageTabTitles.subjectPage")} header={headerProps}>
+    <Layout pageTabTitle={t("pageTabTitles.subjectPage")} header={headerProps}>
       {memoizedTitle}
       <AddSubject />
       {memoizedCatalog}
@@ -65,6 +65,6 @@ export const SubjectsPage = () => {
           />
         </Suspense>
       )}
-    </Layout2>
+    </Layout>
   );
 };

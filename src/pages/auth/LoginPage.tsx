@@ -2,10 +2,9 @@ import LoginForm from "@components/forms/LoginForm";
 import { logIn } from "@actions/index";
 import { useAppDispatch } from "@redux/hooks";
 import { useMemoizedTranslation } from "@hooks/useTranslation";
-import Layout2 from "@components/common/Layout2";
+import Layout from "@components/common/Layout";
 import FormFooter from "@components/common/FormFooter";
 import FormContainer from "@components/common/FormContainer";
-import type { LayoutFooter2PropsType } from "@components/common/LayoutFooter2";
 
 const LoginPage = () => {
   const { t } = useMemoizedTranslation();
@@ -21,14 +20,9 @@ const LoginPage = () => {
   };
 
   const headerProps = { showBackButton: true, showLanguageSelector: true };
-  const footerProps: LayoutFooter2PropsType = {};
 
   return (
-    <Layout2
-      pageTabTitle={t("pageTabTitles.signInPage")}
-      header={headerProps}
-      footer={footerProps}
-    >
+    <Layout pageTabTitle={t("pageTabTitles.signInPage")} header={headerProps}>
       <FormContainer formTitle={t("formTitles.signIn")}>
         <LoginForm onSubmit={handleSubmit} />
       </FormContainer>
@@ -37,7 +31,7 @@ const LoginPage = () => {
         linkText={t("forms.login.signUp")}
         linkDestinationPath={"/signup"}
       />
-    </Layout2>
+    </Layout>
   );
 };
 

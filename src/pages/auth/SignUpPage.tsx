@@ -2,7 +2,7 @@ import SignUpForm from "@components/forms/SignUpForm";
 import { signUp } from "@actions/index";
 import { useAppDispatch } from "@redux/hooks";
 import { useMemoizedTranslation } from "@hooks/useTranslation";
-import Layout2 from "@components/common/Layout2";
+import Layout from "@components/common/Layout";
 import FormFooter from "@components/common/FormFooter";
 import FormContainer from "@components/common/FormContainer";
 
@@ -27,7 +27,7 @@ export const SignUpPage = () => {
   const headerProps = { showBackButton: true, showLanguageSelector: true };
 
   return (
-    <Layout2 pageTabTitle={t("pageTabTitles.signUpPage")} header={headerProps}>
+    <Layout pageTabTitle={t("pageTabTitles.signUpPage")} header={headerProps}>
       <FormContainer formTitle={t("formTitles.signUp")}>
         <SignUpForm onSubmit={handleSubmit} />
       </FormContainer>
@@ -36,6 +36,6 @@ export const SignUpPage = () => {
         linkText={t("forms.login.signIn")}
         linkDestinationPath={"/login"}
       />
-    </Layout2>
+    </Layout>
   );
 };
