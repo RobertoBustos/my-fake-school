@@ -32,10 +32,12 @@ const es = {
       },
     },
     forms: {
-      login: {
+      user: {
         email: "Correo",
         password: "Contraseña",
-        passwordConfirmation: "Confirme Contraseña",
+        confirmPassword: "Confirme Contraseña",
+        age: "Edad",
+        dateOfBirth: "Fecha de Nacimiento",
         needAnAccount: "¿Necesitas una cuenta? ",
         signUp: "Registrate",
         alreadyHaveAnAccount: "¿Ya cuentas con una cuenta? ",
@@ -93,6 +95,19 @@ const es = {
       },
       storage: {
         retrylimitexceeded: "El número de intentos ha sido excedido."
+      },
+      forms: {
+        emailRequired: "Correo electrónico obligatorio.",
+        invalidEmailFormat: "Este correo no esta en un formato válido.",
+        firstNameRequired: "El nombre es obligatorio.",
+        lastNameRequired: "El apellido es obligatorio.",
+        passwordRequired: "Contraseña obligatoria.",
+        passwordLength: "La contraseña debe contener al menos 4 caracteres.",
+        passwordConfirmationRequired: "Por favor confirme su contraseña.",
+        phoneRequired: "Número de teléfono obligatorio.",
+        invailidPhoneFormat: "Formato inválido para número telefónico.",
+        ageRequired: "Edad es obligatorio.",
+        ageRange: "Por favor indique un valor entre {{minAge}} y {{maxAge}}"
       }
     },
     confirmations: {

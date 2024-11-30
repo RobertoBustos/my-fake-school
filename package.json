@@ -59,6 +59,7 @@
     ]
   },
   "devDependencies": {
-    "@craco/craco": "^7.1.0"
+    "@craco/craco": "^7.1.0",
+    "@hookform/devtools": "^4.3.1"
   }
 }

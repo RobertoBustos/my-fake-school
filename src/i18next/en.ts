@@ -32,10 +32,12 @@ const en = {
       },
     },
     forms: {
-      login: {
+      user: {
         email: "Email",
         password: "Password",
-        passwordConfirmation: "Password Confirmation",
+        confirmPassword: "Password Confirmation",
+        age: "Age",
+        dateOfBirth: "Date of Birth",
         needAnAccount: "Need an account?",
         signUp: "Create one",
         alreadyHaveAnAccount: "Already have an account?",
@@ -93,6 +95,19 @@ const en = {
       },
       storage: {
         retrylimitexceeded: "The number of retries has been exceeded."
+      },
+      forms: {
+        emailRequired: "Email is required.",
+        invalidEmailFormat: "Invalid email format.",
+        firstNameRequired: "Firstname is required.",
+        lastNameRequired: "Lastname is required.",
+        passwordRequired: "Password is required.",
+        passwordLength: "Password must be at least {{characters}} characters.",
+        passwordConfirmationRequired: "Please confirm your password.",
+        phoneRequired: "Phone number is required.",
+        invailidPhoneFormat: "Invalid phone number format.",
+        ageRequired: "Age is required.",
+        ageRange: "Plese enter a number between {{minAge}} and {{maxAge}}"
       }
     },
     confirmations: {

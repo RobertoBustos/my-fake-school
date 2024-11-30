@@ -30,8 +30,12 @@ export enum ModalListType {
 export enum FormFields {
     FIRST_NAME = "firstName",
     LAST_NAME = "lastName",
+    EMAIL = "email",
     PASSWORD = "password",
     PHONE_NUMBER = "phoneNumber",
     DISPLAY_NAME = "displayName",
-    PHOTO_URL = "photoURL"
+    PHOTO_URL = "photoURL",
+    CONFIRM_PASSWORD = "confirmPassword",
+    AGE = "age",
+    DATE_OF_BIRTH = "dateOfBirth"
 }

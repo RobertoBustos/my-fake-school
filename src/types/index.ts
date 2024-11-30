@@ -1,3 +1,5 @@
+import { HTMLInputTypeAttribute } from "react";
+
 export * from "./subjectTypes"
 export * from "./enums"
 export * from "./authTypes"
@@ -18,3 +20,5 @@ export type SupportedLanguageType = {
     code: string
     nativeName: string,
 }
+
+export type CustomInputType = HTMLInputTypeAttribute

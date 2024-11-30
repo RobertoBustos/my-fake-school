@@ -9,6 +9,7 @@ import reportWebVitals from "./reportWebVitals";
 import "@config/remoteConfig";
 import { auth, initAuthStateChangeListener } from "@config/auth";
 import { clearUserData, setUserData } from "@redux/actions";
+import React from "react";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -32,9 +33,11 @@ initAuthStateChangeListener(auth, (user) => {
 });
 
 root.render(
-  <Provider store={store}>
-    <RouterProvider router={router} />
-  </Provider>
+  <React.StrictMode>
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
+  </React.StrictMode>
 );
 
 // eslint-disable-next-line react-hooks/rules-of-hooks

@@ -46,7 +46,10 @@ export type UserUpdatePayloadType = {
     phoneNumber?: string
     displayName?: string;
     email?: string;
-    photoURL?: string | null
+    photoURL?: string | null;
+    confirmPassword?: string | null
+    age?: number | null,
+    dateOfBirth?: Date | null
 }
 
 export type UpdateServicePayloadType = {

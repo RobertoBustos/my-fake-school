@@ -1,6 +1,36 @@
+.errortext {
+    text-align: left;
+    color: red
+}
+
+label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="number"],
+input[type="password"],
+input[type="date"] {
+    display: block;
+    width: 100%;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
 .layout {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     min-height: 100vh;
-    margin-bottom: 3rem;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
     padding-left: 3rem;
     padding-right: 3rem;
 }
@@ -23,6 +53,9 @@
     margin-right: -3rem; /** this has to be the same of the layout margin right negative **/
     padding-right: 3rem; /** this has to be the same of the layout padding right **/
     background-color: lightgrey;
+    position: fixed;
+    top: 0;
+    z-index: 1;
 }
 
 .headerleft {
@@ -56,6 +89,8 @@
     .layout{
         display: flex;
         flex-direction: column;
+        padding-top: 5rem;
+        padding-bottom: 5rem;
         padding-left: 5rem;
         padding-right: 5rem;
         margin-bottom: -2rem;/** this value is necesary **/
@@ -78,8 +113,4 @@
         margin-top: 3rem;
         min-height: 5rem;
     }
-}
-
-@media (min-width: 431px) {
-    
 }
