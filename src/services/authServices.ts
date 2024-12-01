@@ -1,11 +1,17 @@
-import { auth, signUp, logIn, logOut, verifyEmalil, updateUserProfile, updateUserPassword } from "@config/auth";
+import { auth, signUp, logIn, logOut, verifyEmalil, updateUserProfile, updateUserPassword, reauthenticateUser } from "@config/auth";
 import { eventLogger, events } from "@utils/eventLogger";
 import { mapFirebaseError } from "@utils/mapFirebaseError";
 import type { SignUpServicePayloadType, SignInServicePayloadType, CustomUserType, CustomAuthErrorType, CustomAuthResponseType, UpdateServicePayloadType, UploadProfilePictureServiceType, CustomStorageResponseType } from "@customTypes/index";
 import { createFileRef, deleteFile, getFileDownloadURL, uploadFile } from "@config/storage"
+import { fakeEmailValidator } from "@utils/serviceUtils";
+import { FirebaseError } from "firebase/app";
 
 export async function signUpService(payload: SignUpServicePayloadType): Promise<CustomUserType | CustomAuthErrorType> {
     try {
+        const emailValidationResponse = await fakeEmailValidator(payload.email);
+        if (emailValidationResponse) {
+            throw new FirebaseError("auth/email-already-in-use", "")
+        }
         const response = await signUp(payload.email, payload.password)
         eventLogger(events.SIGN_UP, payload)
         return response.user
@@ -57,7 +63,8 @@ export async function updateProfileService(payload: UpdateServicePayloadType): P
             eventLogger(events.UPDATE_PROFILE, {})
         }
         if (payload.password) {
-            await updateUserPassword(auth.currentUser, payload.password)
+            await reauthenticateUser(payload.password.currentPassword!)
+            await updateUserPassword(auth.currentUser, payload.password.newPassword!)
             eventLogger(events.UPDATE_PASSWORD, {})
         }
         return { ok: true }
@@ -82,6 +89,15 @@ export async function deleteProfilePictureUnsavedService(payload: string): Promi
     try {
         const fileRef = createFileRef(payload)
         await deleteFile(fileRef)
+        return { ok: true }
+    } catch (error) {
+        return mapFirebaseError(error);
+    }
+}
+
+export async function validateCredentials(password: string): Promise<CustomAuthResponseType | CustomAuthErrorType> {
+    try {
+        await reauthenticateUser(password)
         return { ok: true }
     } catch (error) {
         return mapFirebaseError(error);

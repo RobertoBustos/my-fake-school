@@ -10,6 +10,7 @@ export type FormInputPropsType = {
   errorMessage?: string;
   validations?: RegisterOptions<FieldValues>;
   onChange?: () => void;
+  hidden?: boolean;
 };
 
 const FormInput = ({
@@ -19,11 +20,12 @@ const FormInput = ({
   errorMessage,
   validations,
   onChange,
+  hidden = false,
 }: FormInputPropsType) => {
   const { t } = useMemoizedTranslation();
   const memoizedFormInput = useMemo(() => {
     return (
-      <div>
+      <div className={hidden ? "d-none" : ""}>
         <label htmlFor={fieldName}>{t(`forms.user.${fieldName}`)}</label>
         <input
           type={type}
@@ -34,7 +36,7 @@ const FormInput = ({
         <p className="errortext">{errorMessage}</p>
       </div>
     );
-  }, [errorMessage, fieldName, register, t, type, validations]);
+  }, [errorMessage, fieldName, register, t, type, validations, hidden]);
 
   return memoizedFormInput;
 };

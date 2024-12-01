@@ -37,5 +37,7 @@ export enum FormFields {
     PHOTO_URL = "photoURL",
     CONFIRM_PASSWORD = "confirmPassword",
     AGE = "age",
-    DATE_OF_BIRTH = "dateOfBirth"
+    DATE_OF_BIRTH = "dateOfBirth",
+    NEW_PASSWORD = "newPassword",
+    CONFIRM_NEW_PASSWORD = "confirmNewPassword",
 }

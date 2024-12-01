@@ -1,7 +1,7 @@
 import i18n from "@config/i18next";
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import type { AuthState } from "@redux/types";
-import type { UserDataType, UserSignUpPayloadType, UserSignInPayloadType, UserProfileNewValue, UserUploadProfilePicturePayloadType, } from "@customTypes/index";
+import type { UserDataType, UserSignUpPayloadType, UserSignInPayloadType, UserProfileNewValue, UserUploadProfilePicturePayloadType, UpdateServicePayloadType, } from "@customTypes/index";
 import { isProfilePictureChanged, parseUpdateUserProfilePayload, removeKeyFromObject, shapeFirebaseAuthError } from "@utils/index"
 import { signUpService, signInService, logOutService, verificationService, updateProfileService, uploadProfilePictureService, deleteProfilePictureUnsavedService } from "@services/authServices";
 
@@ -33,6 +33,17 @@ export const authSlice = createSlice({
             if (state.userCredential.displayName === state.userManipulationInProgress.displayName) {
                 state.userManipulationInProgress = removeKeyFromObject(state.userManipulationInProgress, "displayName")
             }
+        },
+        setUserUpdatedData: (state, { payload }: PayloadAction<UpdateServicePayloadType>) => {
+            if (payload.profile?.displayName) {
+                state.userCredential.displayName = payload.profile?.displayName
+            }
+            if (payload.profile?.photoURL) {
+                state.userCredential.photoURL = payload.profile?.photoURL
+            }
+            if (payload.password?.newPassword) {
+                state.userCredential.currentPassword = payload.password?.newPassword
+            }
         }
     },
     extraReducers: (builder) => {
@@ -54,9 +65,6 @@ export const authSlice = createSlice({
 })
 
 export const signUp = createAsyncThunk("auth/signUp", async (payload: UserSignUpPayloadType, { rejectWithValue }) => {
-    if (payload.password !== payload.passwordConfirm) {
-        return rejectWithValue(i18n.t("errors.auth.passwordsNotMatch"));
-    }
     const response = await signUpService(payload)
     if ("message" in response) {
         return rejectWithValue(i18n.t(`errors.${shapeFirebaseAuthError(response.message)}`));
@@ -121,6 +129,6 @@ export const clearUserUpdateData = createAsyncThunk("auth/clearUserUpdateData", 
     return;
 })
 
-export const { setUserData, clearUserData, beginUserEdition } = authSlice.actions
+export const { setUserData, clearUserData, beginUserEdition, setUserUpdatedData } = authSlice.actions
 
 export default authSlice.reducer;

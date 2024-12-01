@@ -1,5 +1,4 @@
 import { useForm } from "react-hook-form";
-import { DevTool } from "@hookform/devtools";
 import { useAppDispatch, useAppSelector } from "@redux/hooks";
 import { logIn } from "@actions/index";
 import CustomButton from "@components/common/CustomButton";
@@ -14,13 +13,10 @@ import FormContainer from "@components/common/FormContainer";
 import FormInput from "@components/common/FormInput";
 import { emailValidations, passwordValidations } from "./formValidations";
 
-let renderCount = 0;
-
 const LoginForm = () => {
   const { t } = useMemoizedTranslation();
   const dispatch = useAppDispatch();
   const {
-    control,
     handleSubmit,
     register,
     formState: { errors, isValid, isValidating, isSubmitting },
@@ -33,7 +29,7 @@ const LoginForm = () => {
   });
   const isLogginIn = useAppSelector(selectAppLoader(AppLoaders.LOG_IN));
 
-  const onSubmit = async (data: UserUpdatePayloadType) => {
+  const onSubmit = (data: UserUpdatePayloadType) => {
     dispatch(
       logIn({
         email: data.email || "",
@@ -42,9 +38,8 @@ const LoginForm = () => {
     );
   };
 
-  renderCount++;
   return (
-    <FormContainer formTitle={`${t("formTitles.signIn")} - ${renderCount / 2}`}>
+    <FormContainer formTitle={t("formTitles.signIn")}>
       <form onSubmit={handleSubmit(onSubmit)} noValidate>
         <FormInput
           type="email"
@@ -69,7 +64,6 @@ const LoginForm = () => {
           disabled={isValidating || isSubmitting || !isValid}
         />
       </form>
-      <DevTool control={control} />
     </FormContainer>
   );
 };

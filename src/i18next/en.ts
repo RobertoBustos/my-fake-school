@@ -22,14 +22,17 @@ const en = {
       },
       user: {
         saveChangesLabel: "Save Changes",
-        saveChangesInProgress: "Saving Changes...",
+        saveChangesInProgress: "Saving...",
         verifyLabel: "Verify your email",
-        verifyLabelInProgress: "Sending verification email...",
+        verifyLabelInProgress: "Sending...",
         logOutLabel: "Log out",
         logOutLabelInProgress: "Loggin out...",
         logInLabelInProgress: "Loggin in...",
         signUpLabelInProgress: "Creating account..."
       },
+      actions: {
+        defaultLoadingLabel: "Loading..."
+      }
     },
     forms: {
       user: {
@@ -38,6 +41,12 @@ const en = {
         confirmPassword: "Password Confirmation",
         age: "Age",
         dateOfBirth: "Date of Birth",
+        firstName: "First Name",
+        lastName: "Last Name",
+        newPassword: "New Password",
+        confirmNewPassword: "Confirm with current password",
+        phoneNumber: "Phone Number",
+        photoURL: "Profile Photo",
         needAnAccount: "Need an account?",
         signUp: "Create one",
         alreadyHaveAnAccount: "Already have an account?",
@@ -88,26 +97,25 @@ const en = {
           "There are {{subjects}} missing its confirmation in the catalog.",
       },
       auth: {
+        noChangesInProfile: "There are no changes to be saved.",
         passwordsNotMatch: "Passwords don't match.",
         invalidcredential: "Incorrect username or password.",
         emailalreadyinuse: "There's already an account with this email.",
-        noChangesInProfile: "There are no changes to be saved."
+        equiresrecentlogin: "To change your password please sign in again.",
+        weakpassword: "Password too weak."
       },
       storage: {
         retrylimitexceeded: "The number of retries has been exceeded."
       },
       forms: {
-        emailRequired: "Email is required.",
+        isRequired: "{{field}} is Required.",
+        minLength: "{{field}} must contain at least {{characters}} characters.",
+        confirmationRequired: "Confirmation required.",
         invalidEmailFormat: "Invalid email format.",
-        firstNameRequired: "Firstname is required.",
-        lastNameRequired: "Lastname is required.",
-        passwordRequired: "Password is required.",
-        passwordLength: "Password must be at least {{characters}} characters.",
-        passwordConfirmationRequired: "Please confirm your password.",
-        phoneRequired: "Phone number is required.",
         invailidPhoneFormat: "Invalid phone number format.",
-        ageRequired: "Age is required.",
-        ageRange: "Plese enter a number between {{minAge}} and {{maxAge}}"
+        ageRange: "Plese enter a number between {{minAge}} and {{maxAge}}.",
+        fileFormatNotSupported: "Invalid file type.",
+        fileSizeExceeded: "File size is greater than {{maxSize}}"
       }
     },
     confirmations: {
@@ -125,6 +133,7 @@ const en = {
       title: "Welcome To Your Home Page",
       options: {
         profile: "My Profile",
+        profilev2: "My Profile (v2)",
         subjects: "Subjects",
         teachers: "Teachers",
         students: "Students",

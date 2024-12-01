@@ -22,14 +22,17 @@ const es = {
       },
       user: {
         saveChangesLabel: "Guardar",
-        saveChangesInProgress: "Guardando cambios...",
+        saveChangesInProgress: "Guardando...",
         verifyLabel: "Verifique su correo",
-        verifyLabelInProgress: "Enviando correo de verificación...",
+        verifyLabelInProgress: "Enviando...",
         logOutLabel: "Cerrar Sesíon",
-        logOutLabelInProgress: "Finalizando sesión...",
-        logInLabelInProgress: "Iniciando sesión...",
+        logOutLabelInProgress: "Saliendo...",
+        logInLabelInProgress: "Entrando...",
         signUpLabelInProgress: "Creando cuenta..."
       },
+      actions: {
+        defaultLoadingLabel: "Cargando..."
+      }
     },
     forms: {
       user: {
@@ -38,6 +41,12 @@ const es = {
         confirmPassword: "Confirme Contraseña",
         age: "Edad",
         dateOfBirth: "Fecha de Nacimiento",
+        firstName: "Nombre",
+        lastName: "Apellido",
+        newPassword: "Nueva Contraseña",
+        confirmNewPassword: "Confirme con contraseña actual",
+        phoneNumber: "Teléfono",
+        photoURL: "Foto de Perfil",
         needAnAccount: "¿Necesitas una cuenta? ",
         signUp: "Registrate",
         alreadyHaveAnAccount: "¿Ya cuentas con una cuenta? ",
@@ -45,7 +54,7 @@ const es = {
       },
       profile: {
         firstName: "Nombre",
-        lastName: "Apellidos",
+        lastName: "Apellido",
         password: "Nueva contraseña",
         phoneNumber: "Teléfono"
       }
@@ -88,26 +97,25 @@ const es = {
           "Se encontraron {{subjects}} faltantes de registro en el catálogo.",
       },
       auth: {
+        noChangesInProfile: "No hay información que modificar.",
         passwordsNotMatch: "Las contraseñas no coinciden.",
         invalidcredential: "Usuario o contraseña incorrectos.",
         emailalreadyinuse: "Ya existe una cuenta con este correo.",
-        noChangesInProfile: "No hay información que modificar."
+        equiresrecentlogin: "Se necesita volver a loguearse para cambiar la contraseña.",
+        weakpassword: "Contraseña poco segura."
       },
       storage: {
         retrylimitexceeded: "El número de intentos ha sido excedido."
       },
       forms: {
-        emailRequired: "Correo electrónico obligatorio.",
-        invalidEmailFormat: "Este correo no esta en un formato válido.",
-        firstNameRequired: "El nombre es obligatorio.",
-        lastNameRequired: "El apellido es obligatorio.",
-        passwordRequired: "Contraseña obligatoria.",
-        passwordLength: "La contraseña debe contener al menos 4 caracteres.",
-        passwordConfirmationRequired: "Por favor confirme su contraseña.",
-        phoneRequired: "Número de teléfono obligatorio.",
-        invailidPhoneFormat: "Formato inválido para número telefónico.",
-        ageRequired: "Edad es obligatorio.",
-        ageRange: "Por favor indique un valor entre {{minAge}} y {{maxAge}}"
+        isRequired: "{{field}} es requerido.",
+        minLength: "{{field}} debe contener al menos {{characters}} caracteres.",
+        confirmationRequired: "Confirmacion requerida.",
+        invalidEmailFormat: "Por favor proporcione un correo válido.",
+        invailidPhoneFormat: "Por favor proporcione un telefono válido.",
+        ageRange: "Por favor proporcione un núnmero entre {{minAge}} y {{maxAge}}.",
+        fileFormatNotSupported: "Tipo de archivo no valido.",
+        fileSizeExceeded: "El archivo excede {{maxSize}}"
       }
     },
     confirmations: {
@@ -125,6 +133,7 @@ const es = {
       title: "Bienvenido a Tu Pagina de Inicio",
       options: {
         profile: "Mi Perfil",
+        profilev2: "Mi Perfil (v2)",
         subjects: "Materias",
         teachers: "Maestros",
         students: "Alumnos",

@@ -1,5 +1,4 @@
 import { useForm } from "react-hook-form";
-import { DevTool } from "@hookform/devtools";
 import { useAppDispatch, useAppSelector } from "@redux/hooks";
 import { signUp } from "@actions/index";
 import CustomButton from "@components/common/CustomButton";
@@ -13,6 +12,7 @@ import {
 import FormContainer from "@components/common/FormContainer";
 import FormInput from "@components/common/FormInput";
 import {
+  confirmPasswordValidations,
   emailNotExistingValidations,
   passwordValidations,
 } from "./formValidations";
@@ -23,20 +23,19 @@ const LoginForm = () => {
   const {
     handleSubmit,
     register,
-    formState: { errors, isValid, isValidating, isSubmitting, isDirty },
-    control,
+    formState: { errors, isValid, isDirty },
     getValues,
   } = useForm<UserUpdatePayloadType>({
-    mode: "onTouched",
+    mode: "all",
     defaultValues: {
       email: "",
       password: "",
       confirmPassword: "",
     },
   });
-  const isLogginIn = useAppSelector(selectAppLoader(AppLoaders.LOG_IN));
+  const isSigningUp = useAppSelector(selectAppLoader(AppLoaders.SIGN_UP));
 
-  const onSubmit = (data: UserUpdatePayloadType) => {
+  const onSubmit = async (data: UserUpdatePayloadType) => {
     dispatch(
       signUp({
         email: data.email || "",
@@ -44,21 +43,6 @@ const LoginForm = () => {
         passwordConfirm: data.confirmPassword || "",
       })
     );
-  };
-
-  const confirmPasswordValidations = {
-    required: {
-      value: true,
-      message: t("errors.forms.passwordConfirmationRequired"),
-    },
-    validate: {
-      passwordMatch: (fieldValue: string) => {
-        return (
-          fieldValue === getValues(FormFields.PASSWORD) ||
-          t("errors.auth.passwordsNotMatch")
-        );
-      },
-    },
   };
 
   return (
@@ -83,17 +67,18 @@ const LoginForm = () => {
           register={register}
           fieldName={FormFields.CONFIRM_PASSWORD}
           errorMessage={errors.confirmPassword?.message}
-          validations={confirmPasswordValidations}
+          validations={confirmPasswordValidations(
+            getValues(FormFields.PASSWORD) || ""
+          )}
         />
         <CustomButton
-          buttonLabel={t("buttons.signIn.confirmLabel")}
-          type="button"
+          buttonLabel={t("buttons.signUp.confirmLabel")}
+          type="submit"
           className="w-100 mt-4"
-          isLoading={isLogginIn}
-          loadingLabel={t("buttons.user.logInLabelInProgress")}
-          disabled={isValidating || !isValid || isSubmitting || !isDirty}
+          isLoading={isSigningUp}
+          loadingLabel={t("buttons.user.signUpLabelInProgress")}
+          disabled={!isValid || !isDirty}
         />
-        <DevTool control={control} />
       </form>
     </FormContainer>
   );

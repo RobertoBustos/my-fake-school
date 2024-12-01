@@ -14,9 +14,9 @@ import {
 } from "@reducers/subjectReducer";
 import {
   signUp, logIn, sendVerificationEmail, updateProfile, setUserData, clearUserData, uploadUserProfilePicture,
-  logOut
+  logOut, setUserUpdatedData
 } from "@reducers/authReducer"
-import { generateRandomUid } from "@utils/index";
+import { addAlertToState } from "@utils/index";
 
 const initialState: IndicatorsState = {
   appLoaderStatus: "loading",
@@ -44,6 +44,9 @@ export const indicatorsSlice = createSlice({
         (value) => value !== action.payload
       );
     },
+    setError: (state, action: PayloadAction<string>) => {
+      state.alerts = addAlertToState(state, action.payload, "danger", true);
+    },
     closeAlert: (state, action: PayloadAction<string>) => {
       state.alerts = state.alerts.filter(
         (alert) => alert.alertId !== action.payload
@@ -70,27 +73,11 @@ export const indicatorsSlice = createSlice({
     });
     builder.addCase(addNewSubject.fulfilled, (state) => {
       state.appLoaderStatus = "idle";
-      state.alerts = [
-        ...state.alerts,
-        {
-          alertId: generateRandomUid(),
-          message: i18n.t("confirmations.subject.addedSuccesfully"),
-          type: "success",
-          dismisable: true,
-        },
-      ];
+      state.alerts = addAlertToState(state, i18n.t("confirmations.subject.addedSuccesfully"), "success", true)
     });
     builder.addCase(addNewSubject.rejected, (state, action) => {
       state.appLoaderStatus = "idle";
-      state.alerts = [
-        ...state.alerts,
-        {
-          alertId: generateRandomUid(),
-          message: action.payload as string,
-          type: "danger",
-          dismisable: true,
-        },
-      ];
+      state.alerts = addAlertToState(state, action.payload as string, "danger", true)
     });
     //remove existing subject
     builder.addCase(beginSubjectDelete, (state) => {
@@ -106,27 +93,11 @@ export const indicatorsSlice = createSlice({
     builder.addCase(deleteExistingSubject.fulfilled, (state) => {
       state.visibleModals = [];
       state.appLoaderStatus = "idle";
-      state.alerts = [
-        ...state.alerts,
-        {
-          alertId: generateRandomUid(),
-          message: i18n.t("confirmations.subject.removedSuccesfully"),
-          type: "success",
-          dismisable: true,
-        },
-      ];
+      state.alerts = addAlertToState(state, i18n.t("confirmations.subject.removedSuccesfully"), "success", true)
     });
     builder.addCase(deleteExistingSubject.rejected, (state, action) => {
       state.appLoaderStatus = "idle";
-      state.alerts = [
-        ...state.alerts,
-        {
-          alertId: generateRandomUid(),
-          message: action.payload as string,
-          type: "danger",
-          dismisable: true,
-        },
-      ];
+      state.alerts = addAlertToState(state, action.payload as string, "danger", true)
     });
     //edit existing subject
     builder.addCase(beginSubjectEdition, (state) => {
@@ -142,27 +113,11 @@ export const indicatorsSlice = createSlice({
     builder.addCase(editExistingSubject.fulfilled, (state) => {
       state.visibleModals = [];
       state.appLoaderStatus = "idle";
-      state.alerts = [
-        ...state.alerts,
-        {
-          alertId: generateRandomUid(),
-          message: i18n.t("confirmations.subject.editedSuccesfully"),
-          type: "success",
-          dismisable: true,
-        },
-      ];
+      state.alerts = addAlertToState(state, i18n.t("confirmations.subject.editedSuccesfully"), "success", true)
     });
     builder.addCase(editExistingSubject.rejected, (state, action) => {
       state.appLoaderStatus = "idle";
-      state.alerts = [
-        ...state.alerts,
-        {
-          alertId: generateRandomUid(),
-          message: action.payload as string,
-          type: "danger",
-          dismisable: true,
-        },
-      ];
+      state.alerts = addAlertToState(state, action.payload as string, "danger", true)
     });
     //load user data
     builder.addCase(setUserData, (state) => {
@@ -181,15 +136,7 @@ export const indicatorsSlice = createSlice({
     });
     builder.addCase(signUp.rejected, (state, action) => {
       state.appLoaders = state.appLoaders.filter(value => value !== AppLoaders.SIGN_UP)
-      state.alerts = [
-        ...state.alerts,
-        {
-          alertId: generateRandomUid(),
-          message: action.payload as string,
-          type: "danger",
-          dismisable: true,
-        },
-      ];
+      state.alerts = addAlertToState(state, action.payload as string, "danger", true)
     });
     //logIn
     builder.addCase(logIn.pending, (state) => {
@@ -200,15 +147,7 @@ export const indicatorsSlice = createSlice({
     });
     builder.addCase(logIn.rejected, (state, action) => {
       state.appLoaders = state.appLoaders.filter(value => value !== AppLoaders.LOG_IN)
-      state.alerts = [
-        ...state.alerts,
-        {
-          alertId: generateRandomUid(),
-          message: action.payload as string,
-          type: "danger",
-          dismisable: true,
-        },
-      ];
+      state.alerts = addAlertToState(state, action.payload as string, "danger", true)
     });
     //logout
     builder.addCase(logOut.pending, (state) => {
@@ -219,15 +158,7 @@ export const indicatorsSlice = createSlice({
     });
     builder.addCase(logOut.rejected, (state, action) => {
       state.appLoaders = state.appLoaders.filter(value => value !== AppLoaders.LOG_OUT)
-      state.alerts = [
-        ...state.alerts,
-        {
-          alertId: generateRandomUid(),
-          message: action.payload as string,
-          type: "danger",
-          dismisable: true,
-        },
-      ];
+      state.alerts = addAlertToState(state, action.payload as string, "danger", true)
     });
     //sendVerificationEmail
     builder.addCase(sendVerificationEmail.pending, (state) => {
@@ -235,27 +166,11 @@ export const indicatorsSlice = createSlice({
     });
     builder.addCase(sendVerificationEmail.fulfilled, (state) => {
       state.appLoaders = state.appLoaders.filter(value => value !== AppLoaders.SEND_EMAIL_VERIFICATION)
-      state.alerts = [
-        ...state.alerts,
-        {
-          alertId: generateRandomUid(),
-          message: i18n.t("confirmations.user.verificationEmailSent"),
-          type: "success",
-          dismisable: true,
-        },
-      ];
+      state.alerts = addAlertToState(state, i18n.t("confirmations.user.verificationEmailSent"), "success", true)
     });
     builder.addCase(sendVerificationEmail.rejected, (state, action) => {
       state.appLoaders = state.appLoaders.filter(value => value !== AppLoaders.SEND_EMAIL_VERIFICATION)
-      state.alerts = [
-        ...state.alerts,
-        {
-          alertId: generateRandomUid(),
-          message: action.payload as string,
-          type: "danger",
-          dismisable: true,
-        },
-      ];
+      state.alerts = addAlertToState(state, action.payload as string, "danger", true)
     });
     //updateUserProfile
     builder.addCase(updateProfile.pending, (state) => {
@@ -263,27 +178,11 @@ export const indicatorsSlice = createSlice({
     });
     builder.addCase(updateProfile.fulfilled, (state) => {
       state.appLoaders = state.appLoaders.filter(value => value !== AppLoaders.UPDATE_PROFILE)
-      state.alerts = [
-        ...state.alerts,
-        {
-          alertId: generateRandomUid(),
-          message: i18n.t("confirmations.user.profileUpdated"),
-          type: "success",
-          dismisable: true,
-        },
-      ];
+      state.alerts = addAlertToState(state, i18n.t("confirmations.user.profileUpdated"), "success", true)
     });
     builder.addCase(updateProfile.rejected, (state, action) => {
       state.appLoaders = state.appLoaders.filter(value => value !== AppLoaders.UPDATE_PROFILE)
-      state.alerts = [
-        ...state.alerts,
-        {
-          alertId: generateRandomUid(),
-          message: action.payload as string,
-          type: "danger",
-          dismisable: true,
-        },
-      ];
+      state.alerts = addAlertToState(state, action.payload as string, "danger", true)
     });
     //uploadProfilePicture
     builder.addCase(uploadUserProfilePicture.pending, (state) => {
@@ -294,19 +193,15 @@ export const indicatorsSlice = createSlice({
     });
     builder.addCase(uploadUserProfilePicture.rejected, (state, action) => {
       state.appLoaders = state.appLoaders.filter(value => value !== AppLoaders.UPLOAD_PROFILE_PICTURE)
-      state.alerts = [
-        ...state.alerts,
-        {
-          alertId: generateRandomUid(),
-          message: action.payload as string,
-          type: "danger",
-          dismisable: true,
-        },
-      ];
+      state.alerts = addAlertToState(state, action.payload as string, "danger", true)
     });
+    //setUserUpdateData
+    builder.addCase(setUserUpdatedData, (state) => {
+      state.alerts = addAlertToState(state, i18n.t("confirmations.user.profileUpdated"), "success", true);
+    })
   },
 });
 
-export const { showLoadingSpinner, hideLoadingSpinner, hideModal, showModal, closeAlert } =
+export const { showLoadingSpinner, hideLoadingSpinner, hideModal, showModal, closeAlert, setError } =
   indicatorsSlice.actions;
 export default indicatorsSlice.reducer;

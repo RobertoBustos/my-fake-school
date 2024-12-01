@@ -8,17 +8,17 @@ export const parseUpdateUserProfilePayload = () => {
     }
     let payload: UpdateServicePayloadType = { profile: {} }
     if (state.auth.userManipulationInProgress.displayName) {
-        payload.profile.displayName = state.auth.userManipulationInProgress.displayName
+        payload.profile!.displayName = state.auth.userManipulationInProgress.displayName
     }
     if (state.auth.userManipulationInProgress.photoURL) {
-        payload.profile.photoURL = state.auth.userManipulationInProgress.photoURL
+        payload.profile!.photoURL = state.auth.userManipulationInProgress.photoURL
     }
     if (state.auth.userManipulationInProgress.phoneNumber) {
         payload.phoneNumber = state.auth.userManipulationInProgress.phoneNumber
     }
-    if (state.auth.userManipulationInProgress.password) {
-        payload.password = state.auth.userManipulationInProgress.password
-    }
+    /* if (state.auth.userManipulationInProgress.password) {
+        payload.password?.newPassword = state.auth.userManipulationInProgress.password
+    } */
     return payload
 }
 

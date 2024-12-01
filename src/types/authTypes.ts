@@ -1,14 +1,15 @@
-import { FirebaseError } from "firebase/app";
 import type { User } from "firebase/auth";
 import type { FullMetadata } from "firebase/storage";
 
-export type CustomAuthErrorType = FirebaseError
+export type CustomAuthErrorType = {
+    message: string
+}
 
 export type CustomAuthResponseType = {
     ok: boolean
 }
 
-export type CustomUserType = User;
+export type CustomUserType = User
 
 export type CustomStorageResponseType = FullMetadata & {
     downloadURL: string
@@ -21,6 +22,7 @@ export type UserDataType = {
     phoneNumber?: string
     isEmailVerified?: boolean;
     photoURL?: string | null
+    currentPassword?: string | null
 }
 
 export type UserSignUpPayloadType = {
@@ -42,22 +44,27 @@ export type SignInServicePayloadType = UserSignInPayloadType
 export type UserUpdatePayloadType = {
     firstName?: string;
     lastName?: string;
-    password?: string
-    phoneNumber?: string
+    password?: string;
+    phoneNumber?: string;
     displayName?: string;
     email?: string;
     photoURL?: string | null;
-    confirmPassword?: string | null
-    age?: number | null,
-    dateOfBirth?: Date | null
+    confirmPassword?: string | null;
+    age?: number | null;
+    dateOfBirth?: Date | null;
+    newPassword?: string | null;
+    confirmNewPassword?: string | null;
 }
 
 export type UpdateServicePayloadType = {
-    profile: {
+    profile?: {
         displayName?: string
         photoURL?: string
     }
-    password?: string
+    password?: {
+        currentPassword?: string;
+        newPassword?: string
+    }
     phoneNumber?: string;
 }
 

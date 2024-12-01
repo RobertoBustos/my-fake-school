@@ -2,7 +2,7 @@
 export * from "./eventLogger"
 export * from "./mapFirebaseError"
 export * from "./authHelpers"
-export * from "./stringUtils"
+export * from "./indicatorHelpers"
 export * from "./serviceUtils"
 
 export const removeKeyFromObject = (object: Object, keyToRemove: string) => {
