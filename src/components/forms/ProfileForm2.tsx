@@ -6,10 +6,9 @@ import {
   UpdateServicePayloadType,
 } from "@customTypes/index";
 import { useAppDispatch, useAppSelector } from "@redux/hooks";
-import { setError } from "@actions/index";
 import VerifyEmail from "@components/VerifyEmail";
 import FormContainer from "@components/common/FormContainer";
-import { fakeDelayPromise, shapeFirebaseAuthError } from "@utils/index";
+import { fakeDelayPromise, notify, shapeFirebaseAuthError } from "@utils/index";
 import ProfilePicture from "@components/ProfilePicture";
 import {
   ChangeEvent,
@@ -164,7 +163,7 @@ const ProfileForm = ({
       resetField(FormFields.PHOTO_URL, { defaultValue: data.photoURL });
       dispatch(setUserUpdatedData(payload));
     } catch (error) {
-      dispatch(setError(error as string));
+      notify.error(error as string);
     }
   };
 
@@ -181,10 +180,7 @@ const ProfileForm = ({
   }, [isSubmitting, onIsLoadingChange]);
 
   return (
-    <FormContainer
-      formTitle={t("formTitles.userProfile")}
-      displayAlerts={false}
-    >
+    <FormContainer formTitle={t("formTitles.userProfile")}>
       {fileError !== null ? (
         <CustomText text={fileError} className="errortext text-center" />
       ) : null}

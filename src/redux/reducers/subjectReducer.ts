@@ -13,6 +13,7 @@ import {
   deleteSubject,
   updateSubject,
 } from "@services/subjectServices";
+import { notify } from "@utils/index";
 
 const initialState: SubjectState = {
   subjectCatalog: [],
@@ -55,8 +56,13 @@ export const subjectSlice = createSlice({
       })
       .addCase(addNewSubject.fulfilled, (state, action) => {
         state.subjectCatalog = [...state.subjectCatalog, action.payload];
+        notify.success(i18n.t("confirmations.subject.addedSuccesfully"))
+      })
+      .addCase(addNewSubject.rejected, (_, action) => {
+        notify.error(action.payload as string)
       })
       .addCase(editExistingSubject.fulfilled, (state, action) => {
+        notify.success(i18n.t("confirmations.subject.editedSuccesfully"))
         const subject = state.subjectCatalog.find(
           (subject) => subject.subjectId === action.payload.subjectId
         );
@@ -69,7 +75,11 @@ export const subjectSlice = createSlice({
           isDeleted: false,
         };
       })
+      .addCase(editExistingSubject.rejected, (_, action) => {
+        notify.error(action.payload as string)
+      })
       .addCase(deleteExistingSubject.fulfilled, (state, action) => {
+        notify.success(i18n.t("confirmations.subject.removedSuccesfully"))
         state.subjectCatalog = state.subjectCatalog.filter(
           (subject) => subject.subjectId !== action.payload.subjectId
         );
@@ -78,7 +88,10 @@ export const subjectSlice = createSlice({
           subjectName: "",
           isDeleted: false,
         };
-      });
+      })
+      .addCase(deleteExistingSubject.rejected, (_, action) => {
+        notify.error(action.payload as string)
+      })
   },
 });
 

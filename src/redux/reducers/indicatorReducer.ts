@@ -1,5 +1,4 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import i18n from "i18next";
 import { IndicatorsState } from "@redux/types";
 import { AppLoaders, ModalListType } from "@customTypes/index";
 import {
@@ -14,14 +13,12 @@ import {
 } from "@reducers/subjectReducer";
 import {
   signUp, logIn, sendVerificationEmail, updateProfile, setUserData, clearUserData, uploadUserProfilePicture,
-  logOut, setUserUpdatedData
+  logOut
 } from "@reducers/authReducer"
-import { addAlertToState } from "@utils/index";
 
 const initialState: IndicatorsState = {
   appLoaderStatus: "loading",
   visibleModals: [],
-  alerts: [],
   featureFlags: [],
   appLoaders: []
 };
@@ -42,14 +39,6 @@ export const indicatorsSlice = createSlice({
     hideModal: (state, action: PayloadAction<ModalListType>) => {
       state.visibleModals = state.visibleModals.filter(
         (value) => value !== action.payload
-      );
-    },
-    setError: (state, action: PayloadAction<string>) => {
-      state.alerts = addAlertToState(state, action.payload, "danger", true);
-    },
-    closeAlert: (state, action: PayloadAction<string>) => {
-      state.alerts = state.alerts.filter(
-        (alert) => alert.alertId !== action.payload
       );
     },
     registerFeatureFlags: (state, action) => {
@@ -73,11 +62,9 @@ export const indicatorsSlice = createSlice({
     });
     builder.addCase(addNewSubject.fulfilled, (state) => {
       state.appLoaderStatus = "idle";
-      state.alerts = addAlertToState(state, i18n.t("confirmations.subject.addedSuccesfully"), "success", true)
     });
     builder.addCase(addNewSubject.rejected, (state, action) => {
       state.appLoaderStatus = "idle";
-      state.alerts = addAlertToState(state, action.payload as string, "danger", true)
     });
     //remove existing subject
     builder.addCase(beginSubjectDelete, (state) => {
@@ -93,11 +80,9 @@ export const indicatorsSlice = createSlice({
     builder.addCase(deleteExistingSubject.fulfilled, (state) => {
       state.visibleModals = [];
       state.appLoaderStatus = "idle";
-      state.alerts = addAlertToState(state, i18n.t("confirmations.subject.removedSuccesfully"), "success", true)
     });
     builder.addCase(deleteExistingSubject.rejected, (state, action) => {
       state.appLoaderStatus = "idle";
-      state.alerts = addAlertToState(state, action.payload as string, "danger", true)
     });
     //edit existing subject
     builder.addCase(beginSubjectEdition, (state) => {
@@ -113,11 +98,9 @@ export const indicatorsSlice = createSlice({
     builder.addCase(editExistingSubject.fulfilled, (state) => {
       state.visibleModals = [];
       state.appLoaderStatus = "idle";
-      state.alerts = addAlertToState(state, i18n.t("confirmations.subject.editedSuccesfully"), "success", true)
     });
     builder.addCase(editExistingSubject.rejected, (state, action) => {
       state.appLoaderStatus = "idle";
-      state.alerts = addAlertToState(state, action.payload as string, "danger", true)
     });
     //load user data
     builder.addCase(setUserData, (state) => {
@@ -136,7 +119,6 @@ export const indicatorsSlice = createSlice({
     });
     builder.addCase(signUp.rejected, (state, action) => {
       state.appLoaders = state.appLoaders.filter(value => value !== AppLoaders.SIGN_UP)
-      state.alerts = addAlertToState(state, action.payload as string, "danger", true)
     });
     //logIn
     builder.addCase(logIn.pending, (state) => {
@@ -147,7 +129,6 @@ export const indicatorsSlice = createSlice({
     });
     builder.addCase(logIn.rejected, (state, action) => {
       state.appLoaders = state.appLoaders.filter(value => value !== AppLoaders.LOG_IN)
-      state.alerts = addAlertToState(state, action.payload as string, "danger", true)
     });
     //logout
     builder.addCase(logOut.pending, (state) => {
@@ -158,7 +139,6 @@ export const indicatorsSlice = createSlice({
     });
     builder.addCase(logOut.rejected, (state, action) => {
       state.appLoaders = state.appLoaders.filter(value => value !== AppLoaders.LOG_OUT)
-      state.alerts = addAlertToState(state, action.payload as string, "danger", true)
     });
     //sendVerificationEmail
     builder.addCase(sendVerificationEmail.pending, (state) => {
@@ -166,11 +146,9 @@ export const indicatorsSlice = createSlice({
     });
     builder.addCase(sendVerificationEmail.fulfilled, (state) => {
       state.appLoaders = state.appLoaders.filter(value => value !== AppLoaders.SEND_EMAIL_VERIFICATION)
-      state.alerts = addAlertToState(state, i18n.t("confirmations.user.verificationEmailSent"), "success", true)
     });
     builder.addCase(sendVerificationEmail.rejected, (state, action) => {
       state.appLoaders = state.appLoaders.filter(value => value !== AppLoaders.SEND_EMAIL_VERIFICATION)
-      state.alerts = addAlertToState(state, action.payload as string, "danger", true)
     });
     //updateUserProfile
     builder.addCase(updateProfile.pending, (state) => {
@@ -178,11 +156,9 @@ export const indicatorsSlice = createSlice({
     });
     builder.addCase(updateProfile.fulfilled, (state) => {
       state.appLoaders = state.appLoaders.filter(value => value !== AppLoaders.UPDATE_PROFILE)
-      state.alerts = addAlertToState(state, i18n.t("confirmations.user.profileUpdated"), "success", true)
     });
     builder.addCase(updateProfile.rejected, (state, action) => {
       state.appLoaders = state.appLoaders.filter(value => value !== AppLoaders.UPDATE_PROFILE)
-      state.alerts = addAlertToState(state, action.payload as string, "danger", true)
     });
     //uploadProfilePicture
     builder.addCase(uploadUserProfilePicture.pending, (state) => {
@@ -193,15 +169,10 @@ export const indicatorsSlice = createSlice({
     });
     builder.addCase(uploadUserProfilePicture.rejected, (state, action) => {
       state.appLoaders = state.appLoaders.filter(value => value !== AppLoaders.UPLOAD_PROFILE_PICTURE)
-      state.alerts = addAlertToState(state, action.payload as string, "danger", true)
     });
-    //setUserUpdateData
-    builder.addCase(setUserUpdatedData, (state) => {
-      state.alerts = addAlertToState(state, i18n.t("confirmations.user.profileUpdated"), "success", true);
-    })
   },
 });
 
-export const { showLoadingSpinner, hideLoadingSpinner, hideModal, showModal, closeAlert, setError } =
+export const { showLoadingSpinner, hideLoadingSpinner, hideModal, showModal } =
   indicatorsSlice.actions;
 export default indicatorsSlice.reducer;

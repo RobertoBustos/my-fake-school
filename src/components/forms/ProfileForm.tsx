@@ -66,10 +66,7 @@ const ProfileForm = ({ defaultValues }: ProfileFormPropsType) => {
   };
 
   return (
-    <FormContainer
-      formTitle={t("formTitles.userProfile")}
-      displayAlerts={false}
-    >
+    <FormContainer formTitle={t("formTitles.userProfile")}>
       <ProfilePicture imageUrl={photoURL} onClick={handleClick} />
       <input
         type="file"

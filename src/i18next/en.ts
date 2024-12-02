@@ -52,12 +52,6 @@ const en = {
         alreadyHaveAnAccount: "Already have an account?",
         signIn: "Log In",
       },
-      profile: {
-        firstName: "First Name",
-        lastName: "Last Name",
-        password: "New password",
-        phoneNumber: "phoneNumber"
-      }
     },
     pageTabTitles: {
       homePage: "My Fake School - Home",
@@ -100,6 +94,7 @@ const en = {
         noChangesInProfile: "There are no changes to be saved.",
         passwordsNotMatch: "Passwords don't match.",
         networkrequestfailed: "Cant complete your request.",
+        toomanyrequests: "Max number of request exceeded",
         invalidcredential: "Incorrect username or password.",
         emailalreadyinuse: "There's already an account with this email.",
         equiresrecentlogin: "To change your password please sign in again.",
@@ -136,10 +131,6 @@ const en = {
         profile: "My Profile",
         profilev2: "My Profile (v2)",
         subjects: "Subjects",
-        teachers: "Teachers",
-        students: "Students",
-        groups: "Groups",
-        grades: "Grades",
         admin: "Admin",
         logOut: "Log Out"
       },

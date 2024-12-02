@@ -10,8 +10,6 @@ export const selectAppLoaderStatusLoading = (state: RootState) =>
 export const selectVisibleModals = (state: RootState) =>
     state.indicators.visibleModals;
 
-export const selectAlerts = (state: RootState) => state.indicators.alerts;
-
 export const selectFeatureFlag = (featureFlagName: string) => {
     return createSelector([(state: RootState) => state.indicators.featureFlags], (featureFlags) =>
         featureFlags.find((flag) => flag.name === featureFlagName)

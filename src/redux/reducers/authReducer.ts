@@ -2,7 +2,7 @@ import i18n from "@config/i18next";
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import type { AuthState } from "@redux/types";
 import type { UserDataType, UserSignUpPayloadType, UserSignInPayloadType, UserProfileNewValue, UserUploadProfilePicturePayloadType, UpdateServicePayloadType, } from "@customTypes/index";
-import { isProfilePictureChanged, parseUpdateUserProfilePayload, removeKeyFromObject, shapeFirebaseAuthError } from "@utils/index"
+import { isProfilePictureChanged, notify, parseUpdateUserProfilePayload, removeKeyFromObject, shapeFirebaseAuthError } from "@utils/index"
 import { signUpService, signInService, logOutService, verificationService, updateProfileService, uploadProfilePictureService, deleteProfilePictureUnsavedService, validateCredentials } from "@services/authServices";
 
 const initialState: AuthState = {
@@ -47,17 +47,42 @@ export const authSlice = createSlice({
         }
     },
     extraReducers: (builder) => {
+        builder.addCase(signUp.rejected, (_, action) => {
+            notify.error(action.payload as string)
+        });
+        builder.addCase(logIn.rejected, (_, action) => {
+            notify.error(action.payload as string)
+        });
+        builder.addCase(logOut.rejected, (_, action) => {
+            notify.error(action.payload as string)
+        });
+        builder.addCase(sendVerificationEmail.fulfilled, (_, action) => {
+            notify.success(i18n.t("confirmations.user.verificationEmailSent"))
+        });
+        builder.addCase(sendVerificationEmail.rejected, (_, action) => {
+            notify.error(action.payload as string)
+        });
         builder.addCase(updateProfile.fulfilled, (state) => {
+            notify.success(i18n.t("confirmations.user.profileUpdated"))
             state.userCredential.displayName = state.userManipulationInProgress.displayName
             state.userCredential.photoURL = state.userManipulationInProgress.photoURL
             state.userManipulationInProgress = {}
         });
+        builder.addCase(updateProfile.rejected, (_, action) => {
+            notify.error(action.payload as string)
+        });
         builder.addCase(uploadUserProfilePicture.fulfilled, (state, action) => {
             state.userManipulationInProgress.photoURL = action.payload.downloadURL
         })
+        builder.addCase(uploadUserProfilePicture.rejected, (_, action) => {
+            notify.error(action.payload as string)
+        });
         builder.addCase(clearUserUpdateData.fulfilled, (state) => {
             state.userManipulationInProgress = {}
-        })
+        });
+        builder.addCase(setUserUpdatedData, (_, action) => {
+            notify.success(i18n.t("confirmations.user.profileUpdated"))
+        });
     }
 })
 

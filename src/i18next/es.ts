@@ -1,7 +1,7 @@
 const es = {
   translation: {
     languages: {
-      en: "Ingles",
+      en: "Inglés",
       es: "Español",
     },
     buttons: {
@@ -52,19 +52,13 @@ const es = {
         alreadyHaveAnAccount: "¿Ya cuentas con una cuenta? ",
         signIn: "Ingresa",
       },
-      profile: {
-        firstName: "Nombre",
-        lastName: "Apellido",
-        password: "Nueva contraseña",
-        phoneNumber: "Teléfono"
-      }
     },
     pageTabTitles: {
       homePage: "My Fake School - Inicio",
       signUpPage: "My Fake School - Registro",
       signInPage: "My Fake School - Entrar",
       profilePage: "My Fake School - Mi Perfil",
-      subjectPage: "My Fake School - Catalogo de Materias"
+      subjectPage: "My Fake School - Catálogo de Materias"
     },
     formTitles: {
       signUp: "Crear Nueva Cuenta",
@@ -92,17 +86,18 @@ const es = {
       unknown: "Ha ocurrido un error inesperado.",
       subject: {
         nameRequired: "El nombre de la materia no puede estar vacio.",
-        idRequired: "No se encontro el id de esta materia.",
+        idRequired: "No se encontró el id de esta materia.",
         subjectsWithoutIdDetected:
           "Se encontraron {{subjects}} faltantes de registro en el catálogo.",
       },
       auth: {
         noChangesInProfile: "No hay información que modificar.",
         passwordsNotMatch: "Las contraseñas no coinciden.",
-        networkrequestfailed: "Error de comunicacion.",
+        networkrequestfailed: "Error de comunicación.",
+        toomanyrequests: "Se excedió el número máximo de peticiones",
         invalidcredential: "Usuario o contraseña incorrectos.",
         emailalreadyinuse: "Ya existe una cuenta con este correo.",
-        equiresrecentlogin: "Se necesita volver a loguearse para cambiar la contraseña.",
+        equiresrecentlogin: "Se necesita volver a ingresar para cambiar la contraseña.",
         weakpassword: "Contraseña poco segura."
       },
       storage: {
@@ -111,11 +106,11 @@ const es = {
       forms: {
         isRequired: "{{field}} es requerido.",
         minLength: "{{field}} debe contener al menos {{characters}} caracteres.",
-        confirmationRequired: "Confirmacion requerida.",
+        confirmationRequired: "Confirmación requerida.",
         invalidEmailFormat: "Por favor proporcione un correo válido.",
-        invailidPhoneFormat: "Por favor proporcione un telefono válido.",
+        invailidPhoneFormat: "Por favor proporcione un teléfono válido.",
         ageRange: "Por favor proporcione un núnmero entre {{minAge}} y {{maxAge}}.",
-        fileFormatNotSupported: "Tipo de archivo no valido.",
+        fileFormatNotSupported: "Tipo de archivo no válido.",
         fileSizeExceeded: "El archivo excede {{maxSize}}"
       }
     },
@@ -126,20 +121,16 @@ const es = {
         removedSuccesfully: "Materia eliminada exitosamente.",
       },
       user: {
-        verificationEmailSent: "Correo de verification enviado exitosamente.",
+        verificationEmailSent: "Correo de verificación enviado exitosamente.",
         profileUpdated: "Perfil actualizado exitosamente."
       }
     },
     homePage: {
-      title: "Bienvenido a Tu Pagina de Inicio",
+      title: "Bienvenido a Tu Página de Inicio",
       options: {
         profile: "Mi Perfil",
         profilev2: "Mi Perfil (v2)",
         subjects: "Materias",
-        teachers: "Maestros",
-        students: "Alumnos",
-        groups: "Grupos",
-        grades: "Calificaciones",
         admin: "Administración",
         logOut: "Cerrar Sesión"
       },

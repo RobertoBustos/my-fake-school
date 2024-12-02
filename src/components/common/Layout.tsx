@@ -5,7 +5,7 @@ import LayoutHeader from "@components/common/LayoutHeader";
 import type { LayoutHeaderPropsType as HeaderProps } from "@components/common/LayoutHeader";
 import LayoutFooter from "@components/common/LayoutFooter";
 import type { LayoutFooterPropsType as FooterProps } from "@components/common/LayoutFooter";
-import AlertStack from "@components/AlertStack";
+import { Toaster } from "react-hot-toast";
 
 export type Layout2PropsType = {
   children?: ReactNode;
@@ -30,6 +30,7 @@ const Layout = ({
 
   return (
     <div className="layout">
+      <Toaster position="bottom-right" reverseOrder={false} />
       {memoizedPageTabText}
       {header ? (
         <LayoutHeader
@@ -38,7 +39,6 @@ const Layout = ({
           className="header"
         />
       ) : null}
-      {displayAlerts ? <AlertStack /> : null}
       <div className="content">{children}</div>
       {footer ? (
         <LayoutFooter className="footer" button={footer.button} />
