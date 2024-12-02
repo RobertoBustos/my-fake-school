@@ -1,7 +1,7 @@
-import { FieldValues, RegisterOptions, UseFormRegister } from "react-hook-form";
 import { CustomInputType, FormFields } from "@customTypes/index";
-import { useMemoizedTranslation } from "@hooks/useTranslation";
+import { useMemoizedTranslation } from "@hooks/index";
 import { useMemo } from "react";
+import { FieldValues, RegisterOptions, UseFormRegister } from "react-hook-form";
 
 export type FormInputPropsType = {
   type: CustomInputType;

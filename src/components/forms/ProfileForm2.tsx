@@ -1,15 +1,31 @@
-import { useForm } from "react-hook-form";
-import { useMemoizedTranslation } from "@hooks/useTranslation";
+import { setUserUpdatedData } from "@actions/index";
+import ProfilePicture from "@components/ProfilePicture";
+import VerifyEmail from "@components/VerifyEmail";
+import CustomText from "@components/common/CustomText";
+import FormContainer from "@components/common/FormContainer";
+import FormInput from "@components/common/FormInput";
+import {
+  confirmNewPasswordValidations,
+  nameValidations,
+  newPasswordValidations,
+  phoneNumberValidations,
+  profilePictureValidtion,
+} from "@components/forms/formValidations";
 import {
   FormFields,
   ProfileFormFieldsType,
   UpdateServicePayloadType,
 } from "@customTypes/index";
+import { useMemoizedTranslation } from "@hooks/index";
 import { useAppDispatch, useAppSelector } from "@redux/hooks";
-import VerifyEmail from "@components/VerifyEmail";
-import FormContainer from "@components/common/FormContainer";
+import { selectLoggedInUserData } from "@selectors/index";
+import {
+  deleteProfilePictureUnsavedService,
+  updateProfileService,
+  uploadProfilePictureService,
+  validateCredentials,
+} from "@services/index";
 import { fakeDelayPromise, notify, shapeFirebaseAuthError } from "@utils/index";
-import ProfilePicture from "@components/ProfilePicture";
 import {
   ChangeEvent,
   Dispatch,
@@ -19,24 +35,7 @@ import {
   useRef,
   useState,
 } from "react";
-import { selectLoggedInUserData } from "@selectors/index";
-import FormInput from "@components/common/FormInput";
-import {
-  confirmNewPasswordValidations,
-  nameValidations,
-  newPasswordValidations,
-  phoneNumberValidations,
-  profilePictureValidtion,
-} from "./formValidations";
-import {
-  deleteProfilePictureUnsavedService,
-  updateProfileService,
-  uploadProfilePictureService,
-  validateCredentials,
-} from "@services/authServices";
-import CustomText from "@components/common/CustomText";
-import { setUserUpdatedData } from "@actions/index";
-import { DevTool } from "@hookform/devtools";
+import { useForm } from "react-hook-form";
 
 export type ProfileFormPropsType = {
   reference: any;
@@ -59,7 +58,6 @@ const ProfileForm = ({
   const dispatch = useAppDispatch();
   const userInfo = useAppSelector(selectLoggedInUserData);
   const {
-    control,
     register,
     handleSubmit,
     formState: { errors, isValid, isSubmitting, isDirty, dirtyFields },
@@ -240,7 +238,6 @@ const ProfileForm = ({
           hidden
         />
       </form>
-      <DevTool control={control} />
       <VerifyEmail />
     </FormContainer>
   );

@@ -1,9 +1,9 @@
-import { useMemoizedTranslation } from "@hooks/useTranslation";
+import { sendVerificationEmail } from "@actions/index";
+import CustomButton from "@components/common/CustomButton";
+import { AppLoaders } from "@customTypes/index";
+import { useMemoizedTranslation } from "@hooks/index";
 import { useAppDispatch, useAppSelector } from "@redux/hooks";
 import { selectAppLoader, selectIsEmailVerified } from "@selectors/index";
-import CustomButton from "./common/CustomButton";
-import { sendVerificationEmail } from "@actions/index";
-import { AppLoaders } from "@customTypes/enums";
 
 const VerifyEmail = () => {
   const dispatch = useAppDispatch();

@@ -1,5 +1,5 @@
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, sendEmailVerification, updateProfile, updatePassword, EmailAuthProvider, reauthenticateWithCredential } from "firebase/auth"
-import app from "@config/firebase"
+import app from "@config/firebase";
+import { EmailAuthProvider, createUserWithEmailAndPassword, getAuth, onAuthStateChanged, reauthenticateWithCredential, sendEmailVerification, signInWithEmailAndPassword, signOut, updatePassword, updateProfile } from "firebase/auth";
 
 export const auth = getAuth(app)
 

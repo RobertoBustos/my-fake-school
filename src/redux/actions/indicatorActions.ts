@@ -1,6 +1,6 @@
-import { createAction } from '@reduxjs/toolkit'
-import type { Value } from 'firebase/remote-config'
-export { hideLoadingSpinner, hideModal, indicatorsSlice, showLoadingSpinner, showModal } from "@reducers/indicatorReducer"
+import { createAction } from '@reduxjs/toolkit';
+import type { Value } from 'firebase/remote-config';
+export { hideLoadingSpinner, hideModal, indicatorsSlice, showLoadingSpinner, showModal } from "@reducers/indicatorReducer";
 
 export const registerFeatureFlags = createAction('indicators/registerFeatureFlags', function prepare(featureFlags: Record<string, Value>) {
     const featureFlagsMapped = Object.keys(featureFlags).map(key => {

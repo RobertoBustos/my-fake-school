@@ -1,9 +1,6 @@
-import { auth, signUp, logIn, logOut, verifyEmalil, updateUserProfile, updateUserPassword, reauthenticateUser } from "@config/auth";
-import { eventLogger, events } from "@utils/eventLogger";
-import { mapFirebaseError } from "@utils/mapFirebaseError";
-import type { SignUpServicePayloadType, SignInServicePayloadType, CustomUserType, CustomAuthErrorType, CustomAuthResponseType, UpdateServicePayloadType, UploadProfilePictureServiceType, CustomStorageResponseType } from "@customTypes/index";
-import { createFileRef, deleteFile, getFileDownloadURL, uploadFile } from "@config/storage"
-import { fakeEmailValidator } from "@utils/serviceUtils";
+import { auth, createFileRef, deleteFile, getFileDownloadURL, logIn, logOut, reauthenticateUser, signUp, updateUserPassword, updateUserProfile, uploadFile, verifyEmalil } from "@config/index";
+import type { CustomAuthErrorType, CustomAuthResponseType, CustomStorageResponseType, CustomUserType, SignInServicePayloadType, SignUpServicePayloadType, UpdateServicePayloadType, UploadProfilePictureServiceType } from "@customTypes/index";
+import { eventLogger, events, fakeEmailValidator, mapFirebaseError } from "@utils/index";
 import { FirebaseError } from "firebase/app";
 
 export async function signUpService(payload: SignUpServicePayloadType): Promise<CustomUserType | CustomAuthErrorType> {

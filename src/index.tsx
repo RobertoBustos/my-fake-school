@@ -1,15 +1,13 @@
-import ReactDOM from "react-dom/client";
-import { RouterProvider } from "react-router-dom";
-import { Provider } from "react-redux";
+import { clearUserData, setUserData } from "@actions/index";
+import { auth, initAuthStateChangeListener } from "@config/index";
 import store from "@redux/store";
 import router from "@router/index";
-import "@config/i18next";
 import "bootstrap/dist/css/bootstrap.min.css";
-import reportWebVitals from "./reportWebVitals";
-import "@config/remoteConfig";
-import { auth, initAuthStateChangeListener } from "@config/auth";
-import { clearUserData, setUserData } from "@redux/actions";
 import React from "react";
+import ReactDOM from "react-dom/client";
+import { Provider } from "react-redux";
+import { RouterProvider } from "react-router-dom";
+import reportWebVitals from "./reportWebVitals";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement

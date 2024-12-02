@@ -1,16 +1,16 @@
-import { useForm } from "react-hook-form";
-import { useMemoizedTranslation } from "@hooks/useTranslation";
-import { FormFields, ProfileFormFieldsType } from "@customTypes/index";
-import { useAppDispatch, useAppSelector } from "@redux/hooks";
 import { beginUserEdition, uploadUserProfilePicture } from "@actions/index";
+import ProfilePicture from "@components/ProfilePicture";
 import VerifyEmail from "@components/VerifyEmail";
 import FormContainer from "@components/common/FormContainer";
-import { parseFullName } from "@utils/index";
 import FormInputControl from "@components/common/FormInputControl";
 import FormLabel from "@components/common/FormLabel";
-import ProfilePicture from "@components/ProfilePicture";
+import { FormFields, ProfileFormFieldsType } from "@customTypes/index";
+import { useMemoizedTranslation } from "@hooks/index";
+import { useAppDispatch, useAppSelector } from "@redux/hooks";
+import { selecProfilePhotoURL } from "@selectors/index";
+import { parseFullName } from "@utils/index";
 import { ChangeEvent, useRef } from "react";
-import { selecProfilePhotoURL } from "@redux/selectors";
+import { useForm } from "react-hook-form";
 
 export type ProfileFormPropsType = {
   defaultValues: ProfileFormFieldsType;

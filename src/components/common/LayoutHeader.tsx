@@ -1,8 +1,8 @@
 import LanguageSelector from "@components/LanguageSelector";
+import "@styles/components/common/Layout.css";
 import { ArrowLeft01Icon } from "hugeicons-react";
 import { useMemo } from "react";
 import { useNavigate } from "react-router-dom";
-import "@styles/components/common/Layout.css";
 
 export type LayoutHeaderPropsType = {
   showBackButton?: boolean;

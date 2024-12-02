@@ -1,4 +1,4 @@
-import { CustomAuthErrorType } from "@customTypes/authTypes"
+import { CustomAuthErrorType } from "@customTypes/index"
 import { FirebaseError } from "firebase/app"
 
 export const shapeFirebaseAuthError = (errorCode: string) => {

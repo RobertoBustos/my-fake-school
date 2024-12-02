@@ -1,10 +1,10 @@
-import { ReactNode, useMemo } from "react";
+import type { LayoutFooterPropsType as FooterProps } from "@components/common/LayoutFooter";
+import LayoutFooter from "@components/common/LayoutFooter";
+import type { LayoutHeaderPropsType as HeaderProps } from "@components/common/LayoutHeader";
+import LayoutHeader from "@components/common/LayoutHeader";
 import PageTabText from "@components/common/PageTabText";
 import "@styles/components/common/Layout.css";
-import LayoutHeader from "@components/common/LayoutHeader";
-import type { LayoutHeaderPropsType as HeaderProps } from "@components/common/LayoutHeader";
-import LayoutFooter from "@components/common/LayoutFooter";
-import type { LayoutFooterPropsType as FooterProps } from "@components/common/LayoutFooter";
+import { ReactNode, useMemo } from "react";
 import { Toaster } from "react-hot-toast";
 
 export type Layout2PropsType = {

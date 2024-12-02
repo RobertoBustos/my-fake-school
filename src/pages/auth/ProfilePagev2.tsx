@@ -1,9 +1,8 @@
+import LogoutButton from "@components/LogoutButton";
+import CustomButton from "@components/common/CustomButton";
 import Layout from "@components/common/Layout";
 import ProfileForm from "@components/forms/ProfileForm2";
-import { useMemoizedTranslation } from "@hooks/useTranslation";
-import CustomButton from "@components/common/CustomButton";
-import LogoutButton from "@components/LogoutButton";
-import useWindowDimensions from "@hooks/useWindowDimensions";
+import { useMemoizedTranslation, useWindowDimensions } from "@hooks/index";
 import "@styles/pages/ProfilePage.css";
 import { useRef, useState } from "react";
 

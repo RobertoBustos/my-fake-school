@@ -1,4 +1,4 @@
-import { UpdateServicePayloadType } from "@customTypes/authTypes";
+import { UpdateServicePayloadType } from "@customTypes/index";
 import store from "@redux/store";
 
 export const parseUpdateUserProfilePayload = () => {

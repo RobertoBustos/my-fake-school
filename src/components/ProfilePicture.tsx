@@ -1,6 +1,6 @@
 import { AppLoaders } from "@customTypes/index";
 import { useAppSelector } from "@redux/hooks";
-import { selectAppLoader } from "@redux/selectors";
+import { selectAppLoader } from "@selectors/index";
 import "@styles/components/ProfilePicture.css";
 import { Spinner } from "react-bootstrap";
 

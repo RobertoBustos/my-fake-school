@@ -1,7 +1,7 @@
-import SignUpForm from "@components/forms/SignUpForm";
-import { useMemoizedTranslation } from "@hooks/useTranslation";
-import Layout from "@components/common/Layout";
 import FormFooter from "@components/common/FormFooter";
+import Layout from "@components/common/Layout";
+import SignUpForm from "@components/forms/SignUpForm";
+import { useMemoizedTranslation } from "@hooks/index";
 
 export const SignUpPage = () => {
   const { t } = useMemoizedTranslation();

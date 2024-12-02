@@ -1,4 +1,4 @@
-import i18n from "@config/i18next";
+import { i18n } from "@config/index";
 import { EMAIL_REGEX, MAX_PROFILE_PICTURE_FILE_SIZE, PHONE_REGEX, VALID_IMAGE_FILE_TYPES } from "@constants/index";
 import { FieldValues, RegisterOptions } from "react-hook-form";
 
@@ -11,7 +11,6 @@ const emailValidations: RegisterOptions<FieldValues> = {
         value: EMAIL_REGEX,
         message: i18n.t("errors.forms.invalidEmailFormat"),
     },
-
 };
 
 const emailNotExistingValidations: RegisterOptions<FieldValues> = {
@@ -119,4 +118,4 @@ const profilePictureValidtion = (file: File) => {
     return { result: true }
 }
 
-export { emailValidations, emailNotExistingValidations, nameValidations, confirmPasswordValidations, passwordValidations, newPasswordValidations, phoneNumberValidations, ageValidations, dobValidations, confirmNewPasswordValidations, profilePictureValidtion }
+export { ageValidations, confirmNewPasswordValidations, confirmPasswordValidations, dobValidations, emailNotExistingValidations, emailValidations, nameValidations, newPasswordValidations, passwordValidations, phoneNumberValidations, profilePictureValidtion };

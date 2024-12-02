@@ -1,5 +1,5 @@
-import app from "@config/firebase"
-import { getStorage, ref, uploadBytes, getDownloadURL, StorageReference, deleteObject } from "firebase/storage"
+import app from "@config/firebase";
+import { StorageReference, deleteObject, getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 
 const storage = getStorage(app)
 storage.maxOperationRetryTime = 500;
@@ -18,4 +18,4 @@ const getFileDownloadURL = (fileRef: StorageReference) => {
 
 const deleteFile = deleteObject
 
-export { storage, createFileRef, uploadFile, getFileDownloadURL, deleteFile }
+export { createFileRef, deleteFile, getFileDownloadURL, storage, uploadFile };

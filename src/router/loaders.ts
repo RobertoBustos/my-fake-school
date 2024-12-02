@@ -1,4 +1,4 @@
-import { clearUserUpdateData, fetchAllSubjects } from "@redux/actions";
+import { clearUserUpdateData, fetchAllSubjects } from "@actions/index";
 import store from "@redux/store";
 
 export async function subjectCatalogLoader() {

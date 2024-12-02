@@ -1,16 +1,16 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
-import i18n from "i18next";
 import type {
     AddSubjectPayloadType,
     DeleteSubjectPayloadType,
     EditSubjectPayloadType,
 } from "@customTypes/index";
+import { createAsyncThunk } from "@reduxjs/toolkit";
 import {
-    getSubjectCatalog,
     addSubject,
     deleteSubject,
+    getSubjectCatalog,
     updateSubject,
-} from "@services/subjectServices";
+} from "@services/index";
+import i18n from "i18next";
 export { beginSubjectDelete, beginSubjectEdition, cancelSubjectDelete, cancelSubjectEdition } from "@reducers/subjectReducer";
 
 export const fetchAllSubjects = createAsyncThunk(

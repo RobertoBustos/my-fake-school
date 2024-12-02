@@ -1,10 +1,10 @@
 import SubjectCard from "@components/SubjectCard";
+import WarningMessage from "@components/WarningMessage";
 import type { SubjectType } from "@customTypes/index";
+import { useMemoizedTranslation } from "@hooks/index";
 import { useAppSelector } from "@redux/hooks";
 import { selectUnregisteredSubjects } from "@selectors/index";
-import WarningMessage from "./WarningMessage";
 import { useMemo } from "react";
-import { useMemoizedTranslation } from "@hooks/useTranslation";
 
 export type SubjectCatalogPropsType = {
   subjects: SubjectType[];

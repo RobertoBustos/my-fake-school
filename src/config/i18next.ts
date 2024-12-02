@@ -1,6 +1,6 @@
 import i18n from "i18next";
-import { initReactI18next } from "react-i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
+import { initReactI18next } from "react-i18next";
 import en from "../i18next/en";
 import es from "../i18next/es";
 
@@ -24,4 +24,5 @@ i18n
     },
   });
 
-export default i18n;
+export { i18n };
+

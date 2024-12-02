@@ -1,9 +1,9 @@
-import i18n from "@config/i18next";
-import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit"
+import { i18n } from "@config/index";
+import type { UpdateServicePayloadType, UserDataType, UserProfileNewValue, UserSignInPayloadType, UserSignUpPayloadType, UserUploadProfilePicturePayloadType, } from "@customTypes/index";
 import type { AuthState } from "@redux/types";
-import type { UserDataType, UserSignUpPayloadType, UserSignInPayloadType, UserProfileNewValue, UserUploadProfilePicturePayloadType, UpdateServicePayloadType, } from "@customTypes/index";
-import { isProfilePictureChanged, notify, parseUpdateUserProfilePayload, removeKeyFromObject, shapeFirebaseAuthError } from "@utils/index"
-import { signUpService, signInService, logOutService, verificationService, updateProfileService, uploadProfilePictureService, deleteProfilePictureUnsavedService, validateCredentials } from "@services/authServices";
+import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { deleteProfilePictureUnsavedService, logOutService, signInService, signUpService, updateProfileService, uploadProfilePictureService, validateCredentials, verificationService } from "@services/index";
+import { isProfilePictureChanged, notify, parseUpdateUserProfilePayload, removeKeyFromObject, shapeFirebaseAuthError } from "@utils/index";
 
 const initialState: AuthState = {
     userCredential: {},

@@ -1,17 +1,17 @@
-import { Suspense, lazy, useMemo } from "react";
-import Layout from "@components/common/Layout";
 import AddSubject from "@components/AddSubject";
 import SubjectCatalog from "@components/SubjectCatalog";
+import CustomText from "@components/common/CustomText";
+import Layout from "@components/common/Layout";
 import { ModalListType } from "@customTypes/index";
-import { useMemoizedTranslation } from "@hooks/useTranslation";
+import { useMemoizedTranslation } from "@hooks/index";
 import { useAppSelector } from "@redux/hooks";
 import {
   makeSelectCheckIfModalVisible,
   selectSubjectCatalog,
 } from "@selectors/index";
-import { fakeDelayPromise } from "@utils/index";
 import "@styles/pages/SubjectsPage.css";
-import CustomText from "@components/common/CustomText";
+import { fakeDelayPromise } from "@utils/index";
+import { Suspense, lazy, useMemo } from "react";
 
 //using lazy loading for components that dont need to be rendered if they are not being used
 const EditSubjectModal = lazy(() =>

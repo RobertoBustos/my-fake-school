@@ -1,9 +1,9 @@
-import CustomButton from "@components/common/CustomButton";
-import { AppLoaders } from "@customTypes/enums";
 import { clearUserUpdateData, logOut } from "@actions/index";
+import CustomButton from "@components/common/CustomButton";
+import { AppLoaders } from "@customTypes/index";
+import { useMemoizedTranslation } from "@hooks/index";
 import { useAppDispatch, useAppSelector } from "@redux/hooks";
 import { selectAppLoader, selectIsProfileEdited } from "@selectors/index";
-import { useMemoizedTranslation } from "@hooks/useTranslation";
 import { CSSProperties } from "react";
 
 export type LogoutButtonPropsType = {

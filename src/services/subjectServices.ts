@@ -1,12 +1,12 @@
-import i18n from "i18next";
-import { subjectCollection, connection } from "@config/firestore";
+import { connection, subjectCollection } from "@config/index";
 import type {
   AddSubjectServicePayloadType,
-  SubjectType,
-  EditSubjectPayloadType,
   DeleteSubjectPayloadType,
+  EditSubjectPayloadType,
+  SubjectType,
 } from "@customTypes/index";
-import { events, eventLogger } from "@utils/index"
+import { eventLogger, events } from "@utils/index";
+import i18n from "i18next";
 
 export async function getSubjectCatalog(): Promise<SubjectType[] | Error> {
   let serviceResponse: SubjectType[] | Error;

@@ -1,8 +1,9 @@
 import { createBrowserRouter } from "react-router-dom";
 //pages
+import PrivateRoute from "@components/common/PrivateRoute";
 import HomePage from "@pages/HomePage";
 import LoginPage from "@pages/auth/LoginPage";
-import PrivateRoute from "@components/common/PrivateRoute";
+export * from "@router/loaders";
 
 const router = createBrowserRouter([
   {
@@ -51,7 +52,7 @@ const router = createBrowserRouter([
     path: "/profile",
     lazy: async () => {
       const { ProfilePage } = await import("@pages/auth/ProfilePage");
-      const { profilePageLoader } = await import("@router/loaders");
+      const { profilePageLoader } = await import("@router/index");
       return {
         element: (
           <PrivateRoute>
@@ -81,7 +82,7 @@ const router = createBrowserRouter([
     path: "/subjects",
     lazy: async () => {
       const { SubjectsPage } = await import("@pages/SubjectsPage");
-      const { subjectCatalogLoader } = await import("@router/loaders");
+      const { subjectCatalogLoader } = await import("@router/index");
       return {
         loader: subjectCatalogLoader,
         element: (

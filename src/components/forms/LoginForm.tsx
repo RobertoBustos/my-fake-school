@@ -1,17 +1,20 @@
-import { useForm } from "react-hook-form";
-import { useAppDispatch, useAppSelector } from "@redux/hooks";
 import { logIn } from "@actions/index";
 import CustomButton from "@components/common/CustomButton";
-import { useMemoizedTranslation } from "@hooks/useTranslation";
-import { selectAppLoader } from "@selectors/index";
+import FormContainer from "@components/common/FormContainer";
+import FormInput from "@components/common/FormInput";
+import {
+  emailValidations,
+  passwordValidations,
+} from "@components/forms/formValidations";
 import {
   AppLoaders,
   FormFields,
   UserUpdatePayloadType,
 } from "@customTypes/index";
-import FormContainer from "@components/common/FormContainer";
-import FormInput from "@components/common/FormInput";
-import { emailValidations, passwordValidations } from "./formValidations";
+import { useMemoizedTranslation } from "@hooks/index";
+import { useAppDispatch, useAppSelector } from "@redux/hooks";
+import { selectAppLoader } from "@selectors/index";
+import { useForm } from "react-hook-form";
 
 const LoginForm = () => {
   const { t } = useMemoizedTranslation();

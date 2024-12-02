@@ -1,5 +1,6 @@
-import { FormFields } from "@customTypes/enums";
-import { useMemoizedTranslation } from "@hooks/useTranslation";
+import FormLabel from "@components/common/FormLabel";
+import { CustomInputType, FormFields } from "@customTypes/index";
+import { useMemoizedTranslation } from "@hooks/index";
 import { Form } from "react-bootstrap";
 import {
   Control,
@@ -7,8 +8,6 @@ import {
   FieldValues,
   UseFormRegister,
 } from "react-hook-form";
-import FormLabel from "./FormLabel";
-import { CustomInputType } from "@customTypes/index";
 
 export type FormInputControlPropsType = {
   control: Control<FieldValues> | undefined;

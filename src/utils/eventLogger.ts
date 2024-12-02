@@ -1,5 +1,5 @@
-import { analytics, logEvent } from "@config/analytics"
-import { customEvents } from "@customTypes/index"
+import { analytics, logEvent } from "@config/index";
+import { customEvents } from "@customTypes/index";
 
 export const events = customEvents;
 

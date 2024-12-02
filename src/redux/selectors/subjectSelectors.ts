@@ -1,5 +1,5 @@
-import { createSelector } from "reselect"
-import { RootState } from "@redux/types/index";
+import { RootState } from "@redux/types";
+import { createSelector } from "reselect";
 
 export const selectSubjectState = (state: RootState) => state.subject;
 

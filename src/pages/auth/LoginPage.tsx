@@ -1,7 +1,7 @@
-import LoginForm from "@components/forms/LoginForm";
-import { useMemoizedTranslation } from "@hooks/useTranslation";
-import Layout from "@components/common/Layout";
 import FormFooter from "@components/common/FormFooter";
+import Layout from "@components/common/Layout";
+import LoginForm from "@components/forms/LoginForm";
+import { useMemoizedTranslation } from "@hooks/index";
 
 const LoginPage = () => {
   const { t } = useMemoizedTranslation();

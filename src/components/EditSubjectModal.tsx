@@ -1,11 +1,11 @@
+import { cancelSubjectEdition, editExistingSubject } from "@actions/index";
+import CustomModal from "@components/common/CustomModal";
+import { ModalListType } from "@customTypes/index";
+import { useMemoizedTranslation } from "@hooks/index";
+import { useAppDispatch, useAppSelector } from "@redux/hooks";
+import { selectSubjectManipulationInProgressData } from "@selectors/index";
 import { useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
-import { useMemoizedTranslation } from "@hooks/useTranslation";
-import CustomModal from "@components/common/CustomModal";
-import { useAppSelector, useAppDispatch } from "@redux/hooks";
-import { ModalListType } from "@customTypes/index";
-import { selectSubjectManipulationInProgressData } from "@selectors/index";
-import { cancelSubjectEdition, editExistingSubject } from "@actions/index";
 
 export type EditSubjectModalPropsType = {
   modalId: ModalListType;

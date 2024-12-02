@@ -1,6 +1,6 @@
-import { createSelector } from "reselect"
-import { RootState } from "@redux/types/index";
 import { AppLoaders, ModalListType } from "@customTypes/index";
+import { RootState } from "@redux/types";
+import { createSelector } from "reselect";
 
 export const selectIndicatorState = (state: RootState) => state.indicators;
 

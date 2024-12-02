@@ -1,20 +1,26 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { IndicatorsState } from "@redux/types";
 import { AppLoaders, ModalListType } from "@customTypes/index";
 import {
-  addNewSubject,
-  fetchAllSubjects,
-  deleteExistingSubject,
-  beginSubjectEdition,
-  editExistingSubject,
-  cancelSubjectEdition,
-  beginSubjectDelete,
-  cancelSubjectDelete,
-} from "@reducers/subjectReducer";
+  clearUserData,
+  logIn,
+  logOut,
+  sendVerificationEmail,
+  setUserData,
+  signUp,
+  updateProfile,
+  uploadUserProfilePicture
+} from "@reducers/authReducer";
 import {
-  signUp, logIn, sendVerificationEmail, updateProfile, setUserData, clearUserData, uploadUserProfilePicture,
-  logOut
-} from "@reducers/authReducer"
+  addNewSubject,
+  beginSubjectDelete,
+  beginSubjectEdition,
+  cancelSubjectDelete,
+  cancelSubjectEdition,
+  deleteExistingSubject,
+  editExistingSubject,
+  fetchAllSubjects,
+} from "@reducers/subjectReducer";
+import { IndicatorsState } from "@redux/types";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 const initialState: IndicatorsState = {
   appLoaderStatus: "loading",

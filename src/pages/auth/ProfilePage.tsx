@@ -1,18 +1,17 @@
+import { updateProfile } from "@actions/index";
+import LogoutButton from "@components/LogoutButton";
+import CustomButton from "@components/common/CustomButton";
 import Layout from "@components/common/Layout";
 import ProfileForm from "@components/forms/ProfileForm";
+import { AppLoaders } from "@customTypes/index";
+import { useMemoizedTranslation, useWindowDimensions } from "@hooks/index";
 import { useAppDispatch, useAppSelector } from "@redux/hooks";
-import { updateProfile } from "@actions/index";
 import {
   selectAppLoader,
   selectAppLoaderStatusLoading,
   selectIsProfileEdited,
   selectLoggedInUserData,
 } from "@selectors/index";
-import { useMemoizedTranslation } from "@hooks/useTranslation";
-import CustomButton from "@components/common/CustomButton";
-import { AppLoaders } from "@customTypes/enums";
-import LogoutButton from "@components/LogoutButton";
-import useWindowDimensions from "@hooks/useWindowDimensions";
 import "@styles/pages/ProfilePage.css";
 
 export const ProfilePage = () => {
