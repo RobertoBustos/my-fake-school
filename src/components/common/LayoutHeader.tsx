@@ -30,7 +30,7 @@ const LayoutHeader = ({
     backArrowDimentions.width = backArrowDimentions.height / 2;
     backArrowDimentions.marginLeft = -backArrowDimentions.width / 3;
 
-    return window ? (
+    return window.history.state.idx !== 0 ? (
       <ArrowLeft01Icon
         style={{
           marginLeft: `-1rem`,

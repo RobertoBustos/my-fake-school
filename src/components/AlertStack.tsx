@@ -3,13 +3,14 @@ import { useAppDispatch, useAppSelector } from "@redux/hooks";
 import { closeAlert } from "@actions/index";
 import { AlertPropsType } from "@customTypes/index";
 import { selectAlerts } from "@selectors/index";
+import "@styles/components/AlertStack.css";
 
 const AlertStack = () => {
   const dispatch = useAppDispatch();
   const alerts: AlertPropsType[] = useAppSelector(selectAlerts);
 
   return (
-    <div>
+    <div className="alertcontainer">
       {alerts.map((alert) => {
         if (alert.dismisable === true) {
           setTimeout(() => {
