@@ -20,10 +20,13 @@ const ProfileForm = ({ defaultValues }: ProfileFormPropsType) => {
   const fileRef = useRef<HTMLInputElement>(null);
   const { t } = useMemoizedTranslation();
   const dispatch = useAppDispatch();
-  const { control, register, getValues } = useForm<ProfileFormFieldsType>({
-    defaultValues: async () => defaultValues,
-  });
+  const { control, register, getValues, watch } =
+    useForm<ProfileFormFieldsType>({
+      defaultValues: async () => defaultValues,
+    });
   const photoURL = useAppSelector(selecProfilePhotoURL);
+  const displayConfirmPasswordInput: boolean =
+    watch(FormFields.NEW_PASSWORD) !== "";
 
   const handleChange = (fieldName: FormFields, value: string) => {
     if (
@@ -96,10 +99,19 @@ const ProfileForm = ({ defaultValues }: ProfileFormPropsType) => {
       <FormInputControl
         control={control}
         register={register}
-        fieldName={FormFields.PASSWORD}
-        type={"text"}
+        fieldName={FormFields.NEW_PASSWORD}
+        type="passowrd"
         handleChange={handleChange}
       />
+      {displayConfirmPasswordInput ? (
+        <FormInputControl
+          control={control}
+          register={register}
+          fieldName={FormFields.CONFIRM_NEW_PASSWORD}
+          type="passowrd"
+          handleChange={handleChange}
+        />
+      ) : null}
       <FormInputControl
         control={control}
         register={register}

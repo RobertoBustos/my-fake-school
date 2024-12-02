@@ -99,6 +99,7 @@ const es = {
       auth: {
         noChangesInProfile: "No hay información que modificar.",
         passwordsNotMatch: "Las contraseñas no coinciden.",
+        networkrequestfailed: "Error de comunicacion.",
         invalidcredential: "Usuario o contraseña incorrectos.",
         emailalreadyinuse: "Ya existe una cuenta con este correo.",
         equiresrecentlogin: "Se necesita volver a loguearse para cambiar la contraseña.",

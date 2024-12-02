@@ -51,12 +51,14 @@ const router = createBrowserRouter([
     path: "/profile",
     lazy: async () => {
       const { ProfilePage } = await import("@pages/auth/ProfilePage");
+      const { profilePageLoader } = await import("@router/loaders");
       return {
         element: (
           <PrivateRoute>
             <ProfilePage />,
           </PrivateRoute>
         ),
+        loader: profilePageLoader,
       };
     },
   },

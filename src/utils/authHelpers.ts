@@ -6,25 +6,37 @@ export const parseUpdateUserProfilePayload = () => {
     if (Object.keys(state.auth.userManipulationInProgress).length === 0) {
         return null;
     }
-    let payload: UpdateServicePayloadType = { profile: {} }
+    let payload: UpdateServicePayloadType = {}
+    let profile = Object();
+    let password = Object()
     if (state.auth.userManipulationInProgress.displayName) {
-        payload.profile!.displayName = state.auth.userManipulationInProgress.displayName
+        profile.displayName = state.auth.userManipulationInProgress.displayName
     }
     if (state.auth.userManipulationInProgress.photoURL) {
-        payload.profile!.photoURL = state.auth.userManipulationInProgress.photoURL
+        profile!.photoURL = state.auth.userManipulationInProgress.photoURL
+    }
+    if (state.auth.userManipulationInProgress.newPassword) {
+        password.newPassword = state.auth.userManipulationInProgress.newPassword
+    }
+    if (state.auth.userManipulationInProgress.confirmNewPassword) {
+        password!.currentPassword = state.auth.userManipulationInProgress.confirmNewPassword
     }
     if (state.auth.userManipulationInProgress.phoneNumber) {
         payload.phoneNumber = state.auth.userManipulationInProgress.phoneNumber
     }
-    /* if (state.auth.userManipulationInProgress.password) {
-        payload.password?.newPassword = state.auth.userManipulationInProgress.password
-    } */
+    if (Object.keys(profile).length > 0) {
+        payload.profile = profile;
+    }
+    if (Object.keys(password).length > 0) {
+        payload.password = password;
+    }
     return payload
 }
 
 export const isProfilePictureChanged = () => {
     const state = store.getState();
-    return state.auth.userManipulationInProgress.photoURL && state.auth.userManipulationInProgress.photoURL !== "" ? state.auth.userManipulationInProgress.photoURL : undefined
+    const result = state.auth.userManipulationInProgress.photoURL && state.auth.userManipulationInProgress.photoURL !== "" ? true : false
+    return { result, previousValue: state.auth.userCredential.photoURL, newValue: state.auth.userManipulationInProgress.photoURL }
 }
 
 export const parseFullName = (firstName?: string, lastName?: string) => {

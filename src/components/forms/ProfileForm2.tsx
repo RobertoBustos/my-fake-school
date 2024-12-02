@@ -104,10 +104,6 @@ const ProfileForm = ({
             );
           }
           handleFileChangeResponse(true, response.downloadURL);
-          /*  setValue(FormFields.PHOTO_URL, response.downloadURL, {
-            shouldDirty: true,
-          });
-          setFileError(""); */
         } catch (error) {
           handleFileChangeResponse(false, error as string);
         }

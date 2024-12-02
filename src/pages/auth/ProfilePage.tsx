@@ -26,9 +26,10 @@ export const ProfilePage = () => {
 
   const defaultValues = {
     email: userInfo.email || "",
-    password: "",
     firstName: userInfo.displayName?.split(",")[1] || "",
     lastName: userInfo.displayName?.split(",")[0] || "",
+    newPassword: "",
+    confirmNewPassword: "",
     phoneNumber: userInfo.phoneNumber,
     photoURL: userInfo.photoURL,
   };
@@ -59,7 +60,6 @@ export const ProfilePage = () => {
   };
 
   const renderMobileButtons = isMobile ? renderButtons() : undefined;
-
   const renderDesktopButtons = !isMobile ? renderButtons() : undefined;
 
   return (

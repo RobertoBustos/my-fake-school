@@ -8,12 +8,13 @@ import {
   UseFormRegister,
 } from "react-hook-form";
 import FormLabel from "./FormLabel";
+import { CustomInputType } from "@customTypes/index";
 
 export type FormInputControlPropsType = {
   control: Control<FieldValues> | undefined;
   register: UseFormRegister<FieldValues>;
   fieldName: FormFields;
-  type: string;
+  type: CustomInputType;
   handleChange: (fieldName: FormFields, value: string) => void;
 };
 
@@ -25,17 +26,16 @@ const FormInputControl = ({
   handleChange,
 }: FormInputControlPropsType) => {
   const { t } = useMemoizedTranslation();
-
   return (
     <Controller
       name={fieldName}
       control={control}
       render={({ field }) => (
         <Form.Group id={fieldName}>
-          <FormLabel text={t(`forms.profile.${fieldName}`)} />
+          <FormLabel text={t(`forms.user.${fieldName}`)} />
           <Form.Control
-            {...register(fieldName)}
             type={type}
+            {...register(fieldName)}
             onChange={(e) => {
               field.onChange(e);
               handleChange(fieldName, e.target.value);

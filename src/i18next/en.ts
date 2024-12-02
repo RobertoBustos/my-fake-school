@@ -99,6 +99,7 @@ const en = {
       auth: {
         noChangesInProfile: "There are no changes to be saved.",
         passwordsNotMatch: "Passwords don't match.",
+        networkrequestfailed: "Cant complete your request.",
         invalidcredential: "Incorrect username or password.",
         emailalreadyinuse: "There's already an account with this email.",
         equiresrecentlogin: "To change your password please sign in again.",

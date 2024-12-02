@@ -3,7 +3,7 @@ import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import type { AuthState } from "@redux/types";
 import type { UserDataType, UserSignUpPayloadType, UserSignInPayloadType, UserProfileNewValue, UserUploadProfilePicturePayloadType, UpdateServicePayloadType, } from "@customTypes/index";
 import { isProfilePictureChanged, parseUpdateUserProfilePayload, removeKeyFromObject, shapeFirebaseAuthError } from "@utils/index"
-import { signUpService, signInService, logOutService, verificationService, updateProfileService, uploadProfilePictureService, deleteProfilePictureUnsavedService } from "@services/authServices";
+import { signUpService, signInService, logOutService, verificationService, updateProfileService, uploadProfilePictureService, deleteProfilePictureUnsavedService, validateCredentials } from "@services/authServices";
 
 const initialState: AuthState = {
     userCredential: {},
@@ -50,9 +50,6 @@ export const authSlice = createSlice({
         builder.addCase(updateProfile.fulfilled, (state) => {
             state.userCredential.displayName = state.userManipulationInProgress.displayName
             state.userCredential.photoURL = state.userManipulationInProgress.photoURL
-            state.userManipulationInProgress = {}
-        });
-        builder.addCase(updateProfile.rejected, (state) => {
             state.userManipulationInProgress = {}
         });
         builder.addCase(uploadUserProfilePicture.fulfilled, (state, action) => {
@@ -102,6 +99,16 @@ export const updateProfile = createAsyncThunk("auth/updateProfile", async (_, { 
     if (servicePayload === null) {
         return rejectWithValue(i18n.t("errors.auth.noChangesInProfile"));
     }
+    const credentialResponse = await validateCredentials(
+        servicePayload.password?.currentPassword || ""
+    );
+    if ("message" in credentialResponse) {
+        return rejectWithValue(i18n.t(`errors.${shapeFirebaseAuthError(credentialResponse.message)}`))
+    }
+    const pictureChangeValidation = isProfilePictureChanged();
+    if (pictureChangeValidation.result) {
+        await deleteProfilePictureUnsavedService(pictureChangeValidation.previousValue || "")
+    }
     const response = await updateProfileService(servicePayload);
     if ("message" in response) {
         return rejectWithValue(response.message);
@@ -121,9 +128,9 @@ export const uploadUserProfilePicture = createAsyncThunk("auth/uploadProfilePict
 })
 
 export const clearUserUpdateData = createAsyncThunk("auth/clearUserUpdateData", async (_, { rejectWithValue }) => {
-    const fileURL = isProfilePictureChanged();
-    if (fileURL) {
-        const response = await deleteProfilePictureUnsavedService(fileURL)
+    const pictureChangeValidation = isProfilePictureChanged();
+    if (pictureChangeValidation.result) {
+        const response = await deleteProfilePictureUnsavedService(pictureChangeValidation.newValue || "")
         return response
     }
     return;
