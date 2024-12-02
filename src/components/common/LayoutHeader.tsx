@@ -33,12 +33,9 @@ const LayoutHeader = ({
     return window ? (
       <ArrowLeft01Icon
         style={{
-          maxHeight: `${backArrowDimentions.height}rem`, //this is the main value, the min height of the header class must be higher
-          width: `${backArrowDimentions.width}rem`, //the width of the arrow is half its height
-          marginLeft: `${backArrowDimentions.marginLeft}rem`, // the marginLeft is one third of its width
-          color: "black",
+          marginLeft: `-1rem`,
         }}
-        size={100}
+        size={50}
         onClick={() => {
           navigate(-1);
         }}
@@ -49,10 +46,8 @@ const LayoutHeader = ({
   const memoizedHeader = useMemo(() => {
     return (
       <div className={className}>
-        <div className="headerleft">
-          {showBackButton ? memoizedBackButton : null}
-        </div>
-        <div className="headerright">{memoizedLanguageSelector}</div>
+        <div>{showBackButton ? memoizedBackButton : null}</div>
+        <div>{memoizedLanguageSelector}</div>
       </div>
     );
   }, [className, memoizedBackButton, memoizedLanguageSelector, showBackButton]);
