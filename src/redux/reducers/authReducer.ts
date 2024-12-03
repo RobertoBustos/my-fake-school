@@ -44,6 +44,7 @@ export const authSlice = createSlice({
             if (payload.password?.newPassword) {
                 state.userCredential.currentPassword = payload.password?.newPassword
             }
+            notify.success(i18n.t("confirmations.user.profileUpdated"))
         }
     },
     extraReducers: (builder) => {
@@ -64,8 +65,12 @@ export const authSlice = createSlice({
         });
         builder.addCase(updateProfile.fulfilled, (state) => {
             notify.success(i18n.t("confirmations.user.profileUpdated"))
-            state.userCredential.displayName = state.userManipulationInProgress.displayName
-            state.userCredential.photoURL = state.userManipulationInProgress.photoURL
+            if (state.userManipulationInProgress.displayName) {
+                state.userCredential.displayName = state.userManipulationInProgress.displayName
+            }
+            if (state.userManipulationInProgress.photoURL) {
+                state.userCredential.photoURL = state.userManipulationInProgress.photoURL
+            }
             state.userManipulationInProgress = {}
         });
         builder.addCase(updateProfile.rejected, (_, action) => {
@@ -79,9 +84,6 @@ export const authSlice = createSlice({
         });
         builder.addCase(clearUserUpdateData.fulfilled, (state) => {
             state.userManipulationInProgress = {}
-        });
-        builder.addCase(setUserUpdatedData, (_, action) => {
-            notify.success(i18n.t("confirmations.user.profileUpdated"))
         });
     }
 })
@@ -124,11 +126,13 @@ export const updateProfile = createAsyncThunk("auth/updateProfile", async (_, { 
     if (servicePayload === null) {
         return rejectWithValue(i18n.t("errors.auth.noChangesInProfile"));
     }
-    const credentialResponse = await validateCredentials(
-        servicePayload.password?.currentPassword || ""
-    );
-    if ("message" in credentialResponse) {
-        return rejectWithValue(i18n.t(`errors.${shapeFirebaseAuthError(credentialResponse.message)}`))
+    if (servicePayload.password) {
+        const credentialResponse = await validateCredentials(
+            servicePayload.password?.currentPassword || ""
+        );
+        if ("message" in credentialResponse) {
+            return rejectWithValue(i18n.t(`errors.${shapeFirebaseAuthError(credentialResponse.message)}`))
+        }
     }
     const pictureChangeValidation = isProfilePictureChanged();
     if (pictureChangeValidation.result) {

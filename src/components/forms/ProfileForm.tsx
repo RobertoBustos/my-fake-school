@@ -10,13 +10,14 @@ import {
   nameValidations,
   newPasswordValidations,
   phoneNumberValidations,
+  profilePictureValidtion,
 } from "@components/forms/formValidations";
 import { FormFields, ProfileFormFieldsType } from "@customTypes/index";
 import { useMemoizedTranslation } from "@hooks/index";
 import { useAppDispatch, useAppSelector } from "@redux/hooks";
 import { selecProfilePhotoURL } from "@selectors/index";
 import { parseFullName } from "@utils/index";
-import { ChangeEvent, useRef } from "react";
+import { ChangeEvent } from "react";
 import { useForm } from "react-hook-form";
 
 export type ProfileFormPropsType = {
@@ -24,7 +25,6 @@ export type ProfileFormPropsType = {
 };
 
 const ProfileForm = ({ defaultValues }: ProfileFormPropsType) => {
-  const fileRef = useRef<HTMLInputElement>(null);
   const { t } = useMemoizedTranslation();
   const dispatch = useAppDispatch();
   const {
@@ -65,13 +65,8 @@ const ProfileForm = ({ defaultValues }: ProfileFormPropsType) => {
     );
   };
 
-  const handleClick = () => {
-    fileRef.current?.click();
-  };
-
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     const files = (e.target as HTMLInputElement).files;
-
     if (files) {
       dispatch(uploadUserProfilePicture({ file: files[0] }));
     }
@@ -79,13 +74,10 @@ const ProfileForm = ({ defaultValues }: ProfileFormPropsType) => {
 
   return (
     <FormContainer formTitle={t("formTitles.userProfile")}>
-      <ProfilePicture imageUrl={photoURL} onClick={handleClick} />
-      <input
-        type="file"
-        onChange={handleFileChange}
-        ref={fileRef}
-        className="d-none"
-        multiple={false}
+      <ProfilePicture
+        imageUrl={photoURL}
+        onFileChange={handleFileChange}
+        validation={profilePictureValidtion}
       />
       <CustomText
         text={defaultValues.email || ""}

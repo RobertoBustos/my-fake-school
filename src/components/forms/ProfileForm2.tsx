@@ -34,7 +34,6 @@ import {
   useEffect,
   useImperativeHandle,
   useRef,
-  useState,
 } from "react";
 import { useForm } from "react-hook-form";
 
@@ -79,13 +78,8 @@ const ProfileForm = ({
   const fileRef = useRef<HTMLInputElement>(null);
   const displayConfirmPasswordInput: boolean =
     watch(FormFields.NEW_PASSWORD) !== "";
-  const [fileError, setFileError] = useState<string | null>(null);
   const photoURL = watch(FormFields.PHOTO_URL);
 
-  //handling file input events
-  const handleClick = () => {
-    fileRef.current?.click();
-  };
   const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
     const files = (e.target as HTMLInputElement).files;
     if (files) {
@@ -118,10 +112,8 @@ const ProfileForm = ({
       setValue(FormFields.PHOTO_URL, message, {
         shouldDirty: true,
       });
-      setFileError("");
     } else {
       resetField(FormFields.PHOTO_URL);
-      setFileError(message);
     }
   };
 
@@ -179,10 +171,11 @@ const ProfileForm = ({
 
   return (
     <FormContainer formTitle={t("formTitles.userProfile")}>
-      {fileError !== null ? (
-        <CustomText text={fileError} className="errortext text-center" />
-      ) : null}
-      <ProfilePicture imageUrl={photoURL} onClick={handleClick} />
+      <ProfilePicture
+        imageUrl={photoURL}
+        onFileChange={handleFileChange}
+        validation={profilePictureValidtion}
+      />
       <input
         type="file"
         onChange={handleFileChange}
