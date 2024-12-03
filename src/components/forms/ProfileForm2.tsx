@@ -4,6 +4,7 @@ import VerifyEmail from "@components/VerifyEmail";
 import CustomText from "@components/common/CustomText";
 import FormContainer from "@components/common/FormContainer";
 import FormInput from "@components/common/FormInput";
+import FormPasswordInput from "@components/common/FormPasswordInput";
 import {
   confirmNewPasswordValidations,
   nameValidations,
@@ -25,7 +26,7 @@ import {
   uploadProfilePictureService,
   validateCredentials,
 } from "@services/index";
-import { fakeDelayPromise, notify, shapeFirebaseAuthError } from "@utils/index";
+import { notify, shapeFirebaseAuthError } from "@utils/index";
 import {
   ChangeEvent,
   Dispatch,
@@ -127,7 +128,6 @@ const ProfileForm = ({
   const onSubmit = async (data: ProfileFormFieldsType) => {
     let payload: UpdateServicePayloadType = {};
     try {
-      await fakeDelayPromise(undefined, 500);
       if (dirtyFields.newPassword) {
         payload.password = {
           currentPassword: data.confirmNewPassword!,
@@ -208,16 +208,14 @@ const ProfileForm = ({
           fieldName={FormFields.LAST_NAME}
           errorMessage={errors.lastName?.message}
         />
-        <FormInput
-          type="password"
+        <FormPasswordInput
           register={register}
           fieldName={FormFields.NEW_PASSWORD}
           errorMessage={errors.newPassword?.message}
           validations={newPasswordValidations}
         />
         {displayConfirmPasswordInput ? (
-          <FormInput
-            type="password"
+          <FormPasswordInput
             register={register}
             fieldName={FormFields.CONFIRM_NEW_PASSWORD}
             errorMessage={errors.confirmNewPassword?.message}

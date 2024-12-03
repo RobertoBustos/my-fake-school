@@ -9,7 +9,7 @@ export type FormInputPropsType = {
   fieldName: FormFields;
   errorMessage?: string;
   validations?: RegisterOptions<FieldValues>;
-  onChange?: () => void;
+  onValueChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   hidden?: boolean;
 };
 
@@ -19,11 +19,13 @@ const FormInput = ({
   fieldName,
   errorMessage,
   validations,
-  onChange,
+  onValueChange,
   hidden = false,
 }: FormInputPropsType) => {
   const { t } = useMemoizedTranslation();
   const memoizedFormInput = useMemo(() => {
+    const { onChange } = register(fieldName, validations);
+
     return (
       <div className={hidden ? "d-none" : ""}>
         <label htmlFor={fieldName}>{t(`forms.user.${fieldName}`)}</label>
@@ -32,11 +34,26 @@ const FormInput = ({
           id={fieldName}
           autoComplete="off"
           {...register(fieldName, validations)}
+          onChange={(e) => {
+            onChange(e);
+            if (onValueChange) {
+              onValueChange(e);
+            }
+          }}
         />
         <p className="errortext">{errorMessage}</p>
       </div>
     );
-  }, [errorMessage, fieldName, register, t, type, validations, hidden]);
+  }, [
+    register,
+    fieldName,
+    validations,
+    hidden,
+    t,
+    type,
+    errorMessage,
+    onValueChange,
+  ]);
 
   return memoizedFormInput;
 };

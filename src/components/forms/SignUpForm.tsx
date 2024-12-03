@@ -2,6 +2,7 @@ import { signUp } from "@actions/index";
 import CustomButton from "@components/common/CustomButton";
 import FormContainer from "@components/common/FormContainer";
 import FormInput from "@components/common/FormInput";
+import FormPasswordInput from "@components/common/FormPasswordInput";
 import {
   confirmPasswordValidations,
   emailNotExistingValidations,
@@ -55,15 +56,13 @@ const LoginForm = () => {
           errorMessage={errors.email?.message}
           validations={emailNotExistingValidations}
         />
-        <FormInput
-          type="password"
+        <FormPasswordInput
           register={register}
           fieldName={FormFields.PASSWORD}
           errorMessage={errors.password?.message}
           validations={passwordValidations}
         />
-        <FormInput
-          type="password"
+        <FormPasswordInput
           register={register}
           fieldName={FormFields.CONFIRM_PASSWORD}
           errorMessage={errors.confirmPassword?.message}

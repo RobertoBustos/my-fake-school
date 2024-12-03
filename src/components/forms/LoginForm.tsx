@@ -2,6 +2,7 @@ import { logIn } from "@actions/index";
 import CustomButton from "@components/common/CustomButton";
 import FormContainer from "@components/common/FormContainer";
 import FormInput from "@components/common/FormInput";
+import FormPasswordInput from "@components/common/FormPasswordInput";
 import {
   emailValidations,
   passwordValidations,
@@ -51,8 +52,7 @@ const LoginForm = () => {
           errorMessage={errors.email?.message}
           validations={emailValidations}
         />
-        <FormInput
-          type="password"
+        <FormPasswordInput
           register={register}
           fieldName={FormFields.PASSWORD}
           errorMessage={errors.password?.message}

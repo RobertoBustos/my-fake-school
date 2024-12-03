@@ -1,9 +1,16 @@
 import { beginUserEdition, uploadUserProfilePicture } from "@actions/index";
 import ProfilePicture from "@components/ProfilePicture";
 import VerifyEmail from "@components/VerifyEmail";
+import CustomText from "@components/common/CustomText";
 import FormContainer from "@components/common/FormContainer";
-import FormInputControl from "@components/common/FormInputControl";
-import FormLabel from "@components/common/FormLabel";
+import FormInput from "@components/common/FormInput";
+import FormPasswordInput from "@components/common/FormPasswordInput";
+import {
+  confirmNewPasswordValidations,
+  nameValidations,
+  newPasswordValidations,
+  phoneNumberValidations,
+} from "@components/forms/formValidations";
 import { FormFields, ProfileFormFieldsType } from "@customTypes/index";
 import { useMemoizedTranslation } from "@hooks/index";
 import { useAppDispatch, useAppSelector } from "@redux/hooks";
@@ -20,10 +27,15 @@ const ProfileForm = ({ defaultValues }: ProfileFormPropsType) => {
   const fileRef = useRef<HTMLInputElement>(null);
   const { t } = useMemoizedTranslation();
   const dispatch = useAppDispatch();
-  const { control, register, getValues, watch } =
-    useForm<ProfileFormFieldsType>({
-      defaultValues: async () => defaultValues,
-    });
+  const {
+    register,
+    getValues,
+    watch,
+    formState: { errors },
+  } = useForm<ProfileFormFieldsType>({
+    mode: "all",
+    defaultValues: async () => defaultValues,
+  });
   const photoURL = useAppSelector(selecProfilePhotoURL);
   const displayConfirmPasswordInput: boolean =
     watch(FormFields.NEW_PASSWORD) !== "";
@@ -75,47 +87,61 @@ const ProfileForm = ({ defaultValues }: ProfileFormPropsType) => {
         className="d-none"
         multiple={false}
       />
-      <FormLabel
+      <CustomText
         text={defaultValues.email || ""}
-        className="w-100 text-center"
+        className="w-100 text-center text-bold"
       />
-      <FormInputControl
-        control={control}
-        register={register}
-        fieldName={FormFields.FIRST_NAME}
-        type={"text"}
-        handleChange={handleChange}
-      />
-      <FormInputControl
-        control={control}
-        register={register}
-        fieldName={FormFields.LAST_NAME}
-        type={"text"}
-        handleChange={handleChange}
-      />
-      <FormInputControl
-        control={control}
-        register={register}
-        fieldName={FormFields.NEW_PASSWORD}
-        type="passowrd"
-        handleChange={handleChange}
-      />
-      {displayConfirmPasswordInput ? (
-        <FormInputControl
-          control={control}
+      <form noValidate>
+        <FormInput
+          type="text"
           register={register}
-          fieldName={FormFields.CONFIRM_NEW_PASSWORD}
-          type="passowrd"
-          handleChange={handleChange}
+          fieldName={FormFields.FIRST_NAME}
+          onValueChange={(e) => {
+            handleChange(FormFields.FIRST_NAME, e.target.value);
+          }}
+          errorMessage={errors.firstName?.message}
+          validations={nameValidations}
         />
-      ) : null}
-      <FormInputControl
-        control={control}
-        register={register}
-        fieldName={FormFields.PHONE_NUMBER}
-        type={"text"}
-        handleChange={handleChange}
-      />
+        <FormInput
+          type="text"
+          register={register}
+          fieldName={FormFields.LAST_NAME}
+          onValueChange={(e) => {
+            handleChange(FormFields.LAST_NAME, e.target.value);
+          }}
+          errorMessage={errors.lastName?.message}
+        />
+        <FormPasswordInput
+          register={register}
+          fieldName={FormFields.NEW_PASSWORD}
+          onValueChange={(e) => {
+            handleChange(FormFields.NEW_PASSWORD, e.target.value);
+          }}
+          errorMessage={errors.newPassword?.message}
+          validations={newPasswordValidations}
+        />
+        {displayConfirmPasswordInput ? (
+          <FormPasswordInput
+            register={register}
+            fieldName={FormFields.CONFIRM_NEW_PASSWORD}
+            onValueChange={(e) => {
+              handleChange(FormFields.CONFIRM_NEW_PASSWORD, e.target.value);
+            }}
+            errorMessage={errors.confirmNewPassword?.message}
+            validations={confirmNewPasswordValidations}
+          />
+        ) : null}
+        <FormInput
+          type="number"
+          register={register}
+          fieldName={FormFields.PHONE_NUMBER}
+          onValueChange={(e) => {
+            handleChange(FormFields.PHONE_NUMBER, e.target.value);
+          }}
+          errorMessage={errors.phoneNumber?.message}
+          validations={phoneNumberValidations}
+        />
+      </form>
       <VerifyEmail />
     </FormContainer>
   );
