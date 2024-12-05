@@ -10,3 +10,11 @@ export const removeKeyFromObject = (object: Object, keyToRemove: string) => {
 }
 
 export const notify = toast
+
+export const formatCurrency = (cents: number, currenccy: string): string => {
+  const localCurrency = Intl.NumberFormat(currenccy, { style: "currency", currency: currenccy })
+
+
+
+  return `$ ${localCurrency.format(cents / 100)} ${currenccy.toUpperCase()}`
+}

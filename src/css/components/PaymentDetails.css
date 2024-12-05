@@ -1,0 +1,28 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 0.2rem lightgray solid;
+    border-radius: 2rem;
+    width: 100%;
+    height: auto;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+.checkicon {
+    font-size: 10rem;
+    color: green;
+    margin-bottom: 3rem;
+}
+
+.amounttext {
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.thankyoutext {
+    font-size: 1rem;
+    text-align: center;
+}

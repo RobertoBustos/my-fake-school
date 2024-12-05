@@ -32,6 +32,10 @@ const en = {
       },
       actions: {
         defaultLoadingLabel: "Loading..."
+      },
+      payment: {
+        confirmPaymentLabel: "Pay now",
+        confirmPaymentLabelInProgress: "Payment in progress...",
       }
     },
     forms: {
@@ -63,7 +67,8 @@ const en = {
     formTitles: {
       signUp: "Sign Up",
       signIn: "Sign In",
-      userProfile: "My Profile"
+      userProfile: "My Profile",
+      checkout: "Payment Information"
     },
     subject: {
       editModal: {
@@ -123,6 +128,10 @@ const en = {
       user: {
         verificationEmailSent: "Verification email sent.",
         profileUpdated: "User information succesfully updated.",
+      },
+      payment: {
+        purchaseCompleted: "You have succesfully completed your purchase.",
+        thankyouText: "Thank You!.",
       }
     },
     homePage: {
@@ -131,7 +140,7 @@ const en = {
         profile: "My Profile",
         profilev2: "My Profile (v2)",
         subjects: "Subjects",
-        admin: "Admin",
+        payment: "Payments",
         logOut: "Log Out"
       },
     },

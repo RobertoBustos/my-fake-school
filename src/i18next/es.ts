@@ -32,6 +32,10 @@ const es = {
       },
       actions: {
         defaultLoadingLabel: "Cargando..."
+      },
+      payment: {
+        confirmPaymentLabel: "Pagar ahora",
+        confirmPaymentLabelInProgress: "Pago en proceso...",
       }
     },
     forms: {
@@ -63,7 +67,8 @@ const es = {
     formTitles: {
       signUp: "Crear Nueva Cuenta",
       signIn: "Iniciar Sesión",
-      userProfile: "Mi Perfil"
+      userProfile: "Mi Perfil",
+      checkout: "Informacion del Pago"
     },
     subject: {
       editModal: {
@@ -123,6 +128,10 @@ const es = {
       user: {
         verificationEmailSent: "Correo de verificación enviado exitosamente.",
         profileUpdated: "Perfil actualizado exitosamente."
+      },
+      payment: {
+        purchaseCompleted: "Pago aplicado correctamente.",
+        thankyouText: "Gracias por su compra.",
       }
     },
     homePage: {
@@ -131,7 +140,7 @@ const es = {
         profile: "Mi Perfil",
         profilev2: "Mi Perfil (v2)",
         subjects: "Materias",
-        admin: "Administración",
+        payment: "Pagos",
         logOut: "Cerrar Sesión"
       },
     },

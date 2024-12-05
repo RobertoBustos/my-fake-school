@@ -93,6 +93,36 @@ const router = createBrowserRouter([
       };
     },
   },
+  {
+    id: "payment",
+    path: "/payment",
+    lazy: async () => {
+      const { PaymentsPage } = await import("@pages/PaymentsPage");
+      return {
+        element: (
+          <PrivateRoute>
+            <PaymentsPage />
+          </PrivateRoute>
+        ),
+      };
+    },
+  },
+  {
+    id: "confirmation",
+    path: "/payment/confirm",
+    lazy: async () => {
+      const { PaymentsConfirmationPage } = await import(
+        "@pages/PaymentsConfirmationPage"
+      );
+      return {
+        element: (
+          <PrivateRoute>
+            <PaymentsConfirmationPage />
+          </PrivateRoute>
+        ),
+      };
+    },
+  },
 ]);
 
 export default router;
