@@ -144,7 +144,6 @@ const en = {
       title: "Welcome To Your Home Page",
       options: {
         profile: "My Profile",
-        profilev2: "My Profile (v2)",
         subjects: "Subjects",
         payment: "Payments",
         logOut: "Log Out",

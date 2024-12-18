@@ -1,29 +1,26 @@
+import CustomSwitchButton from "@components/common/CustomSwitchButton";
 import Layout from "@components/common/Layout";
 import GoogleMapProvider from "@components/maps/provider/GoogleMapProvider";
 import { useMemoizedTranslation } from "@hooks/index";
 import "@styles/components/maps/GoogleMap.css";
 import { useState } from "react";
-import { Form } from "react-bootstrap";
 
 export type MapProvider = "google" | "leaflet";
 
 export const LocationPage = () => {
   const { t } = useMemoizedTranslation();
-  const [mode, setMode] = useState<MapProvider>("google");
+  const [googleMapsProvider, setGoogleMapsProvider] = useState<boolean>(true);
 
   return (
     <Layout
       header={{ showBackButton: true, showLanguageSelector: true }}
       pageTabTitle={t("pageTabTitles.location")}
     >
-      <Form.Check
-        type="switch"
-        id="custom-switch"
-        label={mode}
-        onClick={() => setMode(mode === "google" ? "leaflet" : "google")}
+      <CustomSwitchButton
+        label={googleMapsProvider ? "Google" : "Leaflet"}
+        onClick={() => setGoogleMapsProvider(!googleMapsProvider)}
       />
-      {mode === "google" ? <GoogleMapProvider /> : null}
-      {mode === "leaflet" ? <div></div> : null}
+      {googleMapsProvider ? <GoogleMapProvider /> : <div></div>}
     </Layout>
   );
 };

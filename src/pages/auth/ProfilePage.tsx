@@ -1,40 +1,33 @@
 import { updateProfile } from "@actions/index";
 import LogoutButton from "@components/LogoutButton";
 import CustomButton from "@components/common/CustomButton";
+import CustomSwitchButton from "@components/common/CustomSwitchButton";
 import Layout from "@components/common/Layout";
-import ProfileForm from "@components/forms/ProfileForm";
+import ReduxProfileForm from "@components/forms/ProfileForm";
+import HooksProfileForm from "@components/forms/ProfileForm2";
 import { AppLoaders } from "@customTypes/index";
 import { useMemoizedTranslation, useWindowDimensions } from "@hooks/index";
 import { useAppDispatch, useAppSelector } from "@redux/hooks";
-import {
-  selectAppLoader,
-  selectAppLoaderStatusLoading,
-  selectIsProfileEdited,
-  selectLoggedInUserData,
-} from "@selectors/index";
+import { selectAppLoader, selectIsProfileEdited } from "@selectors/index";
 import "@styles/pages/ProfilePage.css";
+import { useRef, useState } from "react";
 
 export const ProfilePage = () => {
   const { t } = useMemoizedTranslation();
-  const userInfo = useAppSelector(selectLoggedInUserData);
   const dispatch = useAppDispatch();
-  const isAppLoading = useAppSelector(selectAppLoaderStatusLoading);
   const isProfileEdited = useAppSelector(selectIsProfileEdited);
   const isEditing = useAppSelector(selectAppLoader(AppLoaders.UPDATE_PROFILE));
   const { isMobile } = useWindowDimensions();
-
-  const defaultValues = {
-    email: userInfo.email || "",
-    firstName: userInfo.displayName?.split(",")[1] || "",
-    lastName: userInfo.displayName?.split(",")[0] || "",
-    newPassword: "",
-    confirmNewPassword: "",
-    phoneNumber: userInfo.phoneNumber,
-    photoURL: userInfo.photoURL,
-  };
+  const [reduxMode, setReduxMode] = useState<boolean>(true);
+  const formRef = useRef<HTMLFormElement>(null);
+  const [isValid, setIsValid] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const handleSubmit = () => {
-    dispatch(updateProfile());
+    if (reduxMode) {
+      return dispatch(updateProfile());
+    }
+    return formRef.current?.submitForm();
   };
 
   const headerProps = {
@@ -45,14 +38,25 @@ export const ProfilePage = () => {
   const renderButtons = () => {
     return (
       <div className="buttons">
-        <CustomButton
-          buttonLabel={t("buttons.user.saveChangesLabel")}
-          onClick={handleSubmit}
-          disabled={!isProfileEdited}
-          className="button"
-          isLoading={isEditing}
-          loadingLabel={t("buttons.user.saveChangesInProgress")}
-        />
+        {reduxMode ? (
+          <CustomButton
+            buttonLabel={t("buttons.user.saveChangesLabel")}
+            onClick={handleSubmit}
+            disabled={!isProfileEdited}
+            className="button"
+            isLoading={isEditing}
+            loadingLabel={t("buttons.user.saveChangesInProgress")}
+          />
+        ) : (
+          <CustomButton
+            buttonLabel={t("buttons.user.saveChangesLabel")}
+            onClick={handleSubmit}
+            className="button"
+            isLoading={isLoading}
+            loadingLabel={t("buttons.user.saveChangesInProgress")}
+            disabled={!isValid}
+          />
+        )}
         <LogoutButton className="button" />
       </div>
     );
@@ -67,12 +71,22 @@ export const ProfilePage = () => {
       footer={{ button: renderMobileButtons }}
       pageTabTitle={t("pageTabTitles.profilePage")}
     >
-      {!isAppLoading ? (
-        <>
-          <ProfileForm defaultValues={defaultValues} />
-          {renderDesktopButtons}
-        </>
-      ) : null}
+      <>
+        <CustomSwitchButton
+          label={reduxMode ? "Redux" : "Hooks"}
+          onClick={() => setReduxMode(!reduxMode)}
+        />
+        {reduxMode ? (
+          <ReduxProfileForm />
+        ) : (
+          <HooksProfileForm
+            ref={formRef}
+            onIsValidChange={setIsValid}
+            onIsLoadingChange={setIsLoading}
+          />
+        )}
+        {renderDesktopButtons}
+      </>
     </Layout>
   );
 };

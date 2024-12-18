@@ -7,7 +7,6 @@ export const serviceUrl: string =
 //home page constants
 export const homePageOptions: string[] = [
   "profile",
-  "profilev2",
   "subjects",
   "payment",
   "location"

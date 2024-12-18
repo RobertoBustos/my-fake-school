@@ -65,20 +65,6 @@ const router = createBrowserRouter(
       },
     },
     {
-      id: "profilev2",
-      path: "/profilev2",
-      lazy: async () => {
-        const { ProfilePage } = await import("@pages/auth/ProfilePagev2");
-        return {
-          element: (
-            <PrivateRoute>
-              <ProfilePage />,
-            </PrivateRoute>
-          ),
-        };
-      },
-    },
-    {
       id: "subjects",
       path: "/subjects",
       lazy: async () => {

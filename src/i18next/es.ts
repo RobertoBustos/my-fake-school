@@ -144,7 +144,6 @@ const es = {
       title: "Bienvenido a Tu Página de Inicio",
       options: {
         profile: "Mi Perfil",
-        profilev2: "Mi Perfil (v2)",
         subjects: "Materias",
         payment: "Pagos",
         logOut: "Cerrar Sesión",
