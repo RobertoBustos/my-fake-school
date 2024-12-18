@@ -62,7 +62,8 @@ const en = {
       signUpPage: "My Fake School - Sign Up",
       signInPage: "My Fake School - Sign In",
       profilePage: "My Fake School - My Profile",
-      subjectPage: "My Fake School - Subject Catalog"
+      subjectPage: "My Fake School - Subject Catalog",
+      location: "My Fake School - Maps & Location"
     },
     formTitles: {
       signUp: "Sign Up",
@@ -117,6 +118,11 @@ const en = {
         ageRange: "Plese enter a number between {{minAge}} and {{maxAge}}.",
         fileFormatNotSupported: "Invalid file type.",
         fileSizeExceeded: "File size is greater than {{maxSize}}"
+      },
+      permission: {
+        geolocation1: "Location permission not allowed.",
+        geolocation2: "Could not found current location.",
+        geolocation3: "Request timeout."
       }
     },
     confirmations: {
@@ -141,9 +147,19 @@ const en = {
         profilev2: "My Profile (v2)",
         subjects: "Subjects",
         payment: "Payments",
-        logOut: "Log Out"
+        logOut: "Log Out",
+        location: "Maps & Location"
       },
     },
+    maps: {
+      distance: "Distance: {{distance}}",
+      duration: "Duration: {{duration}}",
+      from: "From {{from}}",
+      to: "to {{to}}",
+      otherRoutes: "Other Routes",
+      searchPlaceholder: "Search an address here",
+      destinationPlaceholder: "Destination address here"
+    }
   },
 };
 

@@ -10,6 +10,7 @@ export const homePageOptions: string[] = [
   "profilev2",
   "subjects",
   "payment",
+  "location"
 ];
 
 //layout constants

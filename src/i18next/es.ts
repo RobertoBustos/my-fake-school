@@ -62,7 +62,8 @@ const es = {
       signUpPage: "My Fake School - Registro",
       signInPage: "My Fake School - Entrar",
       profilePage: "My Fake School - Mi Perfil",
-      subjectPage: "My Fake School - Catálogo de Materias"
+      subjectPage: "My Fake School - Catálogo de Materias",
+      location: "My Fake School - Mapa"
     },
     formTitles: {
       signUp: "Crear Nueva Cuenta",
@@ -117,6 +118,11 @@ const es = {
         ageRange: "Por favor proporcione un núnmero entre {{minAge}} y {{maxAge}}.",
         fileFormatNotSupported: "Tipo de archivo no válido.",
         fileSizeExceeded: "El archivo excede {{maxSize}}"
+      },
+      permission: {
+        geolocation1: "La ubicación esta desactivada.",
+        geolocation2: "No se pudo localizar.",
+        geolocation3: "Tiempo de espera excedido."
       }
     },
     confirmations: {
@@ -141,9 +147,19 @@ const es = {
         profilev2: "Mi Perfil (v2)",
         subjects: "Materias",
         payment: "Pagos",
-        logOut: "Cerrar Sesión"
+        logOut: "Cerrar Sesión",
+        location: "Mapas y localización"
       },
     },
+    maps: {
+      distance: "Distancia: {{distance}}",
+      duration: "Duración: {{duration}}",
+      from: "De {{from}}",
+      to: "a {{to}}",
+      otherRoutes: "Rutas alternas",
+      searchPlaceholder: "Busque una dirección",
+      destinationPlaceholder: "Dirección de destino"
+    }
   },
 };
 

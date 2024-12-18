@@ -1,8 +1,9 @@
 import { HTMLInputTypeAttribute } from "react";
 
-export * from "./authTypes";
-export * from "./enums";
-export * from "./subjectTypes";
+export * from "@customTypes/authTypes";
+export * from "@customTypes/enums";
+export * from "@customTypes/mapsTypes";
+export * from "@customTypes/subjectTypes";
 
 export type FeatureFlagType = {
     name: string;

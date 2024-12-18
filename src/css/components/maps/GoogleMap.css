@@ -1,0 +1,98 @@
+.map {
+    width: 100%;
+    height: 85vh;
+    margin-top: 2rem;
+}
+
+.places-origin {
+    position: absolute;
+    top: 1rem;
+    z-index: 10;
+    width: 100%;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
+
+.places-destination {
+    position: absolute;
+    top: 3.3rem;
+    z-index: 10;
+    width: 100%;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
+
+.places-options {
+    width: 100%;
+    background-color: white;
+    border-radius: 2rem;
+}
+
+.places-option{
+    margin-right: 0;
+    margin-left: -2rem;
+    border-bottom: 0.1rem solid lightgray;
+    border-radius: 2rem;
+    padding: 0.5rem
+}
+
+
+.places-input {
+   width: 100%;
+   border-radius: 1rem;
+   padding: 0.3rem;
+   padding-right: 1.5rem;
+}
+
+.icon {
+    min-height: 100%;
+    margin-left: -1.7rem;
+    font-size: large;
+    cursor: pointer;
+}
+
+
+@media (min-width: 352px) {
+    .icon {
+        margin-left: -1.9rem;
+    }
+}
+
+@media (min-width: 385px) {
+    .icon {
+        margin-left: -2rem;
+    }
+}
+
+@media (min-width: 401px) {
+    .icon {
+        margin-left: -2.1rem;
+    }
+}
+
+@media (min-width: 401px) {
+    .icon {
+        margin-left: -2.2rem;
+    }
+}
+
+@media (min-width: 431px) {
+    .map {
+        height: 75vh;
+        margin-top: 0;
+    }
+
+    .places-origin {
+        right: 1rem;
+        width: 15rem;
+    }
+
+    .places-destination {
+        right: 1rem;
+        width: 15rem;
+    }
+
+    .icon {
+        margin-left: -1.7rem;
+    }
+}

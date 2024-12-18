@@ -1,0 +1,53 @@
+.directions {
+    position: absolute;
+    top: 4rem;
+    width: 100%;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
+
+.directions-box {
+    padding: 1.5rem;
+    background-color: #474747;
+    border-radius: 1rem;
+    color: white;
+}
+
+.directions-summary {
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: center;
+    
+}
+
+.directions-info {
+    font-size: 0.8rem;
+    margin-bottom:0.2rem;
+}
+
+.directions-alternative {
+    font-size: 1rem;
+    font-weight: bold;
+    color: yellow;
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.directions-option {
+    border: 0.1rem dotted gray;
+    border-radius: 1rem;
+    padding: 0.3rem
+}
+
+@media (min-width: 431px) {
+    .directions {
+        left: 1rem;
+        width: 15rem;
+    }
+}
+
+@media (min-width: 600px) {
+    .directions {
+        top: 1rem;
+    }
+}
