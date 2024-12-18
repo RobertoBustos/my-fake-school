@@ -1,15 +1,15 @@
 import Directions from "@components/maps/provider/Directions";
 import MarkerList from "@components/maps/provider/MarkerList";
 import PlacesAutocomplete from "@components/maps/provider/PlacesAutocomplete";
-import { mapOptions } from "@config/index";
 import type { PointType } from "@customTypes/index";
+import { useMapConfig } from "@hooks/index";
 import "@styles/components/maps/GoogleMap.css";
 import { APIProvider, Map } from "@vis.gl/react-google-maps";
 import { useState } from "react";
 import { AiOutlineClose, AiOutlineSearch } from "react-icons/ai";
 
 const GoogleMapProvider = () => {
-  const { apiKey } = mapOptions;
+  const mapOptions = useMapConfig();
   const [selected, setSelected] = useState<PointType | PointType[] | undefined>(
     undefined
   );
@@ -38,8 +38,10 @@ const GoogleMapProvider = () => {
     return null;
   };
 
-  return (
-    <APIProvider apiKey={apiKey!} libraries={["places"]}>
+  return mapOptions.isLoading ? (
+    <div></div>
+  ) : (
+    <APIProvider apiKey={mapOptions.apiKey!} libraries={["places"]}>
       <div className="map">
         <Map {...mapOptions}>
           <PlacesAutocomplete

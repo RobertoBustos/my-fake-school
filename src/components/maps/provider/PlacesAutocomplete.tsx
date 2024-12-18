@@ -12,8 +12,6 @@ import {
   ComboboxPopover,
 } from "@reach/combobox";
 import "@styles/components/maps/GoogleMap.css";
-import { notify } from "@utils/index";
-import { useEffect } from "react";
 import { IconType } from "react-icons";
 import { FaLocationDot } from "react-icons/fa6";
 
@@ -60,20 +58,6 @@ const PlacesAutocomplete = ({
     }
     if (onSelectOption) onSelectOption(undefined);
   };
-
-  useEffect(() => {
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        map?.setCenter({
-          lat: position.coords.latitude,
-          lng: position.coords.longitude,
-        });
-      },
-      (error) => {
-        notify.error(t("errors.permission.geolocation" + error.code));
-      }
-    );
-  }, [map, t]);
 
   return (
     <div className={className}>

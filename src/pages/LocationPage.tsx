@@ -1,15 +1,13 @@
 import CustomSwitchButton from "@components/common/CustomSwitchButton";
 import Layout from "@components/common/Layout";
+import LeafletMap from "@components/maps/leaflet/LeafletMap";
 import GoogleMapProvider from "@components/maps/provider/GoogleMapProvider";
 import { useMemoizedTranslation } from "@hooks/index";
-import "@styles/components/maps/GoogleMap.css";
 import { useState } from "react";
-
-export type MapProvider = "google" | "leaflet";
 
 export const LocationPage = () => {
   const { t } = useMemoizedTranslation();
-  const [googleMapsProvider, setGoogleMapsProvider] = useState<boolean>(true);
+  const [googleMapsProvider, setGoogleMapsProvider] = useState<boolean>(false);
 
   return (
     <Layout
@@ -20,7 +18,7 @@ export const LocationPage = () => {
         label={googleMapsProvider ? "Google" : "Leaflet"}
         onClick={() => setGoogleMapsProvider(!googleMapsProvider)}
       />
-      {googleMapsProvider ? <GoogleMapProvider /> : <div></div>}
+      {googleMapsProvider ? <GoogleMapProvider /> : <LeafletMap />}
     </Layout>
   );
 };

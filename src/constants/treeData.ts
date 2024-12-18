@@ -995,3 +995,22 @@ export const treeData = [{ "type": "Feature", "properties": { "_id": 1, "OBJECTI
 { "type": "Feature", "properties": { "_id": 997, "OBJECTID": 998, "STRUCTID": "644949", "ADDRESS": 20, "STREETNAME": "CLAREMORE AVE", "CROSSSTREET1": "MCINTOSH ST", "CROSSSTREET2": "CRAIGLEE DR", "SUFFIX": "None", "UNIT_NUMBER": "0", "TREE_POSITION_NUMBER": 10, "SITE": "None", "WARD": "20", "BOTANICAL_NAME": "Platanus x acerifolia 'Bloodgood'", "COMMON_NAME": "Planetree, London Bloodgood", "DBH_TRUNK": 6 }, "geometry": { "type": "MultiPoint", "coordinates": [[-79.254483077765798, 43.7051642371827]] } },
 { "type": "Feature", "properties": { "_id": 998, "OBJECTID": 999, "STRUCTID": "189126", "ADDRESS": 68, "STREETNAME": "STEVENSON RD", "CROSSSTREET1": "SILVERSTONE DR", "CROSSSTREET2": "None", "SUFFIX": "None", "UNIT_NUMBER": "0", "TREE_POSITION_NUMBER": 40, "SITE": "HIGHFIELD PARK", "WARD": "01", "BOTANICAL_NAME": "Gymnocladus dioicus", "COMMON_NAME": "Kentucky coffeetree", "DBH_TRUNK": 8 }, "geometry": { "type": "MultiPoint", "coordinates": [[-79.588175490399905, 43.743313881563097]] } },
 { "type": "Feature", "properties": { "_id": 999, "OBJECTID": 1000, "STRUCTID": "ET73705", "ADDRESS": 5, "STREETNAME": "ORKNEY CRES", "CROSSSTREET1": "PRINCESS MARGARET BLVD", "CROSSSTREET2": "GRIMSBY CRT", "SUFFIX": "None", "UNIT_NUMBER": "0", "TREE_POSITION_NUMBER": 20, "SITE": "None", "WARD": "02", "BOTANICAL_NAME": "Acer platanoides", "COMMON_NAME": "Maple, Norway", "DBH_TRUNK": 16 }, "geometry": { "type": "MultiPoint", "coordinates": [[-79.544909053248503, 43.672050627408503]] } }]
+
+export const mappedTreeDataGoogle = treeData.map((tree) => {
+    const coordinates = tree.geometry.coordinates[0];
+    return {
+        lat: coordinates[1],
+        lng: coordinates[0],
+    };
+});
+
+export const mappedTreeDataLeaflet = treeData.map((tree, index) => {
+    const coordinates = tree.geometry.coordinates[0];
+    return {
+        geocode: {
+            lat: coordinates[1],
+            lng: coordinates[0],
+        },
+        popUp: "im a popup element " + index
+    };
+});
