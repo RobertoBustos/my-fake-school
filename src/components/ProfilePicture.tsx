@@ -35,13 +35,14 @@ const ProfilePicture = ({
     if (files) {
       if (validation) {
         const validationResult = validation(files[0]);
-        if (validationResult.result) {
-          onFileChange && onFileChange(e);
+        if (validationResult.result && onFileChange) {
+          onFileChange(e);
         } else {
           setFileError(validationResult.message || "");
         }
-      } else {
-        onFileChange && onFileChange(e);
+      }
+      if(onFileChange && !validation){
+        onFileChange(e);
       }
     } else {
       setFileError("There's no file selected");

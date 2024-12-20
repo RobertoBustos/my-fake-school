@@ -57,7 +57,7 @@ export const authSlice = createSlice({
         builder.addCase(logOut.rejected, (_, action) => {
             notify.error(action.payload as string)
         });
-        builder.addCase(sendVerificationEmail.fulfilled, (_, action) => {
+        builder.addCase(sendVerificationEmail.fulfilled, () => {
             notify.success(i18n.t("confirmations.user.verificationEmailSent"))
         });
         builder.addCase(sendVerificationEmail.rejected, (_, action) => {
@@ -156,7 +156,7 @@ export const uploadUserProfilePicture = createAsyncThunk("auth/uploadProfilePict
     return response
 })
 
-export const clearUserUpdateData = createAsyncThunk("auth/clearUserUpdateData", async (_, { rejectWithValue }) => {
+export const clearUserUpdateData = createAsyncThunk("auth/clearUserUpdateData", async () => {
     const pictureChangeValidation = isProfilePictureChanged();
     if (pictureChangeValidation.result) {
         const response = await deleteProfilePictureUnsavedService(pictureChangeValidation.newValue || "")

@@ -67,8 +67,7 @@ export const useProfile = ({ isReduxMode = false }: UseProfilePropsType) => {
                 return handleFileChangeResponse(false, validation.message!, photoURL);
             }
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    }, []);
 
     const handleFileChangeResponse = useCallback(async (result: boolean, message: string, photoURL: string | null | undefined) => {
         if (photoURL && photoURL !== "" && photoURL !== null) {
@@ -84,7 +83,7 @@ export const useProfile = ({ isReduxMode = false }: UseProfilePropsType) => {
     }, [resetField, setValue])
 
     const onSubmit = useCallback(async (data: ProfileFormFieldsType) => {
-        let payload: UpdateServicePayloadType = {};
+        const payload: UpdateServicePayloadType = {};
         try {
             if (dirtyFields.newPassword) {
                 payload.password = {
@@ -92,7 +91,7 @@ export const useProfile = ({ isReduxMode = false }: UseProfilePropsType) => {
                     newPassword: data.newPassword!,
                 };
             }
-            let profile = Object();
+            const profile = Object();
             if (dirtyFields.photoURL) {
                 profile!.photoURL = data.photoURL;
             }

@@ -13,7 +13,6 @@ export type EditSubjectModalPropsType = {
 };
 
 const EditSubjectModal = ({
-  modalId,
   isVisible,
 }: EditSubjectModalPropsType) => {
   const dispatch = useAppDispatch();

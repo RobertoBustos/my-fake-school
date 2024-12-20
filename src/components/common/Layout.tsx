@@ -14,7 +14,6 @@ export type Layout2PropsType = {
   pageTabTitle?: string;
   showLanguageSelector?: boolean;
   showBackButton?: boolean;
-  displayAlerts?: boolean;
 };
 
 const Layout = ({
@@ -22,7 +21,6 @@ const Layout = ({
   pageTabTitle = "",
   header = undefined,
   footer = undefined,
-  displayAlerts = true,
 }: Layout2PropsType) => {
   const memoizedPageTabText = useMemo(() => {
     return <PageTabText titleText={pageTabTitle} />;

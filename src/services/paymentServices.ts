@@ -4,7 +4,7 @@ export const getPublishableKey = async (): Promise<any | null> => {
         const result = await fetch("/config");
         const { publishableKey } = await result.json();
         return publishableKey
-    } catch (error) {
+    } catch {
         return null
     }
 }
@@ -17,7 +17,7 @@ export const getClientSecret = async (): Promise<string> => {
         });
         const { clientSecret } = await result.json();
         return clientSecret
-    } catch (error) {
+    } catch {
         return ""
     }
 }

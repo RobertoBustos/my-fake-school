@@ -37,9 +37,6 @@ root.render(
     </Provider>
   </React.StrictMode>
 );
-
-// eslint-disable-next-line react-hooks/rules-of-hooks
-
 // If you want to start measuring performance in your app, pass a function
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 //reportWebVitals(loggerFunction); ------> example to log results

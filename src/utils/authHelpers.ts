@@ -6,9 +6,9 @@ export const parseUpdateUserProfilePayload = () => {
     if (Object.keys(state.auth.userManipulationInProgress).length === 0) {
         return null;
     }
-    let payload: UpdateServicePayloadType = {}
-    let profile = Object();
-    let password = Object()
+    const payload: UpdateServicePayloadType = {}
+    const profile = Object();
+    const password = Object()
     if (state.auth.userManipulationInProgress.displayName) {
         profile.displayName = state.auth.userManipulationInProgress.displayName
     }

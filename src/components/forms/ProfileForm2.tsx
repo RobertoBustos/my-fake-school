@@ -21,8 +21,8 @@ export type ProfileFormPropsType = {
   onIsLoadingChange?: Dispatch<SetStateAction<boolean>>;
 };
 
-const ProfileForm = forwardRef<HTMLFormElement, ProfileFormPropsType>(
-  ({ onIsValidChange, onIsLoadingChange }) => {
+const ProfileForm = forwardRef<HTMLFormElement, ProfileFormPropsType>(function MyComponent
+  ({ onIsValidChange, onIsLoadingChange }) {
     const { t } = useMemoizedTranslation();
     const {
       handleFileChange,

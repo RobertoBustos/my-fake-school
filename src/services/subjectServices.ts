@@ -24,7 +24,7 @@ export async function getSubjectCatalog(): Promise<SubjectType[] | Error> {
       };
     });
     return serviceResponse;
-  } catch (error) {
+  } catch {
     return Error(i18n.t("errors.unknown"));
   }
 }
@@ -40,7 +40,7 @@ export async function addSubject(
     };
     eventLogger(events.ADD_SUBJECT, payload)
     return mappedSubject;
-  } catch (error) {
+  } catch {
     return Error(i18n.t("errors.unknown"));
   }
 }
@@ -56,7 +56,7 @@ export async function updateSubject(
     await connection.updateDoc(docToChange, payload.newData);
     eventLogger(events.UPDATE_SUBJECT, payload)
     return true;
-  } catch (error) {
+  } catch {
     return Error(i18n.t("errors.unknown"));
   }
 }
@@ -73,7 +73,7 @@ export async function deleteSubject(
     await connection.updateDoc(docToChange, payload.newData);
     eventLogger(events.DELETE_SUBJECT, payload)
     return true;
-  } catch (error) {
+  } catch {
     return Error(i18n.t("errors.unknown"));
   }
 }

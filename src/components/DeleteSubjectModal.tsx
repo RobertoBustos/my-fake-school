@@ -11,7 +11,6 @@ export type DeleteSubjectModalPropsType = {
 };
 
 const DeleteSubjectModal = ({
-  modalId,
   isVisible,
 }: DeleteSubjectModalPropsType) => {
   const dispatch = useAppDispatch();

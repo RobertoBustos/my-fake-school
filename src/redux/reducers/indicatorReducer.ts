@@ -69,7 +69,7 @@ export const indicatorsSlice = createSlice({
     builder.addCase(addNewSubject.fulfilled, (state) => {
       state.appLoaderStatus = "idle";
     });
-    builder.addCase(addNewSubject.rejected, (state, action) => {
+    builder.addCase(addNewSubject.rejected, (state) => {
       state.appLoaderStatus = "idle";
     });
     //remove existing subject
@@ -87,7 +87,7 @@ export const indicatorsSlice = createSlice({
       state.visibleModals = [];
       state.appLoaderStatus = "idle";
     });
-    builder.addCase(deleteExistingSubject.rejected, (state, action) => {
+    builder.addCase(deleteExistingSubject.rejected, (state) => {
       state.appLoaderStatus = "idle";
     });
     //edit existing subject
@@ -105,7 +105,7 @@ export const indicatorsSlice = createSlice({
       state.visibleModals = [];
       state.appLoaderStatus = "idle";
     });
-    builder.addCase(editExistingSubject.rejected, (state, action) => {
+    builder.addCase(editExistingSubject.rejected, (state) => {
       state.appLoaderStatus = "idle";
     });
     //load user data
@@ -123,7 +123,7 @@ export const indicatorsSlice = createSlice({
     builder.addCase(signUp.fulfilled, (state) => {
       state.appLoaders = state.appLoaders.filter(value => value !== AppLoaders.SIGN_UP)
     });
-    builder.addCase(signUp.rejected, (state, action) => {
+    builder.addCase(signUp.rejected, (state) => {
       state.appLoaders = state.appLoaders.filter(value => value !== AppLoaders.SIGN_UP)
     });
     //logIn
@@ -133,7 +133,7 @@ export const indicatorsSlice = createSlice({
     builder.addCase(logIn.fulfilled, (state) => {
       state.appLoaders = state.appLoaders.filter(value => value !== AppLoaders.LOG_IN)
     });
-    builder.addCase(logIn.rejected, (state, action) => {
+    builder.addCase(logIn.rejected, (state) => {
       state.appLoaders = state.appLoaders.filter(value => value !== AppLoaders.LOG_IN)
     });
     //logout
@@ -143,7 +143,7 @@ export const indicatorsSlice = createSlice({
     builder.addCase(logOut.fulfilled, (state) => {
       state.appLoaders = state.appLoaders.filter(value => value !== AppLoaders.LOG_OUT)
     });
-    builder.addCase(logOut.rejected, (state, action) => {
+    builder.addCase(logOut.rejected, (state) => {
       state.appLoaders = state.appLoaders.filter(value => value !== AppLoaders.LOG_OUT)
     });
     //sendVerificationEmail
@@ -153,7 +153,7 @@ export const indicatorsSlice = createSlice({
     builder.addCase(sendVerificationEmail.fulfilled, (state) => {
       state.appLoaders = state.appLoaders.filter(value => value !== AppLoaders.SEND_EMAIL_VERIFICATION)
     });
-    builder.addCase(sendVerificationEmail.rejected, (state, action) => {
+    builder.addCase(sendVerificationEmail.rejected, (state) => {
       state.appLoaders = state.appLoaders.filter(value => value !== AppLoaders.SEND_EMAIL_VERIFICATION)
     });
     //updateUserProfile
@@ -163,7 +163,7 @@ export const indicatorsSlice = createSlice({
     builder.addCase(updateProfile.fulfilled, (state) => {
       state.appLoaders = state.appLoaders.filter(value => value !== AppLoaders.UPDATE_PROFILE)
     });
-    builder.addCase(updateProfile.rejected, (state, action) => {
+    builder.addCase(updateProfile.rejected, (state) => {
       state.appLoaders = state.appLoaders.filter(value => value !== AppLoaders.UPDATE_PROFILE)
     });
     //uploadProfilePicture
@@ -173,7 +173,7 @@ export const indicatorsSlice = createSlice({
     builder.addCase(uploadUserProfilePicture.fulfilled, (state) => {
       state.appLoaders = state.appLoaders.filter(value => value !== AppLoaders.UPLOAD_PROFILE_PICTURE)
     });
-    builder.addCase(uploadUserProfilePicture.rejected, (state, action) => {
+    builder.addCase(uploadUserProfilePicture.rejected, (state) => {
       state.appLoaders = state.appLoaders.filter(value => value !== AppLoaders.UPLOAD_PROFILE_PICTURE)
     });
   },
