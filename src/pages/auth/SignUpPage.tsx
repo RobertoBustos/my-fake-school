@@ -9,11 +9,7 @@ export const SignUpPage = () => {
   const headerProps = { showBackButton: true, showLanguageSelector: true };
 
   return (
-    <Layout
-      pageTabTitle={t("pageTabTitles.signUpPage")}
-      header={headerProps}
-      displayAlerts={false}
-    >
+    <Layout pageTabTitle={t("pageTabTitles.signUpPage")} header={headerProps}>
       <SignUpForm />
       <FormFooter
         text={t("forms.user.alreadyHaveAnAccount")}

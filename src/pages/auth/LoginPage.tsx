@@ -8,11 +8,7 @@ const LoginPage = () => {
   const headerProps = { showBackButton: true, showLanguageSelector: true };
 
   return (
-    <Layout
-      pageTabTitle={t("pageTabTitles.signInPage")}
-      header={headerProps}
-      displayAlerts={false}
-    >
+    <Layout pageTabTitle={t("pageTabTitles.signInPage")} header={headerProps}>
       <LoginForm />
       <FormFooter
         text={t("forms.user.needAnAccount")}

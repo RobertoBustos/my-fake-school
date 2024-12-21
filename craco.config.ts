@@ -6,9 +6,9 @@
  * ALLOW TO OVERRIDE THE WEBPACK CONFIG WITHOUT EJECTING
  *
  */
+import * as path from "path";
 
-const path = require("path");
-module.exports = {
+export default {
   webpack: {
     alias: {
       "@": path.resolve(__dirname, "src"),
