@@ -7,7 +7,7 @@ import "@styles/components/common/Layout.css";
 import { ReactNode, useMemo } from "react";
 import { Toaster } from "react-hot-toast";
 
-export type Layout2PropsType = {
+export type LayoutPropsType = {
   children?: ReactNode;
   footer?: FooterProps;
   header?: HeaderProps;
@@ -21,7 +21,7 @@ const Layout = ({
   pageTabTitle = "",
   header = undefined,
   footer = undefined,
-}: Layout2PropsType) => {
+}: LayoutPropsType) => {
   const memoizedPageTabText = useMemo(() => {
     return <PageTabText titleText={pageTabTitle} />;
   }, [pageTabTitle]);
