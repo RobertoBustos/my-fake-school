@@ -1,5 +1,5 @@
 import { i18n } from "@config/index";
-import type { UpdateServicePayloadType, UserDataType, UserProfileNewValue, UserSignInPayloadType, UserSignUpPayloadType, UserUploadProfilePicturePayloadType, } from "@customTypes/index";
+import { AppLoaders, type UpdateServicePayloadType, type UserDataType, type UserProfileNewValue, type UserSignInPayloadType, type UserSignUpPayloadType, type UserUploadProfilePicturePayloadType, } from "@customTypes/index";
 import type { AuthState } from "@redux/types";
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { deleteProfilePictureUnsavedService, logOutService, signInService, signUpService, updateProfileService, uploadProfilePictureService, validateCredentials, verificationService } from "@services/index";
@@ -8,7 +8,8 @@ import { isProfilePictureChanged, notify, parseUpdateUserProfilePayload, removeK
 const initialState: AuthState = {
     userCredential: {},
     isLoggedIn: false,
-    userManipulationInProgress: {}
+    userManipulationInProgress: {},
+    activeAuthLoaders: [AppLoaders.LOAD_AUTH_STATE_CHANGE_LISTENER]
 }
 
 export const authSlice = createSlice({
@@ -18,10 +19,12 @@ export const authSlice = createSlice({
         setUserData: (state, action: PayloadAction<UserDataType>) => {
             state.userCredential = action.payload
             state.isLoggedIn = true
+            state.activeAuthLoaders = state.activeAuthLoaders.filter(value => value !== AppLoaders.LOAD_AUTH_STATE_CHANGE_LISTENER)
         },
         clearUserData: (state) => {
             state.userCredential = {};
             state.isLoggedIn = false
+            state.activeAuthLoaders = state.activeAuthLoaders.filter(value => value !== AppLoaders.LOAD_AUTH_STATE_CHANGE_LISTENER)
         },
         beginUserEdition: (state, action: PayloadAction<UserProfileNewValue>) => {
             if (action.payload.value === "") {
@@ -48,23 +51,57 @@ export const authSlice = createSlice({
         }
     },
     extraReducers: (builder) => {
-        builder.addCase(signUp.rejected, (_, action) => {
+        //signUp
+        builder.addCase(signUp.pending, (state) => {
+            state.activeAuthLoaders = [...state.activeAuthLoaders, AppLoaders.SIGN_UP]
+        });
+        builder.addCase(signUp.fulfilled, (state) => {
+            state.activeAuthLoaders = state.activeAuthLoaders.filter(value => value !== AppLoaders.SIGN_UP)
+        });
+        builder.addCase(signUp.rejected, (state, action) => {
+            state.activeAuthLoaders = state.activeAuthLoaders.filter(value => value !== AppLoaders.SIGN_UP)
             notify.error(action.payload as string)
         });
-        builder.addCase(logIn.rejected, (_, action) => {
+        //logIn
+        builder.addCase(logIn.pending, (state) => {
+            state.activeAuthLoaders = [...state.activeAuthLoaders, AppLoaders.LOG_IN]
+        });
+        builder.addCase(logIn.fulfilled, (state) => {
+            state.activeAuthLoaders = state.activeAuthLoaders.filter(value => value !== AppLoaders.LOG_IN)
+        });
+        builder.addCase(logIn.rejected, (state, action) => {
+            state.activeAuthLoaders = state.activeAuthLoaders.filter(value => value !== AppLoaders.LOG_IN)
             notify.error(action.payload as string)
         });
-        builder.addCase(logOut.rejected, (_, action) => {
+        //logOut
+        builder.addCase(logOut.pending, (state) => {
+            state.activeAuthLoaders = [...state.activeAuthLoaders, AppLoaders.LOG_OUT]
+        });
+        builder.addCase(logOut.fulfilled, (state) => {
+            state.activeAuthLoaders = state.activeAuthLoaders.filter(value => value !== AppLoaders.LOG_OUT)
+        });
+        builder.addCase(logOut.rejected, (state, action) => {
+            state.activeAuthLoaders = state.activeAuthLoaders.filter(value => value !== AppLoaders.LOG_OUT)
             notify.error(action.payload as string)
         });
-        builder.addCase(sendVerificationEmail.fulfilled, () => {
+        //sendVerificationEmail
+        builder.addCase(sendVerificationEmail.pending, (state) => {
+            state.activeAuthLoaders = [...state.activeAuthLoaders, AppLoaders.SEND_EMAIL_VERIFICATION]
+        });
+        builder.addCase(sendVerificationEmail.fulfilled, (state) => {
+            state.activeAuthLoaders = state.activeAuthLoaders.filter(value => value !== AppLoaders.SEND_EMAIL_VERIFICATION)
             notify.success(i18n.t("confirmations.user.verificationEmailSent"))
         });
-        builder.addCase(sendVerificationEmail.rejected, (_, action) => {
+        builder.addCase(sendVerificationEmail.rejected, (state, action) => {
+            state.activeAuthLoaders = state.activeAuthLoaders.filter(value => value !== AppLoaders.SEND_EMAIL_VERIFICATION)
             notify.error(action.payload as string)
         });
+        //updateUserProfile
+        builder.addCase(updateProfile.pending, (state) => {
+            state.activeAuthLoaders = [...state.activeAuthLoaders, AppLoaders.UPDATE_PROFILE]
+        });
         builder.addCase(updateProfile.fulfilled, (state) => {
-            notify.success(i18n.t("confirmations.user.profileUpdated"))
+            state.activeAuthLoaders = state.activeAuthLoaders.filter(value => value !== AppLoaders.UPDATE_PROFILE)
             if (state.userManipulationInProgress.displayName) {
                 state.userCredential.displayName = state.userManipulationInProgress.displayName
             }
@@ -72,16 +109,25 @@ export const authSlice = createSlice({
                 state.userCredential.photoURL = state.userManipulationInProgress.photoURL
             }
             state.userManipulationInProgress = {}
+            notify.success(i18n.t("confirmations.user.profileUpdated"))
         });
-        builder.addCase(updateProfile.rejected, (_, action) => {
+        builder.addCase(updateProfile.rejected, (state, action) => {
+            state.activeAuthLoaders = state.activeAuthLoaders.filter(value => value !== AppLoaders.UPDATE_PROFILE)
             notify.error(action.payload as string)
+        });
+        //uploadProfilePicture
+        builder.addCase(uploadUserProfilePicture.pending, (state) => {
+            state.activeAuthLoaders = [...state.activeAuthLoaders, AppLoaders.UPLOAD_PROFILE_PICTURE]
         });
         builder.addCase(uploadUserProfilePicture.fulfilled, (state, action) => {
+            state.activeAuthLoaders = state.activeAuthLoaders.filter(value => value !== AppLoaders.UPLOAD_PROFILE_PICTURE)
             state.userManipulationInProgress.photoURL = action.payload.downloadURL
         })
-        builder.addCase(uploadUserProfilePicture.rejected, (_, action) => {
+        builder.addCase(uploadUserProfilePicture.rejected, (state, action) => {
+            state.activeAuthLoaders = state.activeAuthLoaders.filter(value => value !== AppLoaders.UPLOAD_PROFILE_PICTURE)
             notify.error(action.payload as string)
         });
+        //clearUserUpdateData
         builder.addCase(clearUserUpdateData.fulfilled, (state) => {
             state.userManipulationInProgress = {}
         });

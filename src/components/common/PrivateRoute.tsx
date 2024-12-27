@@ -1,8 +1,6 @@
+import { AppLoaders } from "@customTypes/index";
 import { useAppSelector } from "@redux/hooks";
-import {
-  selectAppLoaderStatusLoading,
-  selectIsLoggedIn,
-} from "@selectors/index";
+import { selectAuthAppLoader, selectIsLoggedIn } from "@selectors/index";
 import { useMemo } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 
@@ -13,7 +11,9 @@ export type PrivateRoutePropsType = {
 const PrivateRoute = ({ children }: PrivateRoutePropsType) => {
   const location = useLocation();
   const isLoggedIn = useAppSelector(selectIsLoggedIn);
-  const isAppLoading = useAppSelector(selectAppLoaderStatusLoading);
+  const isAppLoading = useAppSelector(
+    selectAuthAppLoader(AppLoaders.LOAD_AUTH_STATE_CHANGE_LISTENER)
+  );
 
   const memoizedPrivateRoute = useMemo(() => {
     if (isAppLoading) {

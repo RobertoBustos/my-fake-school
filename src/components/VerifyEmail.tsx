@@ -3,14 +3,14 @@ import CustomButton from "@components/common/CustomButton";
 import { AppLoaders } from "@customTypes/index";
 import { useMemoizedTranslation } from "@hooks/index";
 import { useAppDispatch, useAppSelector } from "@redux/hooks";
-import { selectAppLoader, selectIsEmailVerified } from "@selectors/index";
+import { selectAuthAppLoader, selectIsEmailVerified } from "@selectors/index";
 
 const VerifyEmail = () => {
   const dispatch = useAppDispatch();
   const { t } = useMemoizedTranslation();
   const isEmailVerified = useAppSelector(selectIsEmailVerified);
   const isLoading = useAppSelector(
-    selectAppLoader(AppLoaders.SEND_EMAIL_VERIFICATION)
+    selectAuthAppLoader(AppLoaders.SEND_EMAIL_VERIFICATION)
   );
 
   const handleVerifyEmail = () => {

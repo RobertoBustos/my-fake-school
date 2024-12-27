@@ -8,7 +8,7 @@ import HooksProfileForm from "@components/forms/ProfileForm2";
 import { AppLoaders } from "@customTypes/index";
 import { useMemoizedTranslation, useWindowDimensions } from "@hooks/index";
 import { useAppDispatch, useAppSelector } from "@redux/hooks";
-import { selectAppLoader, selectIsProfileEdited } from "@selectors/index";
+import { selectAuthAppLoader, selectIsProfileEdited } from "@selectors/index";
 import "@styles/pages/ProfilePage.css";
 import { useRef, useState } from "react";
 
@@ -16,7 +16,9 @@ export const ProfilePage = () => {
   const { t } = useMemoizedTranslation();
   const dispatch = useAppDispatch();
   const isProfileEdited = useAppSelector(selectIsProfileEdited);
-  const isEditing = useAppSelector(selectAppLoader(AppLoaders.UPDATE_PROFILE));
+  const isEditing = useAppSelector(
+    selectAuthAppLoader(AppLoaders.UPDATE_PROFILE)
+  );
   const { isMobile } = useWindowDimensions();
   const [reduxMode, setReduxMode] = useState<boolean>(true);
   const formRef = useRef<HTMLFormElement>(null);

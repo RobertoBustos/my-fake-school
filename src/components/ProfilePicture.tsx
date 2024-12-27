@@ -1,6 +1,6 @@
 import { AppLoaders } from "@customTypes/index";
 import { useAppSelector } from "@redux/hooks";
-import { selectAppLoader } from "@selectors/index";
+import { selectAuthAppLoader } from "@selectors/index";
 import "@styles/components/ProfilePicture.css";
 import { ChangeEvent, useRef, useState } from "react";
 import { Spinner } from "react-bootstrap";
@@ -22,7 +22,7 @@ const ProfilePicture = ({
 }: ProfilePicturePropsType) => {
   const [fileError, setFileError] = useState<string | null>(null);
   const isUploadingImage = useAppSelector(
-    selectAppLoader(AppLoaders.UPLOAD_PROFILE_PICTURE)
+    selectAuthAppLoader(AppLoaders.UPLOAD_PROFILE_PICTURE)
   );
   const fileRef = useRef<HTMLInputElement>(null);
 
@@ -41,7 +41,7 @@ const ProfilePicture = ({
           setFileError(validationResult.message || "");
         }
       }
-      if(onFileChange && !validation){
+      if (onFileChange && !validation) {
         onFileChange(e);
       }
     } else {

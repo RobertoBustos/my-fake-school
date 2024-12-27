@@ -8,7 +8,7 @@ import type {
 import { eventLogger, events } from "@utils/index";
 import i18n from "i18next";
 
-export async function getSubjectCatalog(): Promise<SubjectType[] | Error> {
+export async function fetchSubjectsService(): Promise<SubjectType[] | Error> {
   let serviceResponse: SubjectType[] | Error;
   try {
     const subjectQuery = connection.query(
@@ -29,7 +29,7 @@ export async function getSubjectCatalog(): Promise<SubjectType[] | Error> {
   }
 }
 
-export async function addSubject(
+export async function addSubjectService(
   payload: AddSubjectServicePayloadType
 ): Promise<SubjectType | Error> {
   try {
@@ -45,7 +45,7 @@ export async function addSubject(
   }
 }
 
-export async function updateSubject(
+export async function updateSubjectService(
   payload: EditSubjectPayloadType
 ): Promise<boolean | Error> {
   try {
@@ -61,7 +61,7 @@ export async function updateSubject(
   }
 }
 
-export async function deleteSubject(
+export async function deleteSubjectService(
   payload: DeleteSubjectPayloadType
 ): Promise<boolean | Error> {
   try {

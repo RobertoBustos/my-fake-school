@@ -1,8 +1,11 @@
-import { clearUserUpdateData, fetchAllSubjects } from "@actions/index";
 import store from "@redux/store";
 
+
+
+import { clearUserUpdateData, fetchSubjects } from "@actions/index";
+
 export async function subjectCatalogLoader() {
-    return store.dispatch(fetchAllSubjects())
+    return store.dispatch(fetchSubjects())
 }
 
 export function profilePageLoader() {

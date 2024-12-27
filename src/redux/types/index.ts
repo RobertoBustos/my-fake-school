@@ -1,7 +1,7 @@
-import { ThunkAction } from "redux-thunk";
-import { Action } from "@reduxjs/toolkit";
-import type { SubjectType, AppLoaders, ModalListType, FeatureFlagType, UserDataType, ProfileFormFieldsType } from "@customTypes/index";
+import type { AppLoaders, FeatureFlagType, ModalWindows, ProfileFormFieldsType, SubjectType, UserDataType } from "@customTypes/index";
 import store from "@redux/store";
+import { Action } from "@reduxjs/toolkit";
+import { ThunkAction } from "redux-thunk";
 
 export type AppStore = typeof store;
 export type RootState = ReturnType<AppStore["getState"]>;
@@ -16,18 +16,20 @@ export type AppThunk<ThunkReturnType = void> = ThunkAction<
 >;
 export type IndicatorsState = {
   appLoaderStatus: "idle" | "loading" | "failed";
-  visibleModals: ModalListType[];
   featureFlags: FeatureFlagType[];
-  appLoaders: AppLoaders[];
+  analytics: string | null
 };
 
 export type SubjectState = {
   subjectCatalog: SubjectType[];
   subjectManipulationInProgress: SubjectType;
+  activeSubjectLoaders: AppLoaders[]
+  visibleModals: ModalWindows[];
 };
 
 export type AuthState = {
   userCredential: UserDataType
   isLoggedIn: boolean;
   userManipulationInProgress: ProfileFormFieldsType
+  activeAuthLoaders: AppLoaders[]
 }

@@ -1,3 +1,4 @@
+import { AppLoaders, ModalWindows } from "@customTypes/index";
 import { RootState } from "@redux/types";
 import { createSelector } from "reselect";
 
@@ -20,3 +21,15 @@ export const makeSelectSubjectById = (subjectId: string) => {
         subjects.filter((subject) => subject.subjectId === subjectId)
     );
 };
+
+export const selectSubjectAppLoader = (appLoader: AppLoaders) => {
+    return createSelector([(state: RootState) => state.subject.activeSubjectLoaders], (activeLoaders) =>
+        activeLoaders.includes(appLoader)
+    );
+}
+
+export const selectSubjectModal = (modal: ModalWindows) => {
+    return createSelector([(state: RootState) => state.subject.visibleModals], (visibleModals) =>
+        visibleModals.includes(modal)
+    );
+}

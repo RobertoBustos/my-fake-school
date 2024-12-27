@@ -2,13 +2,10 @@ import AddSubject from "@components/AddSubject";
 import SubjectCatalog from "@components/SubjectCatalog";
 import CustomText from "@components/common/CustomText";
 import Layout from "@components/common/Layout";
-import { ModalListType } from "@customTypes/index";
+import { ModalWindows } from "@customTypes/index";
 import { useMemoizedTranslation } from "@hooks/index";
 import { useAppSelector } from "@redux/hooks";
-import {
-  makeSelectCheckIfModalVisible,
-  selectSubjectCatalog,
-} from "@selectors/index";
+import { selectSubjectCatalog, selectSubjectModal } from "@selectors/index";
 import "@styles/pages/SubjectsPage.css";
 import { fakeDelayPromise } from "@utils/index";
 import { Suspense, lazy, useMemo } from "react";
@@ -24,10 +21,10 @@ const DeleteSubjectModal = lazy(() =>
 export const SubjectsPage = () => {
   const { t } = useMemoizedTranslation();
   const isDeleteSubjectModalVisible = useAppSelector(
-    makeSelectCheckIfModalVisible(ModalListType.DELETE_SUBJECT_MODAL)
+    selectSubjectModal(ModalWindows.DELETE_SUBJECT_MODAL)
   );
   const isEditSubjectModalVisible = useAppSelector(
-    makeSelectCheckIfModalVisible(ModalListType.EDIT_SUBJECT_MODAL)
+    selectSubjectModal(ModalWindows.EDIT_SUBJECT_MODAL)
   );
   const subjects = useAppSelector(selectSubjectCatalog);
 
@@ -53,7 +50,7 @@ export const SubjectsPage = () => {
         <Suspense fallback={<div>L O A D I N G ...</div>}>
           <DeleteSubjectModal
             isVisible={isDeleteSubjectModalVisible}
-            modalId={ModalListType.DELETE_SUBJECT_MODAL}
+            modalId={ModalWindows.DELETE_SUBJECT_MODAL}
           />
         </Suspense>
       )}
@@ -61,7 +58,7 @@ export const SubjectsPage = () => {
         <Suspense fallback={<div>L O A D I N G ...</div>}>
           <EditSubjectModal
             isVisible={isEditSubjectModalVisible}
-            modalId={ModalListType.EDIT_SUBJECT_MODAL}
+            modalId={ModalWindows.EDIT_SUBJECT_MODAL}
           />
         </Suspense>
       )}

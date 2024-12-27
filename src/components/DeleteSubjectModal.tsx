@@ -1,25 +1,23 @@
-import { cancelSubjectDelete, deleteExistingSubject } from "@actions/index";
+import { cancelSubjectDelete, deleteSubject } from "@actions/index";
 import CustomModal from "@components/common/CustomModal";
-import { ModalListType } from "@customTypes/index";
+import { ModalWindows } from "@customTypes/index";
 import { useMemoizedTranslation } from "@hooks/index";
 import { useAppDispatch, useAppSelector } from "@redux/hooks";
 import { selectSubjectManipulationInProgressData } from "@selectors/index";
 
 export type DeleteSubjectModalPropsType = {
-  modalId: ModalListType;
+  modalId: ModalWindows;
   isVisible: boolean;
 };
 
-const DeleteSubjectModal = ({
-  isVisible,
-}: DeleteSubjectModalPropsType) => {
+const DeleteSubjectModal = ({ isVisible }: DeleteSubjectModalPropsType) => {
   const dispatch = useAppDispatch();
   const { t } = useMemoizedTranslation();
   const subjectData = useAppSelector(selectSubjectManipulationInProgressData);
 
   const handleConfirmDelete = () => {
     dispatch(
-      deleteExistingSubject({
+      deleteSubject({
         subjectId: subjectData.subjectId,
         newData: { subjectName: subjectData.subjectName, isDeleted: true },
       })

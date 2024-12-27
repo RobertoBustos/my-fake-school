@@ -15,7 +15,7 @@ import {
 } from "@customTypes/index";
 import { useMemoizedTranslation } from "@hooks/index";
 import { useAppDispatch, useAppSelector } from "@redux/hooks";
-import { selectAppLoader } from "@selectors/index";
+import { selectAuthAppLoader } from "@selectors/index";
 import { useForm } from "react-hook-form";
 
 const LoginForm = () => {
@@ -34,7 +34,7 @@ const LoginForm = () => {
       confirmPassword: "",
     },
   });
-  const isSigningUp = useAppSelector(selectAppLoader(AppLoaders.SIGN_UP));
+  const isSigningUp = useAppSelector(selectAuthAppLoader(AppLoaders.SIGN_UP));
 
   const onSubmit = async (data: UserUpdatePayloadType) => {
     dispatch(

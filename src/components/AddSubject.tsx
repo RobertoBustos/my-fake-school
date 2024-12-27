@@ -1,4 +1,4 @@
-import { addNewSubject } from "@actions/index";
+import { addSubject } from "@actions/index";
 import { useMemoizedTranslation } from "@hooks/index";
 import { useAppDispatch } from "@redux/hooks";
 import "@styles/components/AddSubject.css";
@@ -16,7 +16,7 @@ const AddSubject = () => {
 
   const handleSubjectAddition = () => {
     setSubject("");
-    dispatch(addNewSubject(subject));
+    dispatch(addSubject(subject));
   };
 
   return (

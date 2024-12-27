@@ -1,10 +1,15 @@
 export enum AppLoaders {
+    DELETE_SUBJECT = "deleteSubject",
+    UPDATE_SUBJECT = "updateSubject",
+    ADD_SUBJECT = "addSubject",
+    FETCH_SUBJECTS = "fetchSubjects",
     UPLOAD_PROFILE_PICTURE = "ProfilePicture",
     SEND_EMAIL_VERIFICATION = "emailVerification",
     UPDATE_PROFILE = "updateProfile",
     LOG_OUT = "logOut",
     LOG_IN = "logIn",
-    SIGN_UP = "signUp"
+    SIGN_UP = "signUp",
+    LOAD_AUTH_STATE_CHANGE_LISTENER = "loadAuthStateChangeListener"
 }
 
 export enum customEvents {
@@ -20,7 +25,7 @@ export enum customEvents {
     UPLOAD_PROFILE_PICTURE = "uploadProfilePicture"
 }
 
-export enum ModalListType {
+export enum ModalWindows {
     EDIT_SUBJECT_MODAL = "EditSubjectModal",
     DELETE_SUBJECT_MODAL = "DeleteSubjectModal",
     ANOTHER_MODAL = "AnotherModal",

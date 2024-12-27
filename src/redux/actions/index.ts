@@ -1,3 +1,3 @@
-export * from "./subjectActions"
-export * from "./authActions"
-export * from "./indicatorActions";
+export * from "@actions/authActions";
+export * from "@actions/indicatorActions";
+export * from "@actions/subjectActions";

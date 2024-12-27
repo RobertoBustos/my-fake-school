@@ -1,6 +1,6 @@
-import { cancelSubjectEdition, editExistingSubject } from "@actions/index";
+import { cancelSubjectEdition, updateSubject } from "@actions/index";
 import CustomModal from "@components/common/CustomModal";
-import { ModalListType } from "@customTypes/index";
+import { ModalWindows } from "@customTypes/index";
 import { useMemoizedTranslation } from "@hooks/index";
 import { useAppDispatch, useAppSelector } from "@redux/hooks";
 import { selectSubjectManipulationInProgressData } from "@selectors/index";
@@ -8,13 +8,11 @@ import { useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
 
 export type EditSubjectModalPropsType = {
-  modalId: ModalListType;
+  modalId: ModalWindows;
   isVisible: boolean;
 };
 
-const EditSubjectModal = ({
-  isVisible,
-}: EditSubjectModalPropsType) => {
+const EditSubjectModal = ({ isVisible }: EditSubjectModalPropsType) => {
   const dispatch = useAppDispatch();
   const { t } = useMemoizedTranslation();
   const subjectData = useAppSelector(selectSubjectManipulationInProgressData);
@@ -27,7 +25,7 @@ const EditSubjectModal = ({
   const handleConfirmEdition = () => {
     setNewSubjectName("");
     dispatch(
-      editExistingSubject({
+      updateSubject({
         subjectId: subjectData.subjectId,
         newData: {
           subjectName: newSubjectName,

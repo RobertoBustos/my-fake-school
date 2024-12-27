@@ -14,7 +14,7 @@ import {
 } from "@customTypes/index";
 import { useMemoizedTranslation } from "@hooks/index";
 import { useAppDispatch, useAppSelector } from "@redux/hooks";
-import { selectAppLoader } from "@selectors/index";
+import { selectAuthAppLoader } from "@selectors/index";
 import { useForm } from "react-hook-form";
 
 const LoginForm = () => {
@@ -31,7 +31,7 @@ const LoginForm = () => {
       password: "",
     },
   });
-  const isLogginIn = useAppSelector(selectAppLoader(AppLoaders.LOG_IN));
+  const isLogginIn = useAppSelector(selectAuthAppLoader(AppLoaders.LOG_IN));
 
   const onSubmit = (data: UserUpdatePayloadType) => {
     dispatch(

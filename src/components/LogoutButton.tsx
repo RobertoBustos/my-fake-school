@@ -3,7 +3,7 @@ import CustomButton from "@components/common/CustomButton";
 import { AppLoaders } from "@customTypes/index";
 import { useMemoizedTranslation } from "@hooks/index";
 import { useAppDispatch, useAppSelector } from "@redux/hooks";
-import { selectAppLoader, selectIsProfileEdited } from "@selectors/index";
+import { selectAuthAppLoader, selectIsProfileEdited } from "@selectors/index";
 import { CSSProperties } from "react";
 
 export type LogoutButtonPropsType = {
@@ -18,7 +18,7 @@ const LogoutButton = ({
   const dispatch = useAppDispatch();
   const { t } = useMemoizedTranslation();
   const isProfileEdited = useAppSelector(selectIsProfileEdited);
-  const isLoggingOut = useAppSelector(selectAppLoader(AppLoaders.LOG_OUT));
+  const isLoggingOut = useAppSelector(selectAuthAppLoader(AppLoaders.LOG_OUT));
 
   const handleLogOut = () => {
     if (isProfileEdited) {
