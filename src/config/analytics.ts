@@ -1,6 +1,6 @@
-import app from "@config/firebase"
-import { getAnalytics, logEvent } from "firebase/analytics"
+import { getAnalytics, isSupported, logEvent } from "firebase/analytics";
 
-const analytics = getAnalytics(app)
+const isAnalyticsSupported = isSupported
 
-export { analytics, logEvent }
+export { getAnalytics, isAnalyticsSupported, logEvent };
+

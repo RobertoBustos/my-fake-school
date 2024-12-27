@@ -28,4 +28,25 @@ export default {
       "@utils": path.resolve(__dirname, "src/utils"),
     },
   },
+  jest: {
+    configure: {
+      moduleDirectories: ["node_modules"],
+      moduleNameMapper: {
+        '^@components/(.*)$': '<rootDir>/src/components/$1',
+        '^@config/(.*)$': '<rootDir>/src/config/$1',
+        '^@constants/(.*)$': '<rootDir>/src/constants/$1',
+        '^@styles/(.*)$': '<rootDir>/src/css/$1',
+        '^@hooks/(.*)$': '<rootDir>/src/hooks/$1',
+        '^@pages/(.*)$': '<rootDir>/src/pages/$1',
+        '^@redux/(.*)$': '<rootDir>/src/redux/$1',
+        '^@actions/(.*)$': '<rootDir>/src/redux/actions/$1',
+        '^@reducers/(.*)$': '<rootDir>/src/redux/reducers/$1',
+        '^@selectors/(.*)$': '<rootDir>/src/redux/selectors/$1',
+        '^@router/(.*)$': '<rootDir>/src/router/$1',
+        '^@services/(.*)$': '<rootDir>/src/services/$1',
+        '^@customTypes/(.*)$': '<rootDir>/src/types/$1',
+        '^@utils/(.*)$': '<rootDir>/src/utils/$1'
+      }
+    }
+  }
 };

@@ -1,5 +1,15 @@
-import { clearUserData, setUserData } from "@actions/index";
-import { auth, initAuthStateChangeListener } from "@config/index";
+import {
+  activate,
+  auth,
+  fetchConfig,
+  firebaseApp,
+  getAll,
+  getAnalytics,
+  getRemoteConfig,
+  initAuthStateChangeListener,
+  isAnalyticsSupported,
+  isRemoteConfigSupported,
+} from "@config/index";
 import store from "@redux/store";
 import router from "@router/index";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -9,9 +19,39 @@ import { Provider } from "react-redux";
 import { RouterProvider } from "react-router-dom";
 import reportWebVitals from "./reportWebVitals";
 
+import {
+  clearUserData,
+  registerFeatureFlags,
+  setAnalytics,
+  setUserData,
+} from "@actions/index";
+
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
+
+isAnalyticsSupported().then((isSupported) => {
+  if (isSupported) {
+    const analytics = getAnalytics(firebaseApp);
+    store.dispatch(setAnalytics(analytics));
+  }
+});
+
+isRemoteConfigSupported().then((isSupported) => {
+  if (isSupported) {
+    const remoteConfig = getRemoteConfig(firebaseApp);
+    fetchConfig(remoteConfig).then(() => {
+      activate(remoteConfig).then(() => {
+        const featureFlags = getAll(remoteConfig);
+        console.log(
+          `remote config initialized with status ${remoteConfig.lastFetchStatus} and with these feature flags ${JSON.stringify(featureFlags)}`
+        );
+        console.log("featureFlags", featureFlags);
+        store.dispatch(registerFeatureFlags(featureFlags));
+      });
+    });
+  }
+});
 
 initAuthStateChangeListener(auth, (user) => {
   if (user && user !== null) {
