@@ -13,7 +13,11 @@ const LayoutFooter = ({ className, button }: LayoutFooterPropsType) => {
   }, [button]);
 
   const memoizedFooter = useMemo(() => {
-    return <div className={className}>{memoizedButton}</div>;
+    return (
+      <div className={className} data-testid="layout-footer">
+        {memoizedButton}
+      </div>
+    );
   }, [memoizedButton, className]);
 
   return memoizedFooter;

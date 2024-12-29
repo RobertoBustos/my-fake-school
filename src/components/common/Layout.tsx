@@ -27,7 +27,7 @@ const Layout = ({
   }, [pageTabTitle]);
 
   return (
-    <div className="layout">
+    <div className="layout" data-testid="layout">
       <Toaster position="bottom-right" reverseOrder={false} />
       {memoizedPageTabText}
       {header ? (

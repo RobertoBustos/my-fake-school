@@ -45,7 +45,7 @@ const LayoutHeader = ({
 
   const memoizedHeader = useMemo(() => {
     return (
-      <div className={className}>
+      <div className={className} data-testid="layout-header">
         <div>{showBackButton ? memoizedBackButton : null}</div>
         <div>{memoizedLanguageSelector}</div>
       </div>
